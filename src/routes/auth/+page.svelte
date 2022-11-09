@@ -1,6 +1,6 @@
 <script lang="ts">
   import axios from "axios";
-  const url = "http://localhost:5000/auth/";
+  const url = "http://localhost:6000/auth/";
 
   let action: string = "REGISTER";
   let error: boolean = false;
