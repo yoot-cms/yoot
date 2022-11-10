@@ -1,6 +1,6 @@
 <script lang="ts">
   import axios from "axios";
-  const url = "http://localhost:6000/auth/";
+  const url = "http://localhost:5000/auth/";
 
   let action: string = "REGISTER";
   let error: boolean = false;
@@ -42,7 +42,7 @@
 </script>
 
 <div
-  class=" text-white h-screen w-full flex flex-col justify-center items-center bg-no-repeat bg-cover dark:bg-slate-600 "
+  class=" text-white h-screen w-full flex flex-col justify-center items-center bg-no-repeat bg-cover "
   style="background-image: url('./ffflurry.svg');"
 >
   <div class=" flex flex-col w-4/5 md:w-3/5 lg:w-2/5 rounded-md  items-center ">

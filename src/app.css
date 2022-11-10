@@ -2,3 +2,6 @@
 @tailwind utilities;
 @tailwind components;
 
+body{
+    @apply bg-slate-700;
+}
