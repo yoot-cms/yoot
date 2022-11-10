@@ -1,12 +1,12 @@
 <div class=" p-3 flex justify-between items-center" >
     <h1 class=" brand text-6xl  text-center  text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-green-500" > YOOT </h1>
     <div class=" flex justify-between gap-10 text-white underline text-xl">
-        <h1>
+        <a href="/help" class=" underline" >
             Help
-        </h1>
-        <h1>
+        </a>
+        <a href="/help" class=" underline">
             Developers
-        </h1>
+        </a>
     </div>
 </div>
 <hr>
