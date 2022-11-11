@@ -13,7 +13,7 @@
     }
   });
 
-  const url = "";
+  const url = "http://localhost:5000/container/";
   const containers = [
     {
       name: "uh1",
@@ -65,9 +65,28 @@
   let errorMessage = "";
 
   function addContainer() {
+    addingContainer = true
     if (containerName == "") {
+      error=true
+      addingContainer = false
       return;
     }
+    let params = {name: containerName}
+    axios.post(
+      url+"create",
+      params,
+      {
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    ).then((res)=>{
+      addingContainer = false
+      console.log(res.data)
+    }).catch((_err)=>{
+      error = true
+      addingContainer = false
+    })
   }
 </script>
 
@@ -81,9 +100,10 @@
         bind:value={containerName}
         type="text"
         placeholder="New container"
-        class=" text-white rounded-md p-2 focus:outline-none bg-transparent border-white border caret-white"
+        class={` text-white rounded-md p-2 focus:outline-none bg-transparent ${error?"border-red-500":"border-white"} border caret-white  `}
       />
       <button
+        on:click={addContainer}
         class=" bg-white w-12 flex justify-center items-center rounded-md hover:scale-105 hover:-translate-y-1 transition-all"
       >
         {#if addingContainer}
