@@ -10,15 +10,3 @@
     </div>
 </div>
 <hr>
-
-<style>
-
-    @font-face{
-        font-family: "Brand";
-        src: url('./FatypeDEMO.otf');
-    }
-
-    .brand{
-        font-family: "Brand";
-    }
-</style>

@@ -16,3 +16,12 @@ body::-webkit-scrollbar { /* WebKit */
     width: 0;
     height: 0;
 } 
+
+@font-face{
+    font-family: "Brand";
+    src: url('./FatypeDEMO.otf');
+}
+
+.brand{
+    font-family: "Brand";
+}
