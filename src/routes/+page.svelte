@@ -1,14 +1,7 @@
-<script lang="ts">
-  import { browser } from "$app/environment";
-  import { onMount } from "svelte";
+<div class=" flex w-full flex-col items-center" >
+  <h1 class=" text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-green-500  text-9xl brand " >YOOT</h1>
+</div>
 
-  onMount(() => {
-    if (browser) {
-      if (!localStorage.getItem("token")) {
-        window.location.href = "/auth";
-      }
-    }
-  });
-</script>
-
-<div>Welcome to Pigeon</div>
+<div class=" h-96 w-full text-white text-center ">
+  YOOT is a content management system suitable for everyone who is running a content based website.
+</div>
