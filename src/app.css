@@ -18,10 +18,10 @@ body::-webkit-scrollbar { /* WebKit */
 } 
 
 @font-face{
-    font-family: "Brand";
-    src: url('./FatypeDEMO.otf');
+    font-family: Brand;
+    src: url('font.otf');
 }
 
 .brand{
-    font-family: "Brand";
+    font-family: Brand;
 }
