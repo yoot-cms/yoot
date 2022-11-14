@@ -61,6 +61,7 @@
         }
       ).then((res)=>{
         const { data } = res.data
+        console.log(data)
         ContentContainers.set([...data])
       }).catch((err)=>{
         console.log(err.response)

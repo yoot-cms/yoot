@@ -1,6 +1,5 @@
 <script lang="ts" >
     import axios from "axios"
-  import { Container } from "postcss";
     import { ContentContainers } from "../stores/contentContainersStore";
 
 
@@ -20,7 +19,8 @@
             }
         ).then((_res)=>{
             ContentContainers.update(value=>value.filter(container=>container.name!=name))
-        }).catch((_err)=>{
+        }).catch((err)=>{
+            console.log(err)
             alert("Something went wrong. Please try again or contact customer service")
         })
     }
