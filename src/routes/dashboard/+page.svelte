@@ -122,7 +122,7 @@
     </div>
     {:then result} 
       {#each $ContentContainers as container}
-        <ContentContainer name={container.name} />
+        <ContentContainer name={container.name} entities={3} resources={54} />
       {/each}
     {/await}
   </div>
