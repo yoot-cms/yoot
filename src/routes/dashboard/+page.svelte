@@ -36,6 +36,7 @@
         }
       }
     ).then((res)=>{
+      error = false
       const { data } = res.data
       ContentContainers.update((containers)=>[
         ...containers,
@@ -74,9 +75,9 @@
 	<title>YOOT | Dashboard</title>
 </svelte:head>
 <Header />
-<div class=" h-screen bg">
+<div class=" h-screen ">
   <!-- Toolbar -->
-  <div class=" flex space-x-4 justify-between items-baseline my-3 p-3">
+  <div class=" flex space-x-4 justify-between items-baseline z-10 backdrop-blur-md   p-3 sticky top-24 shadow-sm shadow-white ">
     <h1 class=" text-white text-3xl underline ">My content containers</h1>
     <div class=" flex justify-between gap-3">
       <input
@@ -113,7 +114,7 @@
 
   <!-- Content Containers list  -->
   <div
-    class=" text-white flex flex-wrap gap-12 h-4/5 border-t border-b p-3 border-transparent justify-center overflow-y-scroll list"
+    class=" text-white flex flex-wrap gap-12 h-screen p-3 justify-center mt-24 bg"
   >
   {#await fetchresult}
     <div class=" flex justify-center items-center " >
@@ -130,13 +131,5 @@
 <style>
   .bg {
     background-image: url("ooorganize.svg");
-  }
-
-  .list::-webkit-scrollbar{
-    @apply w-3 rounded-md;
-    border: solid 1px white; 
-  }
-  .list::-webkit-scrollbar-thumb{
-    @apply rounded-md bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100;
   }
 </style>

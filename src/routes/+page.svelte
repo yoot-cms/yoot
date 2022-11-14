@@ -5,3 +5,6 @@
 <div class=" h-96 w-full text-white text-center ">
   YOOT is a content management system suitable for everyone who is running a content based website.
 </div>
+<div>
+  
+</div>
