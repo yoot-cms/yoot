@@ -10,3 +10,7 @@ body{
 .cta{
     @apply p-1 md:p-2 lg:p-3 bg-blue-600 rounded-md text-white font-bold;
 }
+
+.auth_form_field{
+    @apply border-b border-slate-600 text-center p-1 focus:outline-none;
+}

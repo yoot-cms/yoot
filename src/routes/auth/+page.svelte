@@ -41,50 +41,18 @@
   }
 </script>
 
-<div
-  class=" text-white h-screen w-full flex flex-col justify-center items-center bg-no-repeat bg-cover "
-  style="background-image: url('./ffflurry.svg');"
->
-  <h1 class=" text-6xl brand" >YOOT</h1>
-  <div class=" flex flex-col w-4/5 md:w-3/5 lg:w-2/5 rounded-md  items-center ">
-    <div class=" w-4/5 md:w-3/5 lg:w-2/5 py-3 space-y-3  ">
-      <div class=" flex flex-col gap-3 items-center justify-center h-full">
-        <input bind:value={email}
-          class=" bg-transparent w-full focus:outline-none text-center p-2 border rounded-md text-slate-500 "
-          type="text"
-          placeholder="email"
-        />
-        <input bind:value={password}
-          class=" bg-transparent w-full focus:outline-none text-center p-2 border rounded-md text-slate-500 "
-          type="password"
-          placeholder="password"
-        />
-      </div>
-    </div>
-    {#if error}
-    <p class=" text-red-500 font-bold" >{errorMessage}</p>
-    {/if}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      class="authButton  my-3 p-2 rounded-md cursor-pointer w-24 text-center hover:scale-105 hover:-translate-y-1 transition-all"
-      on:click={authenticate}
-    >
-      { !loading?action:"..." }
-    </div>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      on:click={() => {
-        action = action == "LOGIN" ? "REGISTER" : "LOGIN";
-      }}
-      class=" underline cursor-pointer text-white animate-pulse hover:scale-105 hover:-translate-y-1 transition-all hover:animate-none"
-    >
-      {alternative}
-    </div>
+<div class=" flex flex-col h-screen items-center justify-center gap-5" >
+  <div class=" text-5xl font-bold" >
+    <h1 >YOOT</h1>
   </div>
+  <h1 class=" text-2xl text-center" >
+    Let's start something big together
+  </h1>
+  <input type="text" class=" auth_form_field" placeholder="Email">
+  <input type="text" class=" auth_form_field" placeholder="Password">
+  <div>
+    <button class=" w-36 cta" on:click={authenticate} >{action}</button>
+  </div>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <h1 class=" underline cursor-pointer text-blue-500" on:click={()=>{ action=action=="REGISTER"?"LOGIN":"REGISTER" }} >{alternative}</h1>
 </div>
-
-<style>
-  .authButton {
-    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-  }
-</style>
