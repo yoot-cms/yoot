@@ -48,8 +48,11 @@
   <h1 class=" text-2xl text-center" >
     Let's start something big together
   </h1>
-  <input type="text" class=" auth_form_field" placeholder="Email">
-  <input type="text" class=" auth_form_field" placeholder="Password">
+  <input bind:value={email} type="text" class=" auth_form_field" placeholder="Email">
+  <input bind:value={password} type="password" class=" auth_form_field" placeholder="Password">
+  {#if error}
+  <span class=" text-red-500" >{errorMessage}</span>
+  {/if}
   <div>
     <button class=" w-36 cta" on:click={authenticate} >{action}</button>
   </div>
