@@ -1,16 +1,16 @@
 <div class=" flex justify-between items-center my-3 px-3">
-  <div>
+    <div>
     <h1 class=" text-xl font-extrabold">YOOTboard</h1>
-  </div>
-  <div class=" flex text-xs justify-between gap-10">
-      <button class=" cta">Pricing</button>
+    </div>
+    <div class=" flex text-xs justify-between gap-10">
+        <button class=" cta">Pricing</button>
     <button class=" cta">Get help</button>
     <button class=" cta">Developers</button>
-  </div>
+    </div>
 </div>
 <hr>
 <slot />
-<div class=" flex justify-around items-center  " >
+<div class="flex justify-around items-center  " >
     <div>
         YOOT 2022 Copyrights
     </div>
