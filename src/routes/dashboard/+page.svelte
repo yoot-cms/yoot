@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import axios from "axios";
   import { browser } from "$app/environment";
   import { onMount } from "svelte";
@@ -69,68 +69,12 @@
     }
   }
   let fetchresult = getContainers()
-</script>
-
+</script> -->
 
 <svelte:head>
 	<title>YOOT | Dashboard</title>
 </svelte:head>
-<Header />
-<div class=" h-screen ">
-  <!-- Toolbar -->
-  <div class=" flex space-x-4 justify-between items-baseline z-10 backdrop-blur-md   p-3 sticky top-24 shadow-sm shadow-white ">
-    <h1 class=" text-white text-3xl underline ">My content containers</h1>
-    <div class=" flex justify-between gap-3">
-      <input
-        bind:value={containerName}
-        type="text"
-        placeholder="New container"
-        class={` text-white rounded-md p-2 focus:outline-none bg-transparent ${error?"border-red-500":"border-white"} border caret-white  `}
-      />
-      <button
-        on:click={addContainer}
-        class=" bg-white w-12 flex justify-center items-center rounded-md hover:scale-105 hover:-translate-y-1 transition-all"
-      >
-        {#if addingContainer}
-          <p class=" animate-bounce font-extrabold text-slate-600">.</p>
-        {:else}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
-          </svg>
-        {/if}
-      </button>
-    </div>
-  </div>
 
-  <!-- Content Containers list  -->
-  <div
-    class=" text-white flex flex-wrap gap-12 h-screen p-3 justify-center mt-24 bg"
-  >
-  {#await fetchresult}
-    <div class=" flex justify-center items-center " >
-      <h1 class=" animate-pulse text-3xl "> Loading containers </h1>
-    </div>
-    {:then result} 
-      {#each $ContentContainers as container}
-        <ContentContainer name={container.name} entities={3} resources={54} />
-      {/each}
-    {/await}
-  </div>
+<div>
+  
 </div>
-
-<style>
-  .bg {
-    background-image: url("ooorganize.svg");
-  }
-</style>
