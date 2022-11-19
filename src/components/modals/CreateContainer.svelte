@@ -2,7 +2,7 @@
     import { modal1State } from "../../stores/stores"
     import { ContentContainers } from "../../stores/contentContainersStore"
     import axios from "axios"
-    import { apiUrl} from "../../config"
+    import { devapiUrl} from "../../config"
 
     let addingContainer = false
     let containerName = ""
@@ -17,7 +17,7 @@
     }
     let params = {name: containerName}
     axios.post(
-      apiUrl+"container/create",
+      devapiUrl+"container/create",
       params,
       {
         headers:{
