@@ -27,8 +27,8 @@
 
 </script>
 
-<div class=" cc bg-cover rounded-xl  w-60 h-60 border border-white cursor-pointer text-center items-center justify-center flex hover:scale-105 hover:-translate-y-1 transition-all" >
-    <div class=" backdrop-blur-md space-y-6 w-full h-full flex flex-col items-center rounded-xl p-3" >
+<div class="rounded-xl  w-60 h-60 border border-slate-600 cursor-pointer text-center items-center justify-center flex hover:scale-100 hover:-translate-y-1 transition-all" >
+    <div class=" space-y-6 w-full h-full flex flex-col items-center rounded-xl p-3" >
         <h1 class=" font-bold" >
             {name}
         </h1>
@@ -47,8 +47,3 @@
     </div>
 </div>
 
-<style>
-    .cc{
-        background-image: url('gggyrate.svg');
-    }
-</style>
