@@ -19,7 +19,7 @@
     }
   });
 
-  const url = "http://localhost:5000/container/";
+  // const url = "http://localhost:5000/container/";
 
   let containerName = "";
   let addingContainer = false;

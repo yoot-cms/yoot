@@ -26,7 +26,7 @@
         return
     }
     axios
-      .post(apiUrl + `${action == "REGISTER" ? "register" : "login"}`, params)
+      .post(apiUrl + `${action == "REGISTER" ? "auth/register" : "auth/login"}`, params)
       .then((res) => {
         const { token } = res.data;
         localStorage.setItem("token", token);
