@@ -6,6 +6,7 @@
   import ContentContainer from "../../components/ContentContainer.svelte";
   import ContainersLoading from "../../components/ContainersLoading.svelte"
   import CreateContainer from "../../components/modals/CreateContainer.svelte"
+  import { apiUrl } from "../../config"
 
   //SECTION State Management imports
   import { modal1State } from "../../stores/stores"
@@ -33,7 +34,7 @@
   async function getContainers(){
     if (browser) {
       await axios.get(
-        `${url}all`,
+        `${apiUrl}all`,
         {
           headers:{
             Authorization: `Bearer ${localStorage.getItem("token")}`

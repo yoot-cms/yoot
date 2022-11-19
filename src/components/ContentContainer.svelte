@@ -1,17 +1,17 @@
 <script lang="ts" >
     import axios from "axios"
     import { ContentContainers } from "../stores/contentContainersStore";
-
+    import { apiUrl } from "../config"
 
     export let name: string
     export let entities: number
     export let resources: number
 
-    const url = `http://localhost:5000/container/delete?name=${name}`
+    // const url = `http://localhost:5000/container/delete?name=${name}`
 
     async function deleteContainer(){
         axios.delete(
-            url,
+            apiUrl+`container/delete?name=${name}`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem("token")}`

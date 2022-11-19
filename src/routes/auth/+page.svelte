@@ -1,6 +1,7 @@
 <script lang="ts">
   import axios from "axios";
-  const url = "http://localhost:5000/auth/";
+  import { apiUrl } from "../../config"
+  // const url = "http://localhost:5000/auth/";
 
   let action: string = "REGISTER";
   let error: boolean = false;
@@ -25,7 +26,7 @@
         return
     }
     axios
-      .post(url + `${action == "REGISTER" ? "register" : "login"}`, params)
+      .post(apiUrl + `${action == "REGISTER" ? "register" : "login"}`, params)
       .then((res) => {
         const { token } = res.data;
         localStorage.setItem("token", token);
