@@ -1,12 +1,27 @@
 
 <svelte:head>
-  <title>YOOT</title>
-  <meta name="description" content="YOOT is a simple to use CMS, designed for everyone running a content based business, dev or non dev YOOT is YOOrs">
+  <title>YOOT | Minimalistic CMS</title>
+  <meta name="description" content="YOOT is a simple to use minimalistic CMS, designed for everyone running a content based business, dev or non dev YOOT is YOyoursOrs">
 </svelte:head>
-<div class=" flex w-full flex-col items-center" >
-  <h1 class=" text-transparent bg-clip-text bg-gradient-to-br from-pink-500 to-green-500  text-9xl brand " >YOOT</h1>
+
+<div class=" flex justify-around items-center my-3" >
+  <div>
+    <h1 class=" text-2xl font-extrabold" >YOOT</h1>
+  </div>
+  <div class=" flex justify-between gap-10" >
+    <button class=" cta">Docs</button>
+    <button class=" cta">Get started</button>
+  </div>
 </div>
 
-<h1 class=" text-white text-center ">
-  YOOT is a content management system suitable for everyone who is running a content based website.
+<div class=" text-center text-3xl mt-14" >
+  <h1 class=" font-extrabold" >
+    Content Management the <h1 >EASY way</h1>
+  </h1>
+</div>
+<h1 class=" text-center text-xl my-5">
+  Manage your content driven websites easily and without the need of developers
 </h1>
+<div class=" flex justify-center" >
+  <button class="cta my-5 " >Sign up now</button>
+</div>
