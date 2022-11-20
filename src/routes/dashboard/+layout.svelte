@@ -1,6 +1,6 @@
 <div class=" flex justify-between items-center my-3 px-3">
     <div>
-    <h1 class=" text-xl font-extrabold">YOOTboard</h1>
+    <a href="/" class=" text-xl font-extrabold">YOOTboard</a>
     </div>
     <div class=" flex text-xs justify-between gap-10">
         <button class=" cta">Pricing</button>
