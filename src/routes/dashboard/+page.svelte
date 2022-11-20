@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import { ContentContainers } from "../../stores/contentContainersStore";
   import ContentContainer from "../../components/ContentContainer.svelte";
-  import ContainersLoading from "../../components/ContainersLoading.svelte";
+  import LoaderPlaceholder from "../../components/LoaderPlaceholder.svelte";
   import CreateContainer from "../../components/modals/CreateContainer.svelte";
   import { apiUrl } from "../../config";
 
@@ -92,11 +92,11 @@
     class=" flex p-2 gap-5 flex-wrap justify-center h-[750px] border-t border-b border-dashed border-slate-600  overflow-y-scroll"
   >
     {#await fetchresult}
-      <ContainersLoading />
+      <LoaderPlaceholder text={"containers"} />
     {:then result}
       {#if $ContentContainers.length != 0}
         {#each $ContentContainers as container}
-          <ContentContainer name={container.name} entities={22} resources={2} />
+          <ContentContainer name={container.name} entities={0} resources={0} />
         {/each}
       {:else}
         <div class=" text-2xl flex justify-center items-center h-full">
