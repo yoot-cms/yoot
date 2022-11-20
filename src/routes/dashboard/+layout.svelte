@@ -8,7 +8,7 @@
     <button class=" cta">Developers</button>
     </div>
 </div>
-<hr>
+<div class=" w-full h-1 bg-slate-600" ></div>
 <slot />
 <div class="flex justify-around items-center  " >
     <div>
