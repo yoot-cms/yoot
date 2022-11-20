@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from "axios";
   import { apiUrl } from "../../config"
-  // const url = "http://localhost:5000/auth/";
 
   let action: string = "REGISTER";
   let error: boolean = false;
@@ -14,15 +13,18 @@
   let email: string = "";
   let password: string = "";
   function authenticate() {
+    loading = true
     let params = { email, password };
     if (email == "" || password == "") {
       error = true
       errorMessage = "Invalid email or password"
+      loading = false
       return;
     }
     if(! email.includes("@") || ! email.includes(".") ){
         error = true
         errorMessage = "Invalid email"
+        loading = false
         return
     }
     axios
@@ -34,6 +36,7 @@
         return;
       })
       .catch((err) => {
+        loading = false
         console.log(err)
         const { message } = err.response.data;
         error = true;
@@ -54,8 +57,9 @@
   {#if error}
   <span class=" text-red-500" >{errorMessage}</span>
   {/if}
-  <div>
-    <button class=" w-36 cta" on:click={authenticate} >{action}</button>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <div on:click={authenticate} >
+    <button class=" w-36 cta"  >{ loading?"....": action}</button>
   </div>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h1 class=" underline cursor-pointer text-blue-500" on:click={()=>{ action=action=="REGISTER"?"LOGIN":"REGISTER" }} >{alternative}</h1>
