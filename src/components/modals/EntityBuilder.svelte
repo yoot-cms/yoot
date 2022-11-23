@@ -28,21 +28,39 @@
                 </svg> 
             </button>             
         </div>
-        <div class=" text-center" >
-          <input type="text" name="" id="" placeholder="Entity name" class=" text-slate-600 p-1  w-96 caret-slate-600 text-center rounded-md focus:outline-none">
+        <div class=" " >
+          <input type="text" name="" id="" placeholder="Entity name" class=" text-slate-600 p-1  w-64 caret-slate-600 text-center rounded-md focus:outline-none">
         </div>
-        <h1 class=" text-center text-white text-xl" >Entity Schema</h1>
         <!-- Fields builder -->
-        <div class=" flex justify-center gap-5 " >
+        <div class=" flex justify-between items-center" >
           <div>
-            <input class=" focus:outline-none p-1 rounded-md text-slate-600" type="text" name="" id="">
+            <input class=" focus:outline-none text-center w-64 p-1 rounded-md text-slate-600" placeholder="Field" type="text" name="" id="">
           </div>
-          <div>
-            <input class=" focus:outline-none p-1 rounded-md text-slate-600" type="text" name="" id="">
+          <div >
+            <select name="" id="" class=" text-center w-64 focus:outline-none p-1 rounded-md text-slate-600" >
+              <option value="Text">Text</option>
+              <option value="Array">Array</option>
+            </select>
           </div>
-          <div>
-            <button>+</button>
-          </div>
+          <button class=" h-9 text-blue-500 bg-white rounded-md px-2" >
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+          </button>
+        </div>
+        <div class=" h-96 overflow-y-scroll border rounded-md" >
+
         </div>
        <div class=" flex justify-center ">
          <button on:click={addEntity} class=" hover:scale-105 hover:-translate-y-1 transition-all text-center rounded-md bg-white text-blue-500 " >
