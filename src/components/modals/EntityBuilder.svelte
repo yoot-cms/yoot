@@ -1,5 +1,6 @@
 <script lang="ts">
   import { modal2State } from "../../stores/stores";
+  import { types } from "../../config"
   import axios from "axios";
   import { apiUrl } from "../../config";
 
@@ -102,8 +103,9 @@
           id=""
           class=" text-center w-64 focus:outline-none p-1 rounded-md text-slate-600 text-xl"
         >
-          <option value="Text">Text</option>
-          <option value="Array">Array</option>
+          {#each types as type}
+            <option value={type.name}>{type.name}</option>
+          {/each}
         </select>
       </div>
       <div class=" flex justify-center w-64">
