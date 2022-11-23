@@ -2,7 +2,7 @@
   import axios from "axios";
   import type { PageData } from "./$types";
   import LoaderPlaceholder from "../../../../components/LoaderPlaceholder.svelte";
-  import CreateEntity from "../../../../components/modals/CreateEntity.svelte";
+  import EntityBuilder from "../../../../components/modals/EntityBuilder.svelte";
   import { apiUrl } from "../../../../config";
   import { browser } from "$app/environment";
   import { modal2State } from "../../../../stores/stores"
@@ -34,7 +34,7 @@
   let fetchresult = loadEntities();
 </script>
 
-<CreateEntity/>
+<EntityBuilder/>
 <main class="  flex flex-col  p-2">
   <!-- Toobar -->
   <div class=" flex justify-between items-center  mb-1">
@@ -67,7 +67,7 @@
         />
       </svg>
     </div>
-    <button on:click={() => { $modal2State=false }} class=" bg-blue-500 p-1 rounded-md text-white ">
+    <button on:click={() => { $modal2State=false }} class=" hover:scale-100 hover:-translate-y-1 transition-all bg-blue-500 p-1 rounded-md text-white ">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

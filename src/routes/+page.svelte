@@ -19,7 +19,7 @@
     Content Management the <h1 >EASY way</h1>
   </h1>
 </div>
-<h1 class=" text-center text-xl my-5">
+<h1 class=" text-center text-2xl my-5">
   Manage your content driven websites easily and without the need of developers
 </h1>
 <div class=" flex justify-center" >

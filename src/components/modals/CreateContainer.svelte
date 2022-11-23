@@ -53,7 +53,7 @@
         </div>
         <input bind:value={containerName} class={` ${error?"border border-red-900":""} rounded-md p-1 text-center focus:outline-none text-slate-600 `} type="text" placeholder="Container name">
        <div class=" flex justify-center ">
-         <button on:click={addContainer} class=" text-center rounded-md bg-white text-blue-500 " >
+         <button on:click={addContainer} class="hover:scale-105 hover:-translate-y-1 transition-all text-center rounded-md bg-white text-blue-500 " >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class={`w-10 h-10 ${addingContainer?"animate-spin":""}`}>
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.25a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" clip-rule="evenodd" />
             </svg>              

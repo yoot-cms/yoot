@@ -69,7 +69,7 @@
     </div>
     <button
       on:click={toggleModal}
-      class=" bg-blue-500 p-1 rounded-md text-white "
+      class=" hover:scale-100 hover:-translate-y-1 transition-all bg-blue-500 p-1 rounded-md text-white "
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -8,7 +8,7 @@ body{
 }
 
 .cta{
-    @apply p-1 md:p-2 lg:p-3 bg-blue-600 rounded-md text-white font-bold;
+    @apply p-1 md:p-2 lg:p-3 bg-blue-600 rounded-md text-white font-bold hover:scale-105 hover:-translate-y-1 transition-all;
 }
 
 .auth_form_field{
