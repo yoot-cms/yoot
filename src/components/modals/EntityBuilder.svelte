@@ -21,10 +21,24 @@
     class=" w-4/6 h-3/5 rounded-md p-2 bg-blue-500 space-y-5 flex flex-col shadow-xl shadow-blue-600"
   >
     <div class=" flex justify-between text-white">
-      <div class=" flex">
+      <div class=" flex gap-2">
         <h1>Entity Builder</h1>
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5 cursor-pointer"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
       </div>
-      <button
+      <button class=" hover:scale-105 hover:-translate-y-1 transition-all"
         on:click={() => {
           $modal2State = true;
         }}
@@ -93,7 +107,7 @@
         </select>
       </div>
       <div class=" flex justify-center w-64">
-        <button class=" h-9 text-blue-500 bg-white  rounded-md px-2">
+        <button class=" h-9 text-blue-500 bg-white  rounded-md px-2 hover:scale-105 hover:-translate-y-1 transition-all">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
