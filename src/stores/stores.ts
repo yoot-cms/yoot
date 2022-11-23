@@ -4,14 +4,12 @@ export const modal1State = writable(true)
 
 export const modal2State = writable(true)
 
-let entity: IEntity = {
-    name:"",
+let entity: IEntityFields = {
     fields:[]
 }
 
 export const EntityBuilderContent = writable(entity)
 
-interface IEntity{
-    name: string
+interface IEntityFields{
     fields: Array<{ name: string, type: string }>
 }

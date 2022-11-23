@@ -1,14 +1,22 @@
 <script lang="ts">
-  import { modal2State } from "../../stores/stores";
+  import { modal2State, EntityBuilderContent } from "../../stores/stores";
   import { types } from "../../config"
   import axios from "axios";
   import { apiUrl } from "../../config";
 
   let addingEntity = false;
-  let containerName = "";
   let error = false;
 
-  function addEntity() {}
+  //SECTION - Entity building
+    let entityName = ""
+    let fieldName = ""
+    let fieldType = ""
+    let fields = []
+    function addField(){
+      
+    }
+
+    function addEntity() {}
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -60,6 +68,7 @@
     </div>
     <div class=" flex justify-center ">
       <input
+        bind:value={entityName}
         type="text"
         name=""
         id=""
@@ -90,6 +99,7 @@
     <div class=" flex justify-center gap-36 items-center">
       <div>
         <input
+          bind:value={fieldName}
           class=" focus:outline-none text-center w-64 p-1 rounded-md text-slate-600 text-xl"
           placeholder="Field"
           type="text"
@@ -99,6 +109,7 @@
       </div>
       <div>
         <select
+          bind:value={fieldType}
           name=""
           id=""
           class=" text-center w-64 focus:outline-none p-1 rounded-md text-slate-600 text-xl"
