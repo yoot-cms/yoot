@@ -104,7 +104,7 @@
           class=" text-center w-64 focus:outline-none p-1 rounded-md text-slate-600 text-xl"
         >
           {#each types as type}
-            <option value={type.name}>{type.name}</option>
+            <option title={type.description} value={type.name}>{type.name}</option>
           {/each}
         </select>
       </div>
