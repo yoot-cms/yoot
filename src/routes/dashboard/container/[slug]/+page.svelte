@@ -34,6 +34,10 @@
   let fetchresult = loadEntities();
 </script>
 
+<svelte:head>
+  <title>YOOT | Dashboard | Containers : {slug}</title>
+</svelte:head>
+
 <EntityBuilder container={slug} />
 <main class="  flex flex-col  p-2">
   <!-- Toobar -->
