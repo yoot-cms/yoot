@@ -34,7 +34,7 @@
   let fetchresult = loadEntities();
 </script>
 
-<EntityBuilder/>
+<EntityBuilder container={slug} />
 <main class="  flex flex-col  p-2">
   <!-- Toobar -->
   <div class=" flex justify-between items-center  mb-1">

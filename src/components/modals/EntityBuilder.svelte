@@ -7,7 +7,7 @@
 
   let addingEntity = false;
   let error = false;
-
+  export let container = ""
   //SECTION - Entity building
     let entityName = ""
     let fieldName = ""
@@ -29,7 +29,37 @@
       })
     }
 
-    function addEntity() {}
+    function addEntity() {
+      if(entityName==""){
+        alert("Entity name can't be empty")
+        return
+      }
+      if($EntityFields.length==0){
+        alert("Can't create entity with no fields")
+        return
+      }
+      addingEntity = true
+      const entity = {
+        name: entityName,
+        fields: $EntityFields,
+        container: container
+      }
+      axios.post(
+        apiUrl+`entity/create`,
+        entity,
+        {
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
+      ).then((res)=>{
+        addingEntity = false
+        console.log(res.data)
+      }).catch((err)=>{
+        addingEntity = false
+        console.log(err)
+      })
+    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
