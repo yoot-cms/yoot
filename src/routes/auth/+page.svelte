@@ -45,6 +45,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>YOOT | Authenticate</title>
+</svelte:head>
+
 <div class=" flex flex-col h-screen items-center justify-center gap-5" >
   <div class=" text-5xl font-bold" >
     <h1 >YOOT</h1>

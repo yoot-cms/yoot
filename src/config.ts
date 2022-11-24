@@ -27,4 +27,4 @@ export const types = [
         description:"Will contain a list of numerical values",
         example:"[12, 30.5]"
     }
-]
+]  
