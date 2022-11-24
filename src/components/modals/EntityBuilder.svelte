@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { modal2State, EntityBuilderContent } from "../../stores/stores";
+  import { modal2State, EntityFields } from "../../stores/stores";
   import { types } from "../../config"
   import axios from "axios";
   import { apiUrl } from "../../config";
+  import Field from "../../components/Field.svelte"
 
   let addingEntity = false;
   let error = false;
@@ -11,9 +12,21 @@
     let entityName = ""
     let fieldName = ""
     let fieldType = ""
-    let fields = []
     function addField(){
-      
+      if(fieldName=="" || fieldType=="" ){
+        alert("Make sure the field name and type are not empty")
+        return
+      }
+      for (const iterator of $EntityFields) {
+        if(iterator.name==fieldName){
+          alert("A field with the same name already exists on the entity")
+          return
+        }
+      }
+      EntityFields.update((value)=>{
+        value.push({ name: fieldName, type: fieldType })
+        return value
+      })
     }
 
     function addEntity() {}
@@ -120,7 +133,7 @@
         </select>
       </div>
       <div class=" flex justify-center w-64">
-        <button class=" h-9 text-blue-500 bg-white  rounded-md px-2 hover:scale-105 hover:-translate-y-1 transition-all">
+        <button on:click={addField} class=" h-9 text-blue-500 bg-white  rounded-md px-2 hover:scale-105 hover:-translate-y-1 transition-all">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -138,7 +151,11 @@
         </button>
       </div>
     </div>
-    <div class=" h-96 overflow-y-scroll border rounded-md" />
+    <div class=" h-96 overflow-y-scroll border rounded-md" >
+      {#each $EntityFields as field}
+        <Field name={field.name} type={field.type} />
+      {/each}
+    </div>
     <div class=" flex justify-center ">
       <button
         on:click={addEntity}
