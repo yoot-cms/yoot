@@ -9,7 +9,6 @@
 
     let deleting = false
 
-    // const url = `http://localhost:5000/container/delete?name=${name}`
 
     async function deleteContainer(){
         deleting = true

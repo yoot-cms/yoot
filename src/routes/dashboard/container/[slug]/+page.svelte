@@ -6,6 +6,7 @@
   import { apiUrl } from "../../../../config";
   import { browser } from "$app/environment";
   import { modal2State } from "../../../../stores/stores"
+  import Entity from "../../../../components/Entity.svelte";
 
   export let data: PageData;
   const { slug } = data;
@@ -89,7 +90,20 @@
     </button>
   </div>
   <!-- Containers -->
-  <div
-    class=" flex p-2 gap-5 flex-wrap justify-center h-[750px] border-t border-b border-dashed border-slate-600  overflow-y-scroll"
-  />
+  <div class=" flex p-2 gap-5 flex-wrap justify-center h-[750px] border-t border-b border-dashed border-slate-600  ">
+    <div class=" flex flex-col w-full" >
+      <h1 class=" text-center font-extrabold text-xl" >ENTITIES</h1>
+      <div class="  w-4/5  m-auto  flex flex-col" >
+        <div class="border-b flex  justify-between " >
+          <div class=" w-1/4 text-center text-xl pl-7 font-bold overflow-clip" >Name</div>
+          <div class=" w-1/4 text-center text-xl font-bold overflow-clip" >Ressources</div>
+          <div class=" w-1/4 text-center text-xl pr-8 font-bold overflow-clip" >Container</div>
+          <div class=" w-1/4 text-center text-xl pr-14 font-bold overflow-clip" >Actions</div>
+        </div>
+        <div class=" h-[500px]  px-2 overflow-y-scroll" >
+            <Entity/>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>

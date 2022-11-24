@@ -70,7 +70,7 @@
 >
   <!-- EntityBuilder   -->
   <div
-    class=" w-4/6 h-3/5 rounded-md p-2 bg-blue-500 space-y-5 flex flex-col shadow-xl shadow-blue-600"
+    class=" w-4/6 h-3/5 rounded-md p-2 bg-blue-500 space-y-5 flex flex-col shadow-xl shadow-blue-400"
   >
     <div class=" flex justify-between text-white">
       <div class=" flex gap-2">
