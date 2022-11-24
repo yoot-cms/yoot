@@ -3,9 +3,9 @@
 </script>
 
 <div class=" bg-slate-200 border-dotted border-2 my-2 hover:scale-100 hover:-translate-y-1 transition-all cursor-pointer rounded-lg p-2 flex justify-between w-full text-xl font-bold  text-blue-500  " >
-    <div class=" overflow-clip w-1/4 text-center">Names</div>
-    <div class=" overflow-clip w-1/4 text-center">Ressources</div>
-    <div class=" overflow-clip w-1/4 text-center">Container</div>
+    <div class=" overflow-clip w-1/4 text-center">Products</div>
+    <div class=" overflow-clip w-1/4 text-center">69</div>
+    <div class=" overflow-clip w-1/4 text-center">Test</div>
     <div class=" overflow-clip w-1/4 text-center flex gap-5 justify-center " >
         <button class=" hover:scale-100 hover:-translate-y-1 transition-all" >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
