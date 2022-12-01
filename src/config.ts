@@ -15,7 +15,7 @@ export const types = [
     {
         name:"List",
         description:"Will contain a list of values",
-        example:"['Paris', 14]"
+        example:"['Paris', 14]" 
     },
     {
         name:"List<Text>",
