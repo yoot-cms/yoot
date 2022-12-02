@@ -27,6 +27,9 @@
         value.push({ name: fieldName, type: fieldType })
         return value
       })
+      entityName = ""
+      fieldName = ""
+      fieldType = ""
     }
 
     function addEntity() {
