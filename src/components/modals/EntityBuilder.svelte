@@ -7,7 +7,7 @@
 
   let addingEntity = false;
   let error = false;
-  export let container = ""
+  export let container : string
   //SECTION - Entity building
     let entityName = ""
     let fieldName = ""
@@ -27,7 +27,6 @@
         value.push({ name: fieldName, type: fieldType })
         return value
       })
-      entityName = ""
       fieldName = ""
       fieldType = ""
     }
@@ -55,12 +54,13 @@
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
         }
-      ).then((res)=>{
+      ).then((_res)=>{
         addingEntity = false
-        console.log(res.data)
+        EntityFields.set([])
+        entityName = ""
       }).catch((err)=>{
         addingEntity = false
-        console.log(err)
+        alert(err.response.data.message)
       })
     }
 </script>
