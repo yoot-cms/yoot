@@ -1,7 +1,6 @@
 <script lang="ts">
   import axios from "axios";
   import type { PageData } from "./$types";
-  import LoaderPlaceholder from "../../../../components/LoaderPlaceholder.svelte";
   import EntityBuilder from "../../../../components/modals/EntityBuilder.svelte";
   import { apiUrl } from "../../../../config";
   import { browser } from "$app/environment";
@@ -11,8 +10,7 @@
   export let data: PageData;
   const { slug } = data;
   let error = false;
-  let loading = true;
-
+  let entities: { name:string, container:string, ressources:number }[] = []
   async function loadEntities() {
     if (browser) {
       axios
@@ -23,6 +21,7 @@
         })
         .then((res) => {
           const { data } = res.data;
+          entities = data
           return data;
         })
         .catch((err) => {
@@ -32,7 +31,7 @@
     }
   }
 
-  let fetchresult = loadEntities();
+  let _ = loadEntities();
 </script>
 
 <svelte:head>
@@ -97,11 +96,21 @@
         <div class="border-b flex  justify-between " >
           <div class=" w-1/4 text-center text-xl pl-7 font-bold overflow-clip" >Name</div>
           <div class=" w-1/4 text-center text-xl font-bold overflow-clip" >Ressources</div>
-          <div class=" w-1/4 text-center text-xl pr-8 font-bold overflow-clip" >Container</div>
+          <div class=" w-1/4 text-center text-xl pr-8 font-bold overflow-clip" >_</div>
           <div class=" w-1/4 text-center text-xl pr-14 font-bold overflow-clip" >Actions</div>
         </div>
         <div class=" h-[500px]  px-2 overflow-y-scroll" >
-            <Entity/>
+            {#await _}
+              <div class=" flex justify-center items-center h-full" >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 animate-spin">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                </svg>           
+              </div>
+            {:then res} 
+              {#each entities as entity}
+                <Entity ressources={0} name={entity.name} container={"_"} />
+              {/each}
+            {/await}
         </div>
       </div>
     </div>

@@ -61,10 +61,7 @@
   {#if error}
   <span class=" text-red-500" >{errorMessage}</span>
   {/if}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div on:click={authenticate} >
-    <button class=" w-36 cta"  >{ loading?"....": action}</button>
-  </div>
+  <button on:click={authenticate} class=" w-36 cta"  >{ loading?"....": action}</button>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h1 class=" underline cursor-pointer text-blue-500" on:click={()=>{ action=action=="REGISTER"?"LOGIN":"REGISTER" }} >{alternative}</h1>
 </div>
