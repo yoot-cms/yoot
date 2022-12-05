@@ -23,5 +23,5 @@
   Manage your content driven websites easily and without the need of developers
 </h1>
 <div class=" flex justify-center" >
-  <button on:click={()=>{ window.location.href="/auth" }} class="cta my-5 " >Sign up now</button>
+  <a href="/auth" class="cta my-5 " >Get started</a>
 </div>

@@ -56,12 +56,14 @@
   <h1 class=" text-2xl text-center" >
     Let's start something big together
   </h1>
-  <input bind:value={email} type="text" class=" auth_form_field" placeholder="Email">
-  <input bind:value={password} type="password" class=" auth_form_field" placeholder="Password">
+<form method="post" class=" flex flex-col space-y-5" on:submit|preventDefault={authenticate}>
+    <input bind:value={email} type="text" class=" auth_form_field" placeholder="Email">
+    <input bind:value={password} type="password" class=" auth_form_field" placeholder="Password">
+    <button type="submit" class=" m-auto w-36 cta"  >{ loading?"....": action}</button>
+</form>
   {#if error}
   <span class=" text-red-500" >{errorMessage}</span>
   {/if}
-  <button on:click={authenticate} class=" w-36 cta"  >{ loading?"....": action}</button>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <h1 class=" underline cursor-pointer text-blue-500" on:click={()=>{ action=action=="REGISTER"?"LOGIN":"REGISTER" }} >{alternative}</h1>
 </div>

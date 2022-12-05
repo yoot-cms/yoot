@@ -53,8 +53,10 @@
   <!-- Toobar -->
   <div class=" flex justify-between items-center  mb-1">
     <div class=" flex gap-1">
-      <a href="/dashboard" class="font-bold">CONTENT CONTAINERS </a>
+      <a href="/dashboard" class="font-bold underline text-blue-400">CONTENT CONTAINERS </a>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <svg
+        on:click={()=>{ alert("Think of Content containers as projects, in which you will create entities that you will populate with your ressources.") }}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"

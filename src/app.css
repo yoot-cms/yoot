@@ -12,5 +12,5 @@ body{
 }
 
 .auth_form_field{
-    @apply border-b border-slate-600 text-center p-1 focus:outline-none;
+    @apply border-b border-slate-600 text-center p-1 focus:outline-none lg:w-96;
 }
