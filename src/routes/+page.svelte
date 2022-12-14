@@ -23,13 +23,13 @@
   
   <!-- Description -->
   <div class=" mt-10 md:text-center" >
-    <h1 class=" font-extrabold text-3xl " >
+    <h1 class=" font-extrabold text-3xl " > 
       Manage your content as easily as 1-2-3
     </h1>
     <div class="lg:w-[48rem] lg:m-auto " >
         <p class=" mt-10 text-gray-500 text-lg " >
           YOOT is a simple and intuitive CMS designed for developers and business owners alike. 
-          With its user-friendly interface and powerful features, YOOT makes it easy to manage and update your website content without any technical expertise. 
+          With its user-friendly interface and powerful features, YOOT makes it easy to manage and update your website content without any technical expertise. <br>
           Try YOOT today and experience the benefits of seamless content management for yourself!
         </p>
     </div>

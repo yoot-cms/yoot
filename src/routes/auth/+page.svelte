@@ -49,21 +49,6 @@
   <title>YOOT | Authenticate</title>
 </svelte:head>
 
-<div class=" flex flex-col h-screen items-center justify-center gap-5" >
-  <div class=" text-5xl font-bold" >
-    <h1 >YOOT</h1>
-  </div>
-  <h1 class=" text-2xl text-center" >
-    Let's start something big together
-  </h1>
-<form method="post" class=" flex flex-col space-y-5" on:submit|preventDefault={authenticate}>
-    <input bind:value={email} type="text" class=" auth_form_field" placeholder="Email">
-    <input bind:value={password} type="password" class=" auth_form_field" placeholder="Password">
-    <button type="submit" class=" m-auto w-36 cta"  >{ loading?"....": action}</button>
-</form>
-  {#if error}
-  <span class=" text-red-500" >{errorMessage}</span>
-  {/if}
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <h1 class=" underline cursor-pointer text-blue-500" on:click={()=>{ action=action=="REGISTER"?"LOGIN":"REGISTER" }} >{alternative}</h1>
+<div class="" >
+ 
 </div>
