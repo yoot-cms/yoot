@@ -13,8 +13,8 @@
     
     <!-- Form -->
     <form on:submit|preventDefault={()=>{}} class=" flex flex-col justify-center gap-2 " >
-      <input class=" border border-grayscale-200 rounded-md p-2 w-[17rem] md:w-[24rem] lg:w-[34rem] focus:outline-none" placeholder="Email address" type="text">
-      <input class=" border border-grayscale-200 rounded-md p-2 w-[17rem] md:w-[24rem] lg:w-[34rem] focus:outline-none" placeholder="Password " type="password">
+      <input class=" border border-grayscale-200 rounded-md p-2 w-[17rem] md:w-[24rem] lg:w-[34rem] focus:outline-none text-gray-400" placeholder="Email address" type="text">
+      <input class=" border border-grayscale-200 rounded-md p-2 w-[17rem] md:w-[24rem] lg:w-[34rem] focus:outline-none text-gray-400" placeholder="Password " type="password">
       <span class=" text-xs text-red-500 text-center hidden" >Bref</span>
       <button class=" bg-indigo-500 rounded-md text-white p-2 flex justify-center h-10" type="submit" >
         {#if true}
@@ -26,7 +26,7 @@
         {/if}
       </button>
     </form>
-    <h1 class=" text-indigo-400 underline mt-5" >Register instead</h1>
+    <h1 class=" text-indigo-400 underline mt-5 cursor-pointer" >Register instead</h1>
 
   </div>
 </div>
