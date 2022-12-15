@@ -2,7 +2,7 @@
     import { location } from "../stores/stores";
 </script>
 
-<div class=" flex border-b h-12 items-center px-3" >
+<div class=" flex border-b h-[5%] items-center px-3" >
     <!-- Containers -->
     <a class="location_link " href="/containers">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
