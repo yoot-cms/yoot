@@ -15,11 +15,9 @@
 <main class=" h-full " >
   <!-- Toolbar -->
   <div class=" h-[5%] flex justify-between items-center" >
-    <h1>You are viewing your containers</h1>
+    <h1>You are viewing your Containers</h1>
     <button class=" flex border-slate-400 border  rounded-md p-1 bg-indigo-500 text-white " >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-      </svg>      
+      <h1>Add container</h1>     
     </button>
   </div>
   <!-- Containers -->
@@ -27,9 +25,7 @@
     <div class={`${true?"":"hidden"} flex flex-col h-full w-full items-center justify-center`} >
       <h1>You don't have any content container</h1> 
       <button class=" flex border-slate-400 border  rounded-md p-1 bg-indigo-500 text-white " >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 ">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>      
+        <h1>Add Container</h1>
       </button>
     </div>
   </section>
