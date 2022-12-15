@@ -1,0 +1,14 @@
+<script lang="ts" >
+  import { browser } from "$app/environment";
+  import { location } from "../../../stores/stores";
+  if (browser) {
+    location.update(_value=>window.location.pathname);
+  }
+
+</script>
+
+<svelte:head>
+    <title>YOOT | Entities</title>
+</svelte:head>
+
+<h1>Welcome to your en TiTies</h1>
