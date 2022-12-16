@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { clipString } from "../Functions";
   const list = [
     {
       name: "Profile",
@@ -9,25 +10,9 @@
       type: "Media",
     },
     {
-      name: "Profile picture",
+      name: "Profilepicture",
       type: "Media",
-    },
-    {
-      name: "Profile picture",
-      type: "Media",
-    },
-    {
-      name: "Profile picture",
-      type: "Media",
-    },
-    {
-      name: "Profile picture",
-      type: "Media",
-    },
-    {
-      name: "Profile picture",
-      type: "Media",
-    },
+    }
   ];
 
   $: toggleFields = false;
@@ -36,8 +21,9 @@
 <div
   class=" bg-grayscale-400 p-3 rounded-md text-white cursor-pointer flex justify-between h-12"
 >
-  <div>
-    <h1>Entity name</h1>
+  <div >
+    <!-- //TODO - Clip entity name  -->
+    <h1>Entity</h1>
   </div>
 
   <div class="relative flex flex-col items-center">
@@ -85,7 +71,7 @@
       {#each list as item}
         <div class=" flex justify-between gap-2 border-b-[1px] ">
           <div class=" w-[50%] overflow-hidden truncate text-center ">
-            <h1>{item.name.slice(0, 9)}{item.name.length > 10 ? "..." : ""}</h1>
+            <h1>{clipString(item.name)}</h1>
           </div>
           <div class="">
             <h1>:</h1>
