@@ -1,16 +1,19 @@
 <script lang="ts" >
   import { browser } from "$app/environment";
   import { location } from "../../../stores/stores";
+  import Entity from "../../../components/Entity.svelte";
+  import EntityBuilder from "../../../components/modals/EntityBuilder.svelte";
+  import { entityBuilderIsVisible } from "../../../stores/stores";
   if (browser) {
     location.update(_value=>window.location.pathname);
   }
-  import Entity from "../../../components/Entity.svelte";
 </script>
 
 <svelte:head>
     <title>YOOT | Entities</title>
 </svelte:head>
 
+<EntityBuilder/>
 <main class=" h-full flex justify-between" >
   <!-- Entities list -->
   <section class=" h-full w-[55%] flex flex-col " >
@@ -18,7 +21,7 @@
     <!-- Title and button section -->
     <div class=" flex justify-between items-center h-[5%]" >
       <h1>You are viewing Entities in <span class=" font-bold" >Container</span> </h1>
-      <button class=" px-2 flex border  rounded-md p-1 bg-indigo-500 text-white " >
+      <button class=" px-2 flex border  rounded-md p-1 bg-indigo-500 text-white " on:click={()=>{ entityBuilderIsVisible.update(_value=>true) }} >
         <h1>Add Entity</h1>
       </button>
     </div>
