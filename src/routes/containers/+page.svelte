@@ -24,7 +24,7 @@
     </form>
   </div>
   <!-- Containers -->
-  <section class={`border-[3px] border-spacing-10 border-dashed border-slate-400 rounded-md h-[95%] w-full ${false?'grid grid-cols-5':'flex '} p-2 gap-5 overflow-y-scroll`} >
+  <section class={`border-[3px] border-dashed border-slate-400 rounded-md h-[95%] w-full ${false?'grid grid-cols-5':'flex '} p-2 gap-5 overflow-y-scroll`} >
     <div class={`${true?"":"hidden"} flex flex-col h-full w-full items-center justify-center`} >
       <h1>You don't have any content container, but creating one is as easy as choosing it's name!</h1>
       <h1>Click <a href="#containers" class=" text-indigo-500">here</a> to learn more about containers </h1>

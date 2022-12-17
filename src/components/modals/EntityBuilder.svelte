@@ -1,5 +1,6 @@
 <script lang="ts">
   import { entityBuilderIsVisible } from "../../stores/stores";
+  import Field from "../Field.svelte";
 </script>
 
 <main hidden={!$entityBuilderIsVisible} class=" w-[50%] h-[50%] z-20 bg-gray-300 rounded-md shadow-2xl shadow-indigo-500 p-2 ">
@@ -37,8 +38,17 @@
       </svg>      
     </button>
   </form>
+  <!-- Fields are listed here -->
+  <div class=" space-y-2 p-2 m-auto w-[70%] h-64 border-2 border-dashed border-slate-400 rounded-md overflow-y-scroll" >
+    <Field/>    
+    <Field/>    
+    <Field/>    
+    <Field/>    
+    <Field/>    
+    <Field/>    
+    <Field/>    
+  </div>
 </main>
-
 
 
 <style >
