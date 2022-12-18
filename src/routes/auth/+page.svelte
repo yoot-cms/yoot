@@ -7,7 +7,7 @@
   function switchAction(){
     action = action=="Login"?"Register":"Login"
   }
-  function authenticate(){
+  async function authenticate(){
     
   }
 </script>
