@@ -19,7 +19,7 @@
 </script>
 
 <div
-  class=" bg-grayscale-400 p-3 rounded-md text-white cursor-pointer flex justify-between h-12"
+  class=" bg-gray-400 p-3 rounded-md text-white cursor-pointer flex justify-between h-12"
 >
   <div >
     <!-- //TODO - Clip entity name  -->

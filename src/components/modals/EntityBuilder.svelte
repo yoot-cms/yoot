@@ -1,9 +1,13 @@
 <script lang="ts">
   import { entityBuilderIsVisible } from "../../stores/stores";
   import Field from "../Field.svelte";
+
+  function addField(){
+    
+  }  
 </script>
 
-<main hidden={!$entityBuilderIsVisible} class=" w-[50%] h-[55%] z-20 bg-gray-300 rounded-md shadow-2xl shadow-indigo-500 p-2 ">
+<main hidden={!$entityBuilderIsVisible} class=" w-[50%] h-[55%] z-20 bg-gray-300 rounded-md shadow-2xl shadow-indigo-300 p-2 ">
   <div class=" flex justify-between " >
     <div class=" flex gap-1" >
       <h1 class="" >Entity builder</h1>
