@@ -4,7 +4,6 @@
   let action = "Login";
   let email: string;
   let password: string;
-  //TODO: switch action if user clicks on switch
   function switchAction() {
     action = action == "Login" ? "Register" : "Login";
   }
