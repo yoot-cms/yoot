@@ -6,3 +6,6 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+.submitButton{
+    @apply flex justify-center items-center bg-indigo-500 rounded-md w-10 text-white ;
+}
