@@ -42,7 +42,7 @@
   
 <style>
   .toolbar{
-    @apply flex justify-end h-[5%] p-1 border-b-2 gap-2 ;
+    @apply flex justify-end h-[5%] p-1 border-y-2 gap-2 ;
   }
 
   .containersContainer{
