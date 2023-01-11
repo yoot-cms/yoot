@@ -3,7 +3,7 @@
 
 </script>
 
-<main class="container">
+<main class="p-1  border-2 h-[10rem] w-full rounded-2xl flex justify-between cursor-pointer">
   <div class="w-full space-y-2 pl-2 pt-2">
     <h1 class=" font-semibold text-xl ">Container name</h1>
     <h1 class=" font-light" >Entities: 15</h1>
@@ -69,12 +69,3 @@
     </button>
   </div>
 </main>
-
-<style>
-  .container {
-    @apply p-1  border-2 h-[10rem] w-full rounded-2xl flex justify-between cursor-pointer;
-  }
-  .icon{
-    @apply absolute opacity-0
-  }
-</style>
