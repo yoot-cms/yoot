@@ -1,9 +1,6 @@
 <script lang="ts" >
-    let show_actions = true
+    let show_actions = false
 
-    function delete_container(){
-
-    }
 </script>
 
 <main class="container">
