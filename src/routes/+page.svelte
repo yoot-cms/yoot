@@ -1,3 +1,18 @@
+<script lang="ts" >
+  import { browser } from "$app/environment";
+  import { onMount } from "svelte";
+
+  let token_exist = false
+  onMount(()=>{
+    if (browser){
+      const auth_token = localStorage.getItem("token");
+      if( auth_token ){
+        token_exist=true
+      }
+    }
+  })
+</script>
+
 <svelte:head>
   <title>YOOT | Minimalistic CMS</title>
   <meta
@@ -15,9 +30,12 @@
       class=" bg-no-repeat bg-cover bg-center bg-[url('/logo.png')] h-10 w-10"
     />
     <div class=" flex justify-between gap-3 md:gap-6 lg:gap-10" >
-      <a class=" hover:underline" href="#pricing">Pricing</a>
       <a class=" hover:underline" href="/docs">Docs</a>
-      <a class=" hover:underline" href="/auth">Login</a>
+      {#if token_exist}
+        <a class=" hover:underline" href="/containers">Dashboard</a>
+        {:else}
+        <a class=" hover:underline" href="/auth">Login</a>
+      {/if}
     </div> 
   </div>
   
