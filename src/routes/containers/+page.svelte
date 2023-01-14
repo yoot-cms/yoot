@@ -20,10 +20,7 @@
       </button>
     </form>
 
-    <div class="overflow-y-scroll  max-h-full md:grid md:grid-cols-2 md:gap-2 " >
-      <Container/>
-      <Container/>
-      <Container/>
+    <div class="overflow-y-scroll space-y-3 md:space-y-0 max-h-full md:grid md:grid-cols-2 md:gap-5 " >
       <Container/>
       <Container/>
       <Container/>
