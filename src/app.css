@@ -8,3 +8,6 @@ body{
     font-family: 'Inter', sans-serif;
 }
 
+.no_scroll::-webkit-scrollbar{
+    @apply hidden;
+}

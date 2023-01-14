@@ -3,7 +3,7 @@
 
 </script>
 
-<main class="container">
+<main class="p-1  border-2 h-[10rem] rounded-2xl flex justify-between cursor-pointer hover:border-gray-700 hover:border-2">
   <div class="w-full space-y-2 pl-2 pt-2">
     <h1 class=" font-semibold text-xl ">Container name</h1>
     <h1 class=" font-light" >Entities: 15</h1>
@@ -27,7 +27,7 @@
         />
       </svg>
     </button>
-    <button on:click={()=>{ alert("bruh") }} class={` hover:scale-110 text-red-500 absolute opacity-0 transition-all ${show_actions?" opacity-100 translate-y-[35px] ease-in-out duration-300":"  "} `}>
+    <button class={` hover:scale-110 text-red-500 absolute opacity-0 transition-all ${show_actions?" opacity-100 translate-y-[35px] ease-in-out duration-300":"  "} `}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
@@ -69,12 +69,3 @@
     </button>
   </div>
 </main>
-
-<style>
-  .container {
-    @apply p-1  border-2 h-[10rem] w-full rounded-2xl flex justify-between cursor-pointer;
-  }
-  .icon{
-    @apply absolute opacity-0
-  }
-</style>
