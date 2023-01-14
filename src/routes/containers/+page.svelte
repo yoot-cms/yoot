@@ -8,7 +8,7 @@
 
 <div class=" h-full p-4 " >
   <!-- Main container -->
-  <main class=" flex flex-col bg-white h-full  md:px-16 ">
+  <main class=" flex flex-col bg-white h-full  md:px-16 lg:px-64">
     
     <!-- Form to add a new container -->
     <form class=" flex justify-between w-full mb-5 " >
@@ -20,7 +20,7 @@
       </button>
     </form>
 
-    <div class="overflow-y-scroll space-y-3 md:space-y-0 max-h-full md:grid md:grid-cols-2 md:gap-5 " >
+    <div class="overflow-y-scroll no_scroll space-y-3 md:space-y-0 max-h-full md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:h-full lg:place-content-start " >
       <Container/>
       <Container/>
       <Container/>
