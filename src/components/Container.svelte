@@ -27,7 +27,7 @@
         />
       </svg>
     </button>
-    <button on:click={()=>{ alert("bruh") }} class={` hover:scale-110 text-red-500 absolute opacity-0 transition-all ${show_actions?" opacity-100 translate-y-[35px] ease-in-out duration-300":"  "} `}>
+    <button class={` hover:scale-110 text-red-500 absolute opacity-0 transition-all ${show_actions?" opacity-100 translate-y-[35px] ease-in-out duration-300":"  "} `}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
