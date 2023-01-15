@@ -25,7 +25,7 @@
     <!-- Form to add a new container -->
     <form class=" flex justify-between w-full mb-5 " >
       <input required type="text" class=" pl-2 h-[2.5rem] w-[85%] rounded-md border-2 p-1  focus:outline-gray-600" placeholder="Container name" name="" id="">
-      <button type="submit" class="flex rounded-md w-[15%] lg:w-[10%] border-2 text-gray-400 justify-center items-center" >
+      <button type="submit" class="hover:border-gray-700 text-gray-700 flex rounded-md w-[15%] lg:w-[10%] border-2 justify-center items-center" >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
           <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
         </svg>          
