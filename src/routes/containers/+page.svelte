@@ -1,5 +1,17 @@
 <script lang="ts">
+  import type { PageServerData } from "./$types"
   import Container from "../../components/Container.svelte";
+  import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
+  export let data: PageServerData
+  
+  if( browser ){
+    if( data.status==401 ){
+      goto('/auth')
+    }
+  }
+  let containers = data.data
+
 </script>
 
 <svelte:head>
@@ -21,10 +33,9 @@
     </form>
 
     <div class="overflow-y-scroll no_scroll space-y-3 md:space-y-0 max-h-full md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:h-full lg:place-content-start " >
-      <Container/>
-      <Container/>
-      <Container/>
-      <Container/>
+      {#each containers as container}
+        <Container name={container.name} created_at={container.created_at} />
+      {/each}
     </div>
 
   </main>
