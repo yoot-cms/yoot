@@ -13,7 +13,7 @@
     <h1 class=" font-light" >Created: {created_at}</h1>
   </div>
   <div class=" flex flex-col items-center relative pt-2 pr-2 ">
-    <button  class="z-50" on:click={()=>{ show_actions=!show_actions }} >
+    <button  class={`z-50 ${show_actions?"rotate-90":""}`} on:click={()=>{ show_actions=!show_actions }} >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
