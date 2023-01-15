@@ -1,5 +1,17 @@
 <script lang="ts">
+  import type { PageServerData } from "./$types"
   import Container from "../../components/Container.svelte";
+  import { browser } from "$app/environment";
+  import { goto } from "$app/navigation";
+  export let data: PageServerData
+  
+  if( browser ){
+    if( data.status==401 ){
+      goto('/auth')
+    }
+  }
+  let containers = data.data
+
 </script>
 
 <svelte:head>
@@ -12,8 +24,8 @@
     
     <!-- Form to add a new container -->
     <form class=" flex justify-between w-full mb-5 " >
-      <input required type="text" class=" pl-2 h-[2.5rem] w-[80%] rounded-md border-2 p-1  focus:outline-gray-600" placeholder="Container name" name="" id="">
-      <button type="submit" class="flex rounded-md w-[15%] border-2 justify-center items-center" >
+      <input required type="text" class=" pl-2 h-[2.5rem] w-[85%] rounded-md border-2 p-1  focus:outline-gray-600" placeholder="Container name" name="" id="">
+      <button type="submit" class="hover:border-gray-700 text-gray-700 flex rounded-md w-[15%] lg:w-[10%] border-2 justify-center items-center" >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
           <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
         </svg>          
@@ -21,10 +33,9 @@
     </form>
 
     <div class="overflow-y-scroll no_scroll space-y-3 md:space-y-0 max-h-full md:grid md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:h-full lg:place-content-start " >
-      <Container/>
-      <Container/>
-      <Container/>
-      <Container/>
+      {#each containers as container}
+        <Container name={container.name} created_at={container.created_at} />
+      {/each}
     </div>
 
   </main>

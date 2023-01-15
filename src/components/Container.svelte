@@ -1,17 +1,19 @@
 <script lang="ts" >
     let show_actions = false
 
+    export let name: String
+    export let created_at: String
 </script>
 
 <main class="p-1  border-2 h-[10rem] rounded-2xl flex justify-between cursor-pointer hover:border-gray-700 hover:border-2">
   <div class="w-full space-y-2 pl-2 pt-2">
-    <h1 class=" font-semibold text-xl ">Container name</h1>
+    <h1 class=" font-semibold text-xl ">{name}</h1>
     <h1 class=" font-light" >Entities: 15</h1>
     <h1 class=" font-light" >Ressources: 120</h1>
-    <h1 class=" font-light" >Created: 120 days ago</h1>
+    <h1 class=" font-light" >Created: {created_at}</h1>
   </div>
   <div class=" flex flex-col items-center relative pt-2 pr-2 ">
-    <button  class="z-50" on:click={()=>{ show_actions=!show_actions }} >
+    <button  class={`z-50 ${show_actions?"rotate-90":""}`} on:click={()=>{ show_actions=!show_actions }} >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
