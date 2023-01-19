@@ -1,11 +1,12 @@
 <script lang="ts" >
+    import { user_store } from "../stores";
     let show_actions = false
 
     export let name: String
     export let created_at: String
 </script>
 
-<main class="p-1  border-2 h-[10rem] rounded-2xl flex justify-between cursor-pointer hover:border-gray-700 hover:border-2">
+<main class="p-1 pb-3 border-2 rounded-2xl h-fit flex justify-between cursor-pointer hover:border-gray-700 hover:border-2">
   <div class="w-full space-y-2 pl-2 pt-2">
     <h1 class=" font-semibold text-xl ">{name}</h1>
     <h1 class=" font-light" >Entities: 15</h1>

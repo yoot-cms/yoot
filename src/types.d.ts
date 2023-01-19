@@ -9,5 +9,5 @@ export type containerData = {
 
 export type fetchContainerResponse = {
     status: Number,
-    data: containerData
+    data: containerData[]
 }
