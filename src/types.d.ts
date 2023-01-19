@@ -1,13 +1,13 @@
 export type containerData = {
-    _id: String,
-    name: String,
+    _id: string,
+    name: string,
     entities: Number,
     ressources: Number,
-    owner: String,
-    created_at: String,
+    owner: string,
+    created_at: string,
 }
 
 export type fetchContainerResponse = {
     status: Number,
-    data: containerData
+    data: containerData[]
 }

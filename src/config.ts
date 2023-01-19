@@ -1,2 +1,2 @@
 // export const apiUrl = "https://yootapi.onrender.com/"
-export const apiUrl = "http://localhost:5000/"
+export const api_url = "http://127.0.0.1:8000"

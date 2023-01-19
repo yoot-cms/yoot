@@ -1,6 +1,6 @@
 <script lang="ts">
   import { browser } from "$app/environment";
-  import { location } from "../../../../stores/stores";
+  import { location } from "../../../../stores";
   if (browser) {
     location.update(_value=>window.location.pathname);
   }

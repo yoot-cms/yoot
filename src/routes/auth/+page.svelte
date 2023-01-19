@@ -1,13 +1,48 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+  import { user_store } from "../../stores"
+  import { api_url } from "../../config"
   import axios from "axios";
   let error = false;
+  let error_message = ""
   let action = "Login";
   let email: string;
   let password: string;
   function switchAction() {
+    error = false
     action = action == "Login" ? "Register" : "Login";
   }
-  async function authenticate() {}
+  async function authenticate() {
+    axios.post(
+      `http://localhost:8000/auth/${action.toLocaleLowerCase()}`,
+      {
+        email,
+        password
+      }
+    ).then((res)=>{
+      const response = res.data
+      switch (response.status) {
+        case 404:
+          error = true
+          error_message = "User not found"
+          break;
+        case 400:
+          error = true
+          error_message = "Wrong password"
+          break
+        case 200:
+          const token = response.token
+          localStorage.setItem("token", token)
+          user_store.set({
+            token:token
+          })
+          goto("/containers")
+      }
+    }).catch( _ =>{
+      error_message = "Something went wrong <br> Please try again or contact us "
+      error = true
+    })
+  }
 </script>
 
 <svelte:head>
@@ -46,7 +81,7 @@
         type="password"
       />
       {#if error}
-        <span class=" text-md text-red-500 text-center">Erraire</span>
+        <span class=" text-md text-red-500 text-center">{@html error_message}</span>
       {/if}
       <button
         class=" bg-indigo-500 rounded-md text-white p-2 flex justify-center h-10"
