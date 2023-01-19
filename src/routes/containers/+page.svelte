@@ -2,7 +2,7 @@
   import type { fetchContainerResponse } from "../../types";
   import { browser } from "$app/environment";
   import { goto } from "$app/navigation";
-  import { pullContainers } from "../../Functions";
+  import { clip_string } from "../../Functions";
   import { containers_store, user_store } from "../../stores";
   import Container from "../../components/Container.svelte";
   import axios from "axios";
@@ -66,6 +66,8 @@
           }
         )
         .then((res) => {
+          load_containers()
+          container_name = ""
           console.log(res.data);
         })
         .catch((err) => {
@@ -80,7 +82,6 @@
               break;
           }
         });
-      error = await pullContainers();
       loading = false;
     } catch (_) {
       error = true

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { user_store } from "../../stores"
+  import { api_url } from "../../config"
   import axios from "axios";
   let error = false;
   let error_message = ""
