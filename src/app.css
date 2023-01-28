@@ -11,3 +11,7 @@ body{
 .no_scroll::-webkit-scrollbar{
     @apply hidden;
 }
+
+.link_to_feature{
+    @apply text-violet-500 underline decoration-wavy;
+}
