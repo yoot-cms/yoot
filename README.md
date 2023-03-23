@@ -1,2 +1,0 @@
-# YOOT
-## YOOT is a minimalistic CMS designed for everyone running a content based website. It helps business runners manage their content without having to rely on developers for every single change they want to make
