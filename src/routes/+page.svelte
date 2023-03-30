@@ -1,11 +1,12 @@
 <script lang="ts">
     import SimpleButton from "../components/SimpleButton.svelte";
+    import OutlineButton from "../components/OutlineButton.svelte";
 </script>
 
 <main class="h-screen w-full">
 	<!-- Hero section -->
-	<section class=" h-screen flex flex-col items-center justify-center text-center">
-		<div>
+	<section class=" h-screen flex flex-col items-center justify-center text-center gap-10">
+		<div class=" space-y-5">
 			<h1 class=" font-bold text-5xl">Manage your content as easily as One Two Three</h1>
 			<section class=" text-gray-400">
 				<h1>
@@ -18,7 +19,7 @@
 		</div>
 		<div class=" flex w-full justify-center gap-10 p-2">
             <SimpleButton text={"Get Started"} />
-			<button>Learn more</button>
+            <OutlineButton text={"Learn more"} />
 		</div>
 	</section>
 </main>
