@@ -1,11 +1,23 @@
 <script lang="ts">
 </script>
 
-<main class=" p-2 w-full">
+<main class="h-screen w-full">
 	<!-- Hero section -->
-	<section class=" w-full">
-		<h1 class=" font-extrabold text-4xl text-purple-800">
-			Manage your content as easily as One Two Three
-		</h1>
+	<section class=" h-screen flex flex-col items-center justify-center text-center">
+		<div>
+			<h1 class=" font-bold text-5xl">Manage your content as easily as One Two Three</h1>
+			<section class=" text-gray-400">
+				<h1>
+					YOOT is a minimalistic, super simple to use CMS designed for simplicity Lorem ipsum dolor
+					sit amet consectetur adipisicing elit. Distinctio nisi nihil eos a modi ipsum consequuntur
+					error? Nemo ut aspernatur omnis blanditiis nesciunt repellat, dignissimos amet tenetur
+					sint voluptatibus reiciendis.
+				</h1>
+			</section>
+		</div>
+		<div class=" flex w-full justify-center gap-10 p-2">
+			<button>Get Started</button>
+			<button>Learn more</button>
+		</div>
 	</section>
 </main>
