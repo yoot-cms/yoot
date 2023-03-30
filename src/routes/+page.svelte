@@ -1,4 +1,5 @@
 <script lang="ts">
+    import SimpleButton from "../components/SimpleButton.svelte";
 </script>
 
 <main class="h-screen w-full">
@@ -16,7 +17,7 @@
 			</section>
 		</div>
 		<div class=" flex w-full justify-center gap-10 p-2">
-			<button>Get Started</button>
+            <SimpleButton text={"Get Started"} />
 			<button>Learn more</button>
 		</div>
 	</section>
