@@ -11,6 +11,5 @@
     </div>
 </header>
 
-<div class=" h-screen w-full" ></div>
 
 <slot/>
