@@ -1,6 +1,6 @@
 <script lang="ts">
-    import SimpleButton from "../components/SimpleButton.svelte";
-    import OutlineButton from "../components/OutlineButton.svelte";
+    import SimpleButton from "../components/buttons/SimpleButton.svelte";
+    import OutlineButton from "../components/buttons/OutlineButton.svelte";
 </script>
 
 <main class="h-screen w-full">
