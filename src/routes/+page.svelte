@@ -3,6 +3,11 @@
     import OutlineButton from "../components/buttons/OutlineButton.svelte";
 </script>
 
+<header class="p-2 flex w-full fixed justify-between items-baseline absolute top-0">
+    <h1 class=" font-bold text-2xl">YOOT</h1>
+    <h1>Github</h1>
+</header>
+
 <main class="h-screen w-full">
 	<!-- Hero section -->
 	<section class=" h-screen flex flex-col items-center justify-center text-center gap-10">
