@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let on_click: () => void;
+	export let on_click: () => void = ()=>{};
 </script>
 
 <button on:click={on_click}>
