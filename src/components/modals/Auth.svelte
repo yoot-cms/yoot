@@ -3,6 +3,7 @@
     import SmRefresh from '../icons/SmRefresh.svelte';
 	import OutlineButton from '../buttons/OutlineButton.svelte';
 	import SimpleButton from '../buttons/SimpleButton.svelte';
+	import Loading from '../icons/Loading.svelte';
 	let user_email = '';
 	let auth_code = '';
 	let code_sent = false;
@@ -59,8 +60,8 @@
 			/>
 			<div class="flex gap-2 items-center">
 				<button class=" text-left text-xs text-violet-500 underline">Resend code</button>
-                {#if false}
-                    <SmRefresh />
+                {#if true}
+                    <Loading />
                 {:else}
                     <h1 class=" text-xs text-green-500">Code sent!</h1>
                 {/if}
