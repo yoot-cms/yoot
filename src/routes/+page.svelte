@@ -45,7 +45,7 @@
 			</section>
 		</div>
 		<div class=" flex w-full justify-center gap-10 p-2">
-			<SimpleButton title={'Get Started'} on_click={get_started} />
+			<SimpleButton on_click={get_started}>Get Started</SimpleButton>
 			<OutlineButton title={'Learn more'} />
 		</div>
 	</section>
