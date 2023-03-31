@@ -19,7 +19,7 @@
                 return
             }
 		}
-        //show_modal
+        auth_modal_is_visible.set(true)
 	}
 </script>
 
@@ -32,7 +32,7 @@
 
 <main class="h-screen w-full p-2">
 	<!-- Hero section -->
-	<section class=" h-screen flex flex-col items-center justify-center text-center gap-10">
+	<section class=" h-full flex flex-col items-center justify-center text-center gap-10">
 		<div class=" space-y-5">
 			<h1 class=" font-bold text-5xl">Content Management made Simple</h1>
 			<section class=" text-gray-400">
@@ -51,7 +51,7 @@
 	</section>
 </main>
 
-<footer class=" text-center absolute bottom-0 p-1 border border-t w-full text-sm">
+<footer class=" text-center absolute bottom-0 p-1 border-t w-full text-sm">
 	<h1>
 		Built by passionate developers @<a href="https://reexlabs.com" class=" underline font-bold"
 			>REEX Labs</a
