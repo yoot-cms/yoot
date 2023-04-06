@@ -44,7 +44,8 @@ export const GET = (
                     "X-Cassandra-Token":DB_APP_TOKEN,
                     "Content-Type":"application/json"
                 },
-                body: JSON.stringify(new_code)
+                body: JSON.stringify(new_code),
+                method:"POST"
             }
         ).then(res=>{
             if(res.status!==201){
