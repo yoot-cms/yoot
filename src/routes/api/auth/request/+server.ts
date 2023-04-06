@@ -30,7 +30,7 @@ export const GET = (
             }
         })
         logger("INFO", `Auth code sent to ${user_email}`, function_name )
-
+        
         return new Response("", { status:200 })
     }
 ) satisfies RequestHandler
