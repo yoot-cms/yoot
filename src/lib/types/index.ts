@@ -14,3 +14,12 @@ export type AuthCode = {
     used: boolean,
     validity_date: string
 }
+
+export type Plan = "wood" | "bronze" | "silver" | "gold"
+
+export type User = {
+    email: string,
+    id: string,
+    profile_picture: string,
+    plan: Plan
+}
