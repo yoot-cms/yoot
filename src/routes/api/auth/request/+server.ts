@@ -2,10 +2,10 @@ import type { RequestHandler } from "./$types"
 import * as nodemailer from "nodemailer"
 import logger from "$lib/utils/logger"
 import { DB_URL, DB_APP_TOKEN, GMAIL_PASS } from "$env/static/private"
-
+import type { AuthCode } from "$lib/types"
 
 export const GET = (
-    ({ url })=>{
+    async ({ url })=>{
         const function_name = "RequestAuth"
         const user_email = url.searchParams.get("email") ?? ""
         if( user_email==="" ) return new Response("",{ status:400 })
@@ -30,7 +30,30 @@ export const GET = (
             }
         })
         logger("INFO", `Auth code sent to ${user_email}`, function_name )
-        
+        // Save authcode in db
+        const new_code: AuthCode = {
+            used:false,
+            code:auth_code,
+            generated_for:user_email,
+            validity_date: new Date().toLocaleDateString()
+        }
+        await fetch(
+            `${DB_URL}/collections/auth_codes`,
+            {
+                headers:{
+                    "X-Cassandra-Token":DB_APP_TOKEN,
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(new_code)
+            }
+        ).then(res=>{
+            if(res.status!==201){
+                return new Response("", { status:500 })
+            }
+        }).catch(err=>{
+            logger("ERR", err, function_name)
+            return new Response("", { status:500 })
+        })
         return new Response("", { status:200 })
     }
 ) satisfies RequestHandler
