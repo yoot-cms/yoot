@@ -5,7 +5,7 @@ import * as nodemailer from "nodemailer"
 export const GET = (
     ({ url })=>{
         const user_email = url.searchParams.get("email") ?? ""
-        if( user_email==="" ) return new Response("Bad Request", { status:400 })
+        if( user_email==="" ) return new Response("",{ status:400 })
         const transporter = nodemailer.createTransport({
             service:"gmail",
             auth:{
