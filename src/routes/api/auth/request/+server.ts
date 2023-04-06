@@ -1,9 +1,11 @@
 import type { RequestHandler } from "./$types"
 import * as nodemailer from "nodemailer"
+import logger from "$lib/utils/logger"
 
 
 export const GET = (
     ({ url })=>{
+        const function_name = "RequestAuth"
         const user_email = url.searchParams.get("email") ?? ""
         if( user_email==="" ) return new Response("",{ status:400 })
         const transporter = nodemailer.createTransport({
@@ -22,11 +24,11 @@ export const GET = (
         }
         transporter.sendMail(mail_options, (err, _info)=>{
             if(err){
-                console.log("Happened while sending Auth code")
-                console.error(err)
-                return new Response("Server Error", { status:500 })
+                logger("ERR", err.message, function_name)
+                return new Response("", { status:500 })
             }
         })
+        logger("INFO", `Auth code sent to ${user_email}`, function_name )
         return new Response("", { status:200 })
     }
 ) satisfies RequestHandler
