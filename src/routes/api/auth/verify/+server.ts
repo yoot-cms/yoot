@@ -34,7 +34,8 @@ export const GET = (
             }
             const { data } = await code_verification_response.json() as AuthCodeData
             const document_id = Object.keys(data)[0]
-            const code_invalidation_response = await fetch(
+            //Invalidate auth code
+            await fetch(
                 `${DB_URL}/collections/auth_codes/${document_id}`,
                 {
                     headers:{
@@ -47,7 +48,27 @@ export const GET = (
                     })
                 }
             )
-            return new Response("", { status: 200 })
+            //Check if user exists in database, create account if not
+            const user_where_clause = { "email": { "$eq": user_email }, active:{ "$eq":true } }
+            const user_req_url: URL = new URL(`${DB_URL}/collections/users`)
+            user_req_url.searchParams.append("where", JSON.stringify(user_where_clause))
+            const user_search_response = await fetch(
+                user_req_url.toString(),
+                {
+                    headers: {
+                        "X-Cassandra-Token": DB_APP_TOKEN,
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+            if(user_search_response.status===404){
+                console.log("not found")
+            }
+            if(user_search_response.status===200){
+                console.log("found")
+            }
+            logger("ERR", user_search_response.statusText, function_name)
+            return new Response("", { status: 500 })
         } catch (err) {
             logger("ERR", err as string, function_name)
             return new Response("", { status: 500 })
