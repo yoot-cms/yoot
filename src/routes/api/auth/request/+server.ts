@@ -49,6 +49,7 @@ export const GET = (
             }
         ).then(res=>{
             if(res.status!==201){
+                console.log(res)
                 return new Response("", { status:500 })
             }
         }).catch(err=>{
