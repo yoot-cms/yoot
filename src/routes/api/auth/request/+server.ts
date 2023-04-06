@@ -2,7 +2,6 @@ import type { RequestHandler } from "./$types"
 import * as nodemailer from "nodemailer"
 import logger from "$lib/utils/logger"
 
-
 export const GET = (
     ({ url })=>{
         const function_name = "RequestAuth"
