@@ -2,7 +2,7 @@ import { DB_APP_TOKEN, DB_URL, JWT_SECRET } from "$env/static/private"
 import type { RequestHandler } from "./$types"
 import logger from "$lib/utils/logger"
 import type { AuthCodeData, User } from "$lib/types"
-
+import * as jwt from "jsonwebtoken"
 
 export const GET = (
     async ({ url }) => {
@@ -81,10 +81,12 @@ export const GET = (
                     logger("ERR", `Failed to create user ${user_email}`, function_name)
                     return new Response("", { status: 500 })
                 }
-                let auth_token
+                let auth_token = jwt.sign({ email: user_email }, JWT_SECRET)
+                return new Response(JSON.stringify({ auth_token }), { status: 200 })
             }
             if(user_search_response.status===200){
-                let auth_token
+                let auth_token = jwt.sign({ email: user_email }, JWT_SECRET)
+                return new Response(JSON.stringify({ auth_token }), { status: 200 })
             }
             logger("ERR", user_search_response.statusText, function_name)
             return new Response("", { status: 500 })
