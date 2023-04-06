@@ -23,3 +23,5 @@ export type User = {
     profile_picture: string,
     plan: Plan
 }
+
+

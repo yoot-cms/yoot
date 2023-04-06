@@ -37,7 +37,7 @@ export const GET = (
             generated_for:user_email,
             validity_date: new Date().toLocaleDateString()
         }
-        await fetch(
+        const response = await fetch(
             `${DB_URL}/collections/auth_codes`,
             {
                 headers:{
@@ -49,13 +49,13 @@ export const GET = (
             }
         ).then(res=>{
             if(res.status!==201){
-                console.log(res)
                 return new Response("", { status:500 })
             }
+            return new Response("", {  status:200})
         }).catch(err=>{
             logger("ERR", err, function_name)
             return new Response("", { status:500 })
         })
-        return new Response("", { status:200 })
+        return response
     }
 ) satisfies RequestHandler
