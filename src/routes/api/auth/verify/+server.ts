@@ -74,7 +74,8 @@ export const GET = (
                             "X-Cassandra-Token": DB_APP_TOKEN,
                             "Content-Type": "application/json"
                         },
-                        method: "POST"
+                        method: "POST",
+                        body: JSON.stringify(new_user)
                     }
                 )
                 if(user_insertion_response.status!==201){
