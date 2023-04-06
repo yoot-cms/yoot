@@ -19,7 +19,7 @@ export const GET = (
             const where_clause = { "used": { "$eq": false }, generated_for: { "$eq": user_email }, code: { "$eq": code } }
             const req_url: URL = new URL(`${DB_URL}/collections/auth_codes`)
             req_url.searchParams.append("where", JSON.stringify(where_clause))
-            const response = await fetch(
+            const code_verification_response = await fetch(
                 req_url.toString(),
                 {
                     headers: {
@@ -27,6 +27,24 @@ export const GET = (
                         "Content-Type": "application/json"
                     }
 
+                }
+            )
+            if(code_verification_response.status!==200){
+                return new Response("", { status:code_verification_response.status })
+            }
+            const { data } = await code_verification_response.json() as AuthCodeData
+            const document_id = Object.keys(data)[0]
+            const code_invalidation_response = await fetch(
+                `${DB_URL}/collections/auth_codes/${document_id}`,
+                {
+                    headers:{
+                        "X-Cassandra-Token": DB_APP_TOKEN,
+                        "Content-Type": "application/json"
+                    },
+                    method: "PATCH",
+                    body: JSON.stringify({
+                        used: true
+                    })
                 }
             )
             return new Response("", { status: 200 })
