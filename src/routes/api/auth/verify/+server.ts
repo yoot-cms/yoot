@@ -1,7 +1,7 @@
-import { DB_APP_TOKEN, DB_URL } from "$env/static/private"
+import { DB_APP_TOKEN, DB_URL, JWT_SECRET } from "$env/static/private"
 import type { RequestHandler } from "./$types"
 import logger from "$lib/utils/logger"
-import type { AuthCodeData } from "$lib/types"
+import type { AuthCodeData, User } from "$lib/types"
 
 
 export const GET = (
@@ -62,10 +62,29 @@ export const GET = (
                 }
             )
             if(user_search_response.status===404){
-                console.log("not found")
+                const new_user : User = {
+                    email: user_email,
+                    plan: "wood",
+                    profile_picture:""
+                }
+                const user_insertion_response = await fetch(
+                    `${DB_URL}/collections/users`,
+                    {
+                        headers:{
+                            "X-Cassandra-Token": DB_APP_TOKEN,
+                            "Content-Type": "application/json"
+                        },
+                        method: "POST"
+                    }
+                )
+                if(user_insertion_response.status!==201){
+                    logger("ERR", `Failed to create user ${user_email}`, function_name)
+                    return new Response("", { status: 500 })
+                }
+                let auth_token
             }
             if(user_search_response.status===200){
-                console.log("found")
+                let auth_token
             }
             logger("ERR", user_search_response.statusText, function_name)
             return new Response("", { status: 500 })

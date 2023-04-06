@@ -19,7 +19,6 @@ export type Plan = "wood" | "bronze" | "silver" | "gold"
 
 export type User = {
     email: string,
-    id: string,
     profile_picture: string,
     plan: Plan
 }
