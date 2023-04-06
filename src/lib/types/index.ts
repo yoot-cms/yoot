@@ -25,3 +25,8 @@ export type User = {
 }
 
 
+export type AuthCodeData = {
+    data: {
+        [key: string]: AuthCode
+    }
+}
