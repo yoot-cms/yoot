@@ -1,6 +1,8 @@
 import type { RequestHandler } from "./$types"
 import * as nodemailer from "nodemailer"
 import logger from "$lib/utils/logger"
+import { DB_URL, DB_APP_TOKEN, GMAIL_PASS } from "$env/static/private"
+
 
 export const GET = (
     ({ url })=>{
@@ -11,7 +13,7 @@ export const GET = (
             service:"gmail",
             auth:{
                 user:"pigeondev01@gmail.com",
-                pass:"fkyndapgxobbxodq"
+                pass:GMAIL_PASS
             }
         })
         const auth_code  = `${Math.round(Math.random()*1000000)}`
@@ -28,6 +30,7 @@ export const GET = (
             }
         })
         logger("INFO", `Auth code sent to ${user_email}`, function_name )
+
         return new Response("", { status:200 })
     }
 ) satisfies RequestHandler
