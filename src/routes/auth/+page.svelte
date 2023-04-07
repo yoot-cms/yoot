@@ -15,6 +15,7 @@
 			const auth_request_response = await fetch(req_url);
             if(auth_request_response.status!==200){
                     error_sending_code = "Something went wrong. Please retry or contact support"
+                    return
                 }
             error_sending_code = ""
             auth_state = 1
@@ -22,9 +23,23 @@
 			error_sending_code = "Something went wrong. Please retry or contact support";
 		}
 	}
+
     async function submit_code(){
             try {
-                
+                const req_url = new URL('/api/auth/verify')
+                req_url.searchParams.append("email", email)
+                req_url.searchParams.append("code", auth_code)
+                const code_submit_response = await fetch(req_url)
+                if(code_submit_response.status!==200 && code_submit_response.status!==404){
+                        error_submitting = "Something went wrong. Please retry or contact support"
+                        return
+                    }                    
+                if(code_submit_response.status===404){
+                        error_submitting = "Invalid code"
+                        return
+                    }
+                const data = await code_submit_response.json()
+                console.log(data)
             } catch (err) {
                 error_submitting = "Something went wrong. Please retry or contact support"
             }
