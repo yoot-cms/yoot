@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Spinner from '../../components/icons/Spinner.svelte';
+    import logger from '$lib/utils/logger';
 	let auth_state: 0 | 1 = 0;
 	let sending_code = false;
 	let submitting = false;
@@ -10,26 +11,32 @@
 
 	async function request_auth() {
 		try {
-			const req_url = new URL('/api/auth/request');
+            sending_code = true
+			const req_url = new URL(`${window.location.origin}/api/auth/request`);
 			req_url.searchParams.append('email', email);
 			const auth_request_response = await fetch(req_url);
+            sending_code = false
 			if (auth_request_response.status !== 200) {
 				error_sending_code = 'Something went wrong. Please retry or contact support';
 				return;
 			}
 			error_sending_code = '';
 			auth_state = 1;
-		} catch (_) {
+		} catch (err) {
+            logger("ERR", err as string, "RequestAuthClient")
+            sending_code = false
 			error_sending_code = 'Something went wrong. Please retry or contact support';
 		}
 	}
 
 	async function submit_code() {
 		try {
-			const req_url = new URL('/api/auth/verify');
+            submitting = true
+			const req_url = new URL(`${window.location.origin}/api/auth/verify`);
 			req_url.searchParams.append('email', email);
 			req_url.searchParams.append('code', auth_code);
 			const code_submit_response = await fetch(req_url);
+            submitting = false
 			if (code_submit_response.status !== 200 && code_submit_response.status !== 404) {
 				error_submitting = 'Something went wrong. Please retry or contact support';
 				return;
@@ -41,6 +48,8 @@
 			const data = await code_submit_response.json();
 			console.log(data);
 		} catch (err) {
+            console.log(err)
+            submitting = false
 			error_submitting = 'Something went wrong. Please retry or contact support';
 		}
 	}
@@ -86,7 +95,7 @@
 					bind:value={auth_code}
 				/>
 				<span class="text-red-700 text-sm">{error_submitting}</span>
-				<button type="submit" class=" p-2 rounded-md text-white font-semibold bg-violet-700 w-full">
+				<button type="submit" class="flex justify-center p-2 rounded-md text-white font-semibold bg-violet-700 w-full">
 					{#if submitting}
 						<Spinner />
 					{:else}
