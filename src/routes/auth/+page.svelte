@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Spinner from '../../components/icons/Spinner.svelte';
     import logger from '$lib/utils/logger';
+    import { goto } from '$app/navigation';
 	let auth_state: 0 | 1 = 0;
 	let sending_code = false;
 	let submitting = false;
@@ -45,8 +46,9 @@
 				error_submitting = 'Invalid code';
 				return;
 			}
-			const data = await code_submit_response.json();
-			console.log(data);
+			const data = await code_submit_response.json() as { auth_token: string };
+            localStorage.setItem("auth_token", data.auth_token)
+            goto('/projects')
 		} catch (err) {
             console.log(err)
             submitting = false
