@@ -1,11 +1,34 @@
 <script lang="ts">
-	import Spinner from "../../components/icons/Spinner.svelte";
-    let auth_state = 0;
-    let sending_code = true
-    let submitting = false
-    $: error_sending_code = ""
-    $: error_submitting = ""
+	import Spinner from '../../components/icons/Spinner.svelte';
+	let auth_state: 0 | 1 = 0;
+	let sending_code = false;
+	let submitting = false;
+	$: error_sending_code = '';
+	$: error_submitting = '';
+	let email = '';
+	let auth_code = '';
 
+	async function request_auth() {
+		try {
+			const req_url = new URL('/api/auth/request');
+			req_url.searchParams.append('email', email);
+			const auth_request_response = await fetch(req_url);
+            if(auth_request_response.status!==200){
+                    error_sending_code = "Something went wrong. Please retry or contact support"
+                }
+            error_sending_code = ""
+            auth_state = 1
+		} catch (_) {
+			error_sending_code = "Something went wrong. Please retry or contact support";
+		}
+	}
+    async function submit_code(){
+            try {
+                
+            } catch (err) {
+                error_submitting = "Something went wrong. Please retry or contact support"
+            }
+        }
 </script>
 
 <div class=" h-screen w-full flex flex-col items-center justify-center p-2">
@@ -21,16 +44,17 @@
 					class=" p-2 focus:outline-none rounded-md w-full border border-gray-500 text-center"
 					placeholder="Your Email"
 					required
+					bind:value={email}
 				/>
-                <span class=" text-red-700 text-sm" >{error_sending_code}</span>
+				<span class=" text-red-700 text-sm">{error_sending_code}</span>
 				<button
 					class=" flex justify-center p-2 rounded-md border border-white text-white font-semibold bg-violet-700 w-full"
 				>
-                    {#if sending_code}
-                        <Spinner/>
-                    {:else}
-                        <h1>Get code</h1>
-                    {/if}
+					{#if sending_code}
+						<Spinner />
+					{:else}
+						<h1>Get code</h1>
+					{/if}
 				</button>
 			</form>
 		{/if}
@@ -42,12 +66,17 @@
 					class=" p-2 focus:outline-none rounded-md w-full border border-gray-500 text-center"
 					placeholder=""
 					required
-                    maxlength="6"
+					maxlength="6"
+					bind:value={auth_code}
 				/>
-                <span class="text-red-700 text-sm">{error_submitting}</span>
-                <button class=" p-2 rounded-md text-white font-semibold bg-violet-700 w-full" >
-                    Submit
-                </button>
+				<span class="text-red-700 text-sm">{error_submitting}</span>
+				<button class=" p-2 rounded-md text-white font-semibold bg-violet-700 w-full">
+					{#if submitting}
+						<Spinner />
+					{:else}
+						<h1>Submit</h1>
+					{/if}
+				</button>
 			</form>
 		{/if}
 	</div>
