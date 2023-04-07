@@ -50,7 +50,7 @@
             localStorage.setItem("auth_token", data.auth_token)
             goto('/projects')
 		} catch (err) {
-            console.log(err)
+            logger("ERR", err as string, "SubmitAuthCode")
             submitting = false
 			error_submitting = 'Something went wrong. Please retry or contact support';
 		}
