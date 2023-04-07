@@ -3,8 +3,8 @@
     let auth_state = 0;
     let sending_code = true
     let submitting = false
-    let error_sending_code = ""
-    let error_submitting = ""
+    $: error_sending_code = ""
+    $: error_submitting = ""
 
 </script>
 
@@ -18,11 +18,11 @@
 			<form class=" flex flex-col items-center gap-2">
 				<input
 					type="email"
-					class=" p-2 focus:outline-none rounded-md w-full border border-gray-500"
+					class=" p-2 focus:outline-none rounded-md w-full border border-gray-500 text-center"
 					placeholder="Your Email"
 					required
 				/>
-
+                <span class=" text-red-700 text-sm" >{error_sending_code}</span>
 				<button
 					class=" flex justify-center p-2 rounded-md border border-white text-white font-semibold bg-violet-700 w-full"
 				>
@@ -44,6 +44,7 @@
 					required
                     maxlength="6"
 				/>
+                <span class="text-red-700 text-sm">{error_submitting}</span>
                 <button class=" p-2 rounded-md text-white font-semibold bg-violet-700 w-full" >
                     Submit
                 </button>
