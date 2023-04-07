@@ -1,5 +1,11 @@
 <script lang="ts">
-	let auth_state = 1;
+	import Spinner from "../../components/icons/Spinner.svelte";
+    let auth_state = 0;
+    let sending_code = true
+    let submitting = false
+    let error_sending_code = ""
+    let error_submitting = ""
+
 </script>
 
 <div class=" h-screen w-full flex flex-col items-center justify-center p-2">
@@ -18,9 +24,13 @@
 				/>
 
 				<button
-					class=" p-2 rounded-md border border-white text-white font-semibold bg-violet-700 w-full"
+					class=" flex justify-center p-2 rounded-md border border-white text-white font-semibold bg-violet-700 w-full"
 				>
-					Get code
+                    {#if sending_code}
+                        <Spinner/>
+                    {:else}
+                        <h1>Get code</h1>
+                    {/if}
 				</button>
 			</form>
 		{/if}
@@ -34,6 +44,9 @@
 					required
                     maxlength="6"
 				/>
+                <button class=" p-2 rounded-md text-white font-semibold bg-violet-700 w-full" >
+                    Submit
+                </button>
 			</form>
 		{/if}
 	</div>
