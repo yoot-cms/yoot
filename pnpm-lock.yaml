@@ -12,6 +12,9 @@ dependencies:
     version: 3.21.4
 
 devDependencies:
+  '@skeletonlabs/skeleton':
+    specifier: ^1.1.0
+    version: 1.1.0
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.0.0(@sveltejs/kit@1.15.1)
@@ -369,6 +372,12 @@ packages:
 
   /@polka/url@1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
+    dev: true
+
+  /@skeletonlabs/skeleton@1.1.0:
+    resolution: {integrity: sha512-dkogVhYYQUzt1nXBMeal39suelaY7zejGPBc/5mjtfzvWjDF3KridZQwtSZrb81XlAFYGttHlcYCqSojywFGUQ==}
+    dependencies:
+      svelte: 3.58.0
     dev: true
 
   /@sveltejs/adapter-auto@2.0.0(@sveltejs/kit@1.15.1):
