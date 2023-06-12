@@ -5,7 +5,9 @@ export const GET = (
      async ()=>{
         try {
             const { rows } = await sql` select * from users `
-            return new Response(JSON.stringify({ data: rows }))
+            return new Response(JSON.stringify({ data: rows }), { headers:{
+                "Content-Type":"application/json"
+            } })
         } catch (err) {
             console.log(err)
             return new Response("", { status:500 })
