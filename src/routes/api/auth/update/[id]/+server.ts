@@ -6,9 +6,9 @@ export const PUT = (
     async ({ request } ) => {
         try {
             const token = request.headers.get("Authorization") ?? ""
-            if(token==="") return new Response("", { status : 401 })
+            if( token==="" ) return new Response("", { status : 401 })
             const { id, status } = verify_token(token)
-            if(!status) return new Response("", { status:401 })
+            if( !status ) return new Response("", { status : 401 })
             const { username } = await request.json() as { username : string }
             await sql`
                 update users 
@@ -18,7 +18,7 @@ export const PUT = (
             return new Response("")
         } catch (err) {
             console.log(err)
-            return new Response("", { status:500 })
+            return new Response("", { status : 500 })
         }
     }
 ) satisfies RequestHandler
