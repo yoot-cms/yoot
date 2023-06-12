@@ -9,9 +9,10 @@ export const POST = (
             const result = await sql`select email from users where email=${email}`
             if (result.rows.length !== 0) return new Response("", { status: 409 })
             const hashed_pwd = await bcrypt.hash(password, 10)
+            const plan = "basic"
             await sql`
-                insert into users(email, password, username) 
-                values(${email}, ${hashed_pwd}, ${username})
+                insert into users(email, password, username, plan) 
+                values(${email}, ${hashed_pwd}, ${username}, ${plan})
             `
             return new Response("", { status:201 })
         } catch (err) {
