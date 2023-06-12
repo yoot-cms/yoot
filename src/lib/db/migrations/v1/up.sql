@@ -30,3 +30,10 @@ create table api_key (
     key text not null,
     owner text REFERENCES users(id)
 );
+
+create table permission (
+    id text default gen_random_uuid()::text PRIMARY KEY,
+    type text not null,
+    project text REFERENCES project(id),
+    entities text[] not null
+);
