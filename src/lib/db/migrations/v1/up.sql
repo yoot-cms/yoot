@@ -24,3 +24,9 @@ create table entry (
     entity text REFERENCES entity(id),
     value JSONB[]
 );
+
+create table api_key (
+    id text default gen_random_uuid()::text PRIMARY KEY,
+    key text not null,
+    owner text REFERENCES users(id)
+);
