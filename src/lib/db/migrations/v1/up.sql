@@ -18,3 +18,9 @@ create table entity (
     project text REFERENCES project(id),
     schema JSONB[]
 );
+
+create table entry (
+    id text default gen_random_uuid()::text PRIMARY KEY,
+    entity text REFERENCES entity(id),
+    value JSONB[]
+);
