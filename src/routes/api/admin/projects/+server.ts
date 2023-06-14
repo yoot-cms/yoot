@@ -10,7 +10,7 @@ export const GET = (
 
         } catch (err) {
             console.log(err)
-            return new Response("", { status:500 })
+            return HttpResponse(500)
         }
     }
 ) satisfies RequestHandler
