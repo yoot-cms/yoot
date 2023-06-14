@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
     import Loading from "$lib/components/Loading.svelte";
 	let email = '';
 	let password = '';
@@ -21,7 +22,9 @@
             }
             if (response.status===200) {
                 const { token } = await response.json() as { token : string }
-                console.log(token)
+                localStorage.setItem("token", token)
+                goto("/dashboard")
+                localStorage.getItem("token")
             }
 		} catch (err) {
 			console.log(err);
