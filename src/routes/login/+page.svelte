@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
     import Loading from "$lib/components/Loading.svelte";
+    import { API_URL } from "$lib/utils";
 	let email = '';
 	let password = '';
     let loading = false
@@ -9,7 +10,7 @@
         loading = true
         error = ""
 		try {
-			const response = await fetch('http://localhost:5173/api/auth/login', {
+			const response = await fetch(`${API_URL}/auth/login`, {
 				method: 'POST',
 				body: JSON.stringify({ email, password })
 			});
