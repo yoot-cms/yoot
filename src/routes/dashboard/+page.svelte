@@ -30,7 +30,14 @@
 			class=" p-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md flex flex-col items-center justify-center"
 		>
 			<h1 class="text-2xl font-bold">Welcome(back) {username}</h1>
-			<div />
+            <div class="p-2 flex gap-4">
+                <button class=" p-3 w-52 bg-gray-500 rounded-md text-white">Projects</button>
+                <button class=" p-3 w-52 bg-gray-500 rounded-md text-white">Api Keys</button>
+            </div>
+            <div class="p-2 flex gap-4">
+                <button class=" p-3 w-52 bg-gray-500 rounded-md text-white">Stats</button>
+                <button class=" p-3 w-52 bg-gray-500 rounded-md text-white">Profile</button>
+            </div>
 		</div>
 	</div>
 {:else}
