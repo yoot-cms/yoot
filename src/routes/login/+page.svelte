@@ -24,7 +24,6 @@
                 const { token } = await response.json() as { token : string }
                 localStorage.setItem("token", token)
                 goto("/dashboard")
-                localStorage.getItem("token")
             }
 		} catch (err) {
 			console.log(err);
