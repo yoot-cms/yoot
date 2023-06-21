@@ -30,7 +30,13 @@ export const POST = (
 export const GET = (
      async ()=>{
         try {
-            const {rows} = await sql` select * from project `
+            const { rows } = await sql` select * from project `
+            /**
+                * [
+                * {
+                    * id:""
+                    * }
+                * ]*/
             return new Response(JSON.stringify({ data: rows }), { headers:{
                 "Content-Type":"application/json"
             } })
