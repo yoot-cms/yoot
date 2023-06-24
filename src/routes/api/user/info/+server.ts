@@ -9,7 +9,8 @@ export const GET : RequestHandler = async ({ request })=>{
         if (token === "") return HttpResponse(401)
         const { status, id } = verify_token(token)
         if (!status) return HttpResponse(401)
-        const { rows } = await sql` SELECT username, email FROM users WHERE id=${id} `
+        const { rows, rowCount } = await sql` SELECT username, email FROM users WHERE id=${id} `
+        if(rowCount===0) return HttpResponse(401)
         return HttpResponse(200, JSON.stringify({ data: rows[0] }))
     } catch (err) {
         console.log(err)
