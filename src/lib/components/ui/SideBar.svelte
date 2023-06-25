@@ -5,7 +5,7 @@
 	import Stats from "../Stats.svelte";
 </script>
 
-<div class=" w-[15%] h-[100%] border-r-2 flex flex-col p-2 gap-5">
+<div class=" w-[15%] h-[100%] border-r-2 flex flex-col p-5 gap-5">
     <button class=" bg-neutral-100 hover:bg-neutral-400 hover:text-white text-xl rounded-md p-3 flex items-center gap-2">
         <Projects/>
         <h1>Projects</h1>
