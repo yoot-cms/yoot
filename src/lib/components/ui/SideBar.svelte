@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
 	import ApiKeys from '../ApiKeys.svelte';
 	import Avatar from '../Avatar.svelte';
 	import Projects from '../Projects.svelte';
@@ -42,7 +41,7 @@
 			href={item.path}
 			class={` ${
 				$location === item.path ? 'bg-neutral-400 text-white' : 'bg-neutral-100'
-			}  hover:bg-neutral-400 hover:text-white text-xl rounded-md p-3 flex items-center gap-2`}
+			}  hover:bg-neutral-400 hover:text-white text-lg rounded-md p-3 flex items-center gap-2`}
 		>
 			<svelte:component this={item.icon} />
 			<h1>{item.name}</h1>
