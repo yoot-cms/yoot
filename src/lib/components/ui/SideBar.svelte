@@ -5,8 +5,14 @@
 	import Projects from '../Projects.svelte';
 	import Stats from '../Stats.svelte';
 	import type { SvelteComponent } from 'svelte';
-	export const location = writable('');
+	import { location } from '$lib/stores';
+	import Home from '../Home.svelte';
 	const items: { name: string; path: string; icon: typeof SvelteComponent }[] = [
+		{
+			name: 'Home',
+			path: '/console',
+			icon: Home
+		},
 		{
 			name: 'Projects',
 			path: '/console/projects',
@@ -34,7 +40,9 @@
 	{#each items as item}
 		<a
 			href={item.path}
-			class=" bg-neutral-100 hover:bg-neutral-400 hover:text-white text-xl rounded-md p-3 flex items-center gap-2"
+			class={` ${
+				$location === item.path ? 'bg-neutral-400 text-white' : 'bg-neutral-100'
+			}  hover:bg-neutral-400 hover:text-white text-xl rounded-md p-3 flex items-center gap-2`}
 		>
 			<svelte:component this={item.icon} />
 			<h1>{item.name}</h1>

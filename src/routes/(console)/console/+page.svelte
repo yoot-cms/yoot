@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
     import { API_URL } from "$lib/utils"
     import Loading_1 from '$lib/components/Loading_1.svelte';
+    import { location } from '$lib/stores';
 	onMount(async () => {
 		if (browser) {
 			const token = localStorage.getItem('token') ?? '';
@@ -27,6 +28,7 @@
 	});
 	let loading = true;
 	$: username = ""
+    location.set("/console")
 </script>
 
 {#if !loading}
