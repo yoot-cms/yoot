@@ -11,7 +11,7 @@
 	>
 		<form method="post" class=" flex flex-col gap-2">
 			<input
-				class={`border-2 ${form?.error? "border-red-500" :"border-gray-500 "} focus:outline-none p-2 rounded-md`}
+				class="border-2 border-gray-500 focus:outline-none p-2 rounded-md"
 				type="email"
 				required
                 name="email"
@@ -34,7 +34,7 @@
 				placeholder="Enter your password"
 			/>
             {#if form?.error}
-               <small class="text-center text-red-700 ">Email already in use</small> 
+               <small class="text-center text-red-500 ">{form.error}</small> 
             {/if}
 			<button on:click={()=>{ loading.set(true) }} disabled={$loading} class="flex justify-center p-2 bg-blue-500 text-white rounded-md">
                 {#if !$loading}
