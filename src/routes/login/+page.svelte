@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from "$app/environment";
 	import { goto } from "$app/navigation";
     import Loading from "$lib/components/Loading.svelte";
     import { API_URL } from "$lib/utils";
@@ -22,8 +23,7 @@
                 error = "Invalid credentials"
             }
             if (response.status===200) {
-                const { token } = await response.json() as { token : string }
-                localStorage.setItem("token", token)
+                const { session_id } = await response.json() as { session_id : string }
                 goto("/dashboard")
             }
 		} catch (err) {

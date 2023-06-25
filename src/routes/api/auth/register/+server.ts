@@ -1,5 +1,5 @@
 import type { RequestHandler } from "./$types";
-import sql from "$lib/db"
+import { sql } from "@vercel/postgres";
 import bcrypt from "bcrypt"
 
 export const POST = (

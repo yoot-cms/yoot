@@ -1,6 +1,6 @@
 import type { RequestHandler } from "./$types";
 import { verify_token } from "$lib";
-import sql from "$lib/db"
+import { sql } from "@vercel/postgres";
 
 export const POST = (
      async ({ request })=>{
