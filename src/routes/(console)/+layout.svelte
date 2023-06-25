@@ -10,13 +10,13 @@
         <div class=" flex gap-5 items-center">
             <a href="/pricing" class="underline">Pricing</a>
             <a href="/docs" class="underline">Documentation</a>
-            <button>
-                <Avatar/>
-            </button>
+            <a href="/docs" class="underline">Quick links</a>
         </div>
     </div>
     <div class=" flex w-full h-[92%] ">
         <SideBar/>
-        <div class=" w-[85%] "></div>
+        <div class=" w-[85%] ">
+            <slot/>
+        </div>
     </div>
 </div>
