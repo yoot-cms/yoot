@@ -14,7 +14,7 @@
     </div>
     <div class=" flex w-full h-[92%] ">
         <SideBar/>
-        <div class=" w-[85%] ">
+        <div class="p-5 w-[85%] ">
             <slot/>
         </div>
     </div>
