@@ -9,7 +9,7 @@
 	<div
 		class="max-h-[75vh] lg:max-h-[60vh] max-w-[90vw] rounded-lg p-4 transition-all md:max-w-[75vw] lg:max-w-[60vw] duration-500"
 	>
-		<form method="post" class=" flex flex-col gap-5">
+		<form method="post" class=" flex flex-col gap-2">
 			<input
 				class={`border-2 ${form?.error? "border-red-500" :"border-gray-500 "} focus:outline-none p-2 rounded-md`}
 				type="email"
