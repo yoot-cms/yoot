@@ -1,4 +1,4 @@
-import { redirect, fail, type Actions } from "@sveltejs/kit";
+import { redirect, type Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { sql } from "@vercel/postgres";
 import { creating_project } from "./store";
@@ -27,7 +27,8 @@ export const actions : Actions = {
         const { rowCount } = await sql` select name from project where owner=${user_id} and name=${name} `
         if(rowCount!==0){
             return {
-                error:""
+                error:`You already have a project named ${name}`,
+                name
             }
         }
         await sql` insert into project(name, owner) values( ${name}, ${user_id} ) `

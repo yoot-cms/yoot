@@ -1,12 +1,43 @@
 <script lang="ts">
 	export let data: PageServerData;
 	import { location, show_create_project } from '$lib/stores';
+    import { creating_project } from './store';
 	import type { PageServerData } from './$types';
 	import Project from '$lib/components/ui/Project.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import Plus from '$lib/components/Plus.svelte';
+    import Loading from '$lib/components/Loading.svelte';
 	location.set('/console/projects');
 </script>
+
+<!-- Create project modal -->
+{#if $show_create_project}
+	<div class=" fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-screen w-full flex flex-col items-center justify-center bg-black/40">
+		<form action="?/create" method="post" class=" flex flex-col justify-between rounded-md h-64 w-[30%] p-3 border border-2 bg-white">
+			<h1 class=" text-neutral-500 font-bold ">Enter your project name</h1>
+			<input
+				class=" border border-3 rounded-md p-3 w-[100%] focus:outline-none"
+				type="text"
+                name="name"
+				placeholder="Project name"
+                required
+			/>
+			<div class="flex justify-end gap-5 text-white">
+				<button disabled={$creating_project} type="button" on:click={()=>{ show_create_project.set(false) }}  class=" rounded-md w-32 bg-red-500 font-bold hover:bg-red-600 p-2">
+					<h1>Cancel</h1>
+				</button>
+				<button disabled={$creating_project} on:click={()=>{ creating_project.set(true) }} class="flex justify-center  rounded-md w-32 bg-blue-500 font-bold hover:bg-blue-600 p-2">
+                    {#if $creating_project}
+                       <Loading/> 
+                    {:else}
+                        <h1>Create</h1>
+                    {/if}
+				</button>
+			</div>
+		</form>
+	</div>
+{/if}
+<!-- Create project modal -->
 
 <div class=" w-full h-[100%] border-2 border-dashed rounded-md flex flex-col p-2 gap-2">
 	<div class="p-2 h-[5%] flex items-center justify-between">
