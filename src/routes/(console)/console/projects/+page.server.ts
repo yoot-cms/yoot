@@ -8,9 +8,7 @@ export const load: PageServerLoad = async ({ locals }) => {
     if(!user_id){
         redirect(301, "/login")
     }
-    console.log("loading rows")
     const { rows } = await sql<{ id:string, name:string }>` select id, name from project where owner=${user_id} `
-    console.log("returning rows")
     return {
         data: rows
     }

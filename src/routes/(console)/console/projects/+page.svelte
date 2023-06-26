@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let data: PageServerData;
-	import { location } from '$lib/stores';
+	import { location, show_create_project } from '$lib/stores';
 	import type { PageServerData } from './$types';
 	import Project from '$lib/components/ui/Project.svelte';
 	import Search from '$lib/components/Search.svelte';
@@ -22,17 +22,25 @@
 					placeholder="Search in projects"
 				/>
 			</div>
-			<button class=" rounded-md bg-blue-700 p-2 text-white">
+			<button
+				on:click={() => {
+					show_create_project.set(true);
+				}}
+				class=" rounded-md bg-blue-700 p-2 text-white"
+			>
 				<h1>New Project</h1>
 			</button>
 		</div>
 	</div>
 	<hr />
-	<div class=" p-2 flex flex-wrap gap-5 ">
+	<div class=" p-2 flex flex-wrap gap-5">
 		{#each data.data as project}
 			<Project name={project.name} id={project.id} />
 		{/each}
 		<button
+			on:click={() => {
+				show_create_project.set(true);
+			}}
 			class="hover:text-neutral-700 flex flex-col text-neutral-400 justify-center text-center items-center w-52 h-52 rounded-md border-2 p-2"
 		>
 			<Plus />
