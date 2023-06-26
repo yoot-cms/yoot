@@ -2,7 +2,7 @@
     import SideBar from "$lib/components/ui/SideBar.svelte";
 </script>
 
-<div class=" h-screen w-full">
+<div class="h-screen w-full">
     <!-- Header-->
     <div class=" flex justify-between items-center border-b-2 p-2 w-full h-[8%] ">
         <h1 class="ml-3 text-3xl font-bold">YOOT</h1>
@@ -14,7 +14,7 @@
     </div>
     <div class=" flex w-full h-[92%] ">
         <SideBar/>
-        <div class="p-5 w-[85%] ">
+        <div class=" p-5 w-[85%] ">
             <slot/>
         </div>
     </div>
