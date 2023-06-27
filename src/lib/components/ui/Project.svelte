@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
+
 	export let name: string;
     let show_options = false
 </script>
 
 <button
 	on:click={() => {
-		alert('You clicked me toooo');
+		goto(`/console/projects/${name}`)
 	}}
 	class="text-neutral-500 hover:border-neutral-500 relative flex justify-center text-center items-center w-72 h-52 rounded-xl shadow-md border-1 p-2"
 >
