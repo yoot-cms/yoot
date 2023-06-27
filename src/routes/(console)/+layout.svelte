@@ -7,9 +7,9 @@
     <div class=" flex justify-between items-center border-b-2 p-2 w-full h-[8%] ">
         <h1 class="ml-3 text-3xl font-bold">YOOT</h1>
         <div class=" flex gap-5 items-center">
-            <a href="/pricing" class="underline">Pricing</a>
-            <a href="/docs" class="underline">Documentation</a>
-            <button class="underline">Quick links</button>
+            <a href="/pricing" >Pricing</a>
+            <a href="/docs" >Documentation</a>
+            <button >Quick links</button>
         </div>
     </div>
     <div class=" flex w-full h-[92%] ">

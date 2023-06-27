@@ -112,7 +112,7 @@
 	<hr />
 	<div class=" p-2 flex flex-wrap gap-5">
 		{#each data.data as project}
-			<Project name={project.name} id={project.id} />
+			<Project name={project.name} />
 		{/each}
 		<button
 			on:click={() => {
