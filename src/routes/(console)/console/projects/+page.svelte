@@ -1,42 +1,83 @@
 <script lang="ts">
 	export let data: PageServerData;
 	import { location, show_create_project } from '$lib/stores';
-    import { creating_project } from './store';
+	import { creating_project } from './store';
 	import type { PageServerData } from './$types';
-    import { enhance } from '$app/forms';
-    import { page } from '$app/stores';
+	import { enhance, type SubmitFunction } from '$app/forms';
 	import Project from '$lib/components/ui/Project.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import Plus from '$lib/components/Plus.svelte';
-    import Loading from '$lib/components/Loading.svelte';
+	import Loading from '$lib/components/Loading.svelte';
+	import toast from 'svelte-french-toast';
 	location.set('/console/projects');
+	let loading = false;
+
+	function name_is_duplicate(name: string) {
+        return data.data.some(project=>project.name===name)
+	}
+
+	const submit_create_project: SubmitFunction = ({ data, cancel }) => {
+		loading = true;
+		const name = data.get('name')! as string;
+		if (name_is_duplicate(name)) {
+			loading = false;
+			cancel();
+			toast.error(`You already have a project named ${name}`);
+		}
+		return async ({ result, update }) => {
+            loading = false;
+			switch (result.type) {
+				case 'failure':
+					toast.error(`You already have a project named ${name}`);
+					break;
+				case 'success':
+                    toast.success(`Project ${name} created`)
+			}
+			await update();
+		};
+	};
 </script>
 
 <!-- Create project modal -->
 {#if $show_create_project}
-	<div class=" z-50 fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-screen w-full flex flex-col items-center justify-center bg-black/40">
-		<form use:enhance action="?/create" method="post" class=" flex flex-col justify-between rounded-md h-64 w-[30%] p-3 bg-white">
-			<h1 class=" text-neutral-500 font-bold ">Enter your project name</h1>
+	<div
+		class=" z-50 fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-screen w-full flex flex-col items-center justify-center bg-black/40"
+	>
+		<form
+			use:enhance={submit_create_project}
+			action="?/create"
+			method="post"
+			class=" flex flex-col justify-between rounded-md h-64 w-[30%] p-3 bg-white"
+		>
+			<h1 class=" text-neutral-500 font-bold">Enter your project name</h1>
 			<input
 				class=" border border-3 rounded-md p-3 w-[100%] focus:outline-none"
 				type="text"
-                name="name"
+				name="name"
 				placeholder="Project name"
-                required
+				autocomplete="off"
+				required
 			/>
-            {#if $page.status==400}
-                <small class="text-red-500">{$page.form?.error}</small>
-            {/if}
 			<div class="flex justify-end gap-5 text-white">
-				<button disabled={$creating_project} type="button" on:click={()=>{ show_create_project.set(false) }}  class=" rounded-md w-32 bg-red-500 font-bold hover:bg-red-600 p-2">
+				<button
+					disabled={loading}
+					type="button"
+					on:click={() => {
+						show_create_project.set(false);
+					}}
+					class=" rounded-md w-32 bg-red-500 font-bold hover:bg-red-600 p-2"
+				>
 					<h1>Cancel</h1>
 				</button>
-				<button disabled={$creating_project} on:click={()=>{ creating_project.set(true) }} class="flex justify-center  rounded-md w-32 bg-blue-500 font-bold hover:bg-blue-600 p-2">
-                    {#if $creating_project}
-                       <Loading/> 
-                    {:else}
-                        <h1>Create</h1>
-                    {/if}
+				<button
+					disabled={loading}
+					class="flex justify-center rounded-md w-32 bg-blue-500 font-bold hover:bg-blue-600 p-2"
+				>
+					{#if loading}
+						<Loading />
+					{:else}
+						<h1>Create</h1>
+					{/if}
 				</button>
 			</div>
 		</form>
