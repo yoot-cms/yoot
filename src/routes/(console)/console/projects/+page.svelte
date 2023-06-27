@@ -3,6 +3,8 @@
 	import { location, show_create_project } from '$lib/stores';
     import { creating_project } from './store';
 	import type { PageServerData } from './$types';
+    import { enhance } from '$app/forms';
+    import { page } from '$app/stores';
 	import Project from '$lib/components/ui/Project.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import Plus from '$lib/components/Plus.svelte';
@@ -12,8 +14,8 @@
 
 <!-- Create project modal -->
 {#if $show_create_project}
-	<div class=" fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-screen w-full flex flex-col items-center justify-center bg-black/40">
-		<form action="?/create" method="post" class=" flex flex-col justify-between rounded-md h-64 w-[30%] p-3 border border-2 bg-white">
+	<div class=" z-50 fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 h-screen w-full flex flex-col items-center justify-center bg-black/40">
+		<form use:enhance action="?/create" method="post" class=" flex flex-col justify-between rounded-md h-64 w-[30%] p-3 bg-white">
 			<h1 class=" text-neutral-500 font-bold ">Enter your project name</h1>
 			<input
 				class=" border border-3 rounded-md p-3 w-[100%] focus:outline-none"
@@ -22,6 +24,9 @@
 				placeholder="Project name"
                 required
 			/>
+            {#if $page.status==400}
+                <small class="text-red-500">{$page.form?.error}</small>
+            {/if}
 			<div class="flex justify-end gap-5 text-white">
 				<button disabled={$creating_project} type="button" on:click={()=>{ show_create_project.set(false) }}  class=" rounded-md w-32 bg-red-500 font-bold hover:bg-red-600 p-2">
 					<h1>Cancel</h1>
@@ -72,7 +77,7 @@
 			on:click={() => {
 				show_create_project.set(true);
 			}}
-			class="hover:text-neutral-700 flex flex-col text-neutral-400 justify-center text-center items-center w-52 h-52 rounded-md border-2 p-2"
+			class="hover:text-neutral-700 flex flex-col text-neutral-400 justify-center text-center items-center w-72 h-52 rounded-md border-2 p-2"
 		>
 			<Plus />
 			<h1>Create new project</h1>

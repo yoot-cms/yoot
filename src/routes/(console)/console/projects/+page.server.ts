@@ -1,7 +1,6 @@
-import { redirect, type Actions } from "@sveltejs/kit";
+import { redirect, type Actions, fail } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { sql } from "@vercel/postgres";
-import { creating_project } from "./store";
 export const ssr = false
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -26,12 +25,11 @@ export const actions : Actions = {
         const name  = data.get("name")! as string
         const { rowCount } = await sql` select name from project where owner=${user_id} and name=${name} `
         if(rowCount!==0){
-            return {
-                error:`You already have a project named ${name}`,
-                name
-            }
+            return fail(400, { error:"Duplicate value error" })
         }
         await sql` insert into project(name, owner) values( ${name}, ${user_id} ) `
-        creating_project.set(false)
+        return {
+            success: true
+        }
     }
 }
