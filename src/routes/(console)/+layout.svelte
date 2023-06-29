@@ -3,7 +3,7 @@
     import { breadcrumb_items } from "$lib/stores"
 </script>
 
-<div class=" w-full h-screen flex ">
+<div class="  w-full h-screen flex ">
     <SideBar />
     <div class=" flex flex-col w-full h-full ">
         <div class=" flex justify-between items-center p-5 w-full h-20 border-b ">
