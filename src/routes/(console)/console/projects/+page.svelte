@@ -20,6 +20,10 @@
                     <Close/>
                 </button>
             </div>
+            <form action="" class="flex flex-col justify-start gap-2">
+                <input type="text" placeholder="Project name" class=" bg-neutral-300 p-2 rounded-md w-full focus:outline-none ">
+                <button>Create</button>
+            </form>
         </div>
 	</div>
 {/if}
