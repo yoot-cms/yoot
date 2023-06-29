@@ -2,6 +2,7 @@
 	import type { PageServerData } from './$types';
 	import { location, show_create_project } from '$lib/stores';
     import Project from '$lib/ui/Project.svelte';
+    import Close from '$lib/components/Close.svelte';
 	import { enhance } from '$app/forms';
 	location.set('/console/projects');
 	export let data: PageServerData;
@@ -9,12 +10,18 @@
 
 <!--Create project modal -->
 {#if $show_create_project}
-	<button
-        on:click={()=>{ show_create_project.set(false) }}
-		class="z-50 hover:cursor-default fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
+	<div
+		class="z-30 hover:cursor-default fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
 	>
-		<div class=" hover:cursor-pointer bg-white w-[30rem] h-80 rounded-lg" />
-	</button>
+		<div class=" p-2 bg-white w-[30rem] h-80 rounded-lg flex flex-col" >
+            <div class=" flex justify-between items-center ">
+                <h1 class=" font-bold text-xl">Create a project</h1>
+                <button on:click={()=>{ show_create_project.set(false) }} >
+                    <Close/>
+                </button>
+            </div>
+        </div>
+	</div>
 {/if}
 
 <div class="w-full h-full bg-neutral-100 flex justify-center">
