@@ -1,17 +1,11 @@
 <script lang="ts">
 	import type { SvelteComponent } from 'svelte';
 	import { location } from '$lib/stores';
-	import Home from '$lib/components/Home.svelte';
 	import Projects from '$lib/components/Projects.svelte';
 	import ApiKeys from '$lib/components/ApiKeys.svelte';
 	import Avatar from '$lib/components/Avatar.svelte';
 	import Stats from '$lib/components/Stats.svelte';
 	const items: { name: string; path: string; icon: typeof SvelteComponent }[] = [
-		{
-			name: 'Home',
-			path: '/console',
-			icon: Home
-		},
 		{
 			name: 'Projects',
 			path: '/console/projects',

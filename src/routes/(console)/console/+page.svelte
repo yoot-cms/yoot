@@ -1,4 +1,7 @@
 <script lang="ts">
-    import { location } from "$lib/stores";
-    location.set("/console")
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	onMount(() => {
+		goto('/console/projects');
+	});
 </script>
