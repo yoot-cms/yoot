@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	import { location, show_create_project } from '$lib/stores';
+    import Project from '$lib/ui/Project.svelte';
 	import { enhance } from '$app/forms';
 	location.set('/console/projects');
 	export let data: PageServerData;
@@ -10,14 +11,14 @@
 {#if $show_create_project}
 	<button
         on:click={()=>{ show_create_project.set(false) }}
-		class=" hover:cursor-default fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
+		class="z-50 hover:cursor-default fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
 	>
 		<div class=" hover:cursor-pointer bg-white w-[30rem] h-80 rounded-lg" />
 	</button>
 {/if}
 
 <div class="w-full h-full bg-neutral-100 flex justify-center">
-	{#if data.projects.length === 0}
+	{#if data.projects.length !== 0}
 		<div class=" h-full w-full flex justify-center items-center">
 			<button
                 on:click={()=>{ show_create_project.set(true) }}
@@ -27,6 +28,18 @@
 			</button>
 		</div>
 	{:else}
-		<div class=" h-full w-full flex flex-col" />
+		<div class=" p-5 max-w-[600px] lg:max-w-[800px]  2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2" >
+            <div class=" flex items-center justify-between ">
+                <h1 class=" font-bold text-2xl ">Projects</h1>
+                <button on:click={()=>{ show_create_project.set(true) }} class=" bg-blue-500 p-2 rounded-2xl text-white w-32 ">New Project</button>
+            </div>
+            <div class=" container p-2 h-full w-full flex flex-wrap justify-start gap-5 overflow-y-scroll">
+                <Project name={"Test"}/>
+                <Project name={"Test"}/>
+                <Project name={"Test"}/>
+                <Project name={"Test"}/>
+                <Project name={"Test"}/>
+            </div>
+        </div>
 	{/if}
 </div>
