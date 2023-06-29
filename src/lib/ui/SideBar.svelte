@@ -1,11 +1,11 @@
 <script lang="ts">
-	import ApiKeys from '../ApiKeys.svelte';
-	import Avatar from '../Avatar.svelte';
-	import Projects from '../Projects.svelte';
-	import Stats from '../Stats.svelte';
 	import type { SvelteComponent } from 'svelte';
 	import { location } from '$lib/stores';
-	import Home from '../Home.svelte';
+	import Home from '$lib/components/Home.svelte';
+	import Projects from '$lib/components/Projects.svelte';
+	import ApiKeys from '$lib/components/ApiKeys.svelte';
+	import Avatar from '$lib/components/Avatar.svelte';
+	import Stats from '$lib/components/Stats.svelte';
 	const items: { name: string; path: string; icon: typeof SvelteComponent }[] = [
 		{
 			name: 'Home',
@@ -23,11 +23,6 @@
 			icon: ApiKeys
 		},
 		{
-			name: 'Profile',
-			path: '/console/profile',
-			icon: Avatar
-		},
-		{
 			name: 'Stats',
 			path: '/console/stats',
 			icon: Stats
@@ -35,16 +30,28 @@
 	];
 </script>
 
-<div class=" w-[15%] h-[100%] border-r-2 flex flex-col p-5 gap-5">
-	{#each items as item}
-		<a
-			href={item.path}
-			class={` ${
-				$location === item.path ? 'bg-neutral-400 text-white' : 'bg-neutral-100'
-			}  hover:bg-neutral-400 hover:text-white text-lg rounded-md p-3 flex items-center gap-2`}
-		>
-			<svelte:component this={item.icon} />
-			<h1>{item.name}</h1>
-		</a>
-	{/each}
+<div class=" w-64 p-5 flex flex-col justify-between h-full border-r border-neutral-300 ">
+	<div class="flex flex-col gap-5">
+        <a href="/console/" class=" font-bold bg-clip-text text-transparent text-2xl text-center bg-gradient-to-t from-rose-700 to-pink-600">YOUTE</a>
+		{#each items as item}
+			<a
+				href={item.path}
+				class={` ${
+					$location === item.path ? 'bg-neutral-600 text-white hover:text-black' : ' text-black'
+				}  hover:bg-neutral-100  rounded-md p-3 flex items-center gap-2 transition-all`}
+			>
+				<svelte:component this={item.icon} />
+				<h1>{item.name}</h1>
+			</a>
+		{/each}
+	</div>
+			<a
+				href="/profile"
+				class={` ${
+					$location === "/console/profile" ? 'bg-neutral-600 text-white hover:text-black' : ' text-black'
+				}  hover:bg-neutral-100  rounded-md p-3 flex items-center gap-2 transition-all`}
+			>
+				<svelte:component this={Avatar} />
+				<h1>Profile</h1>
+			</a>
 </div>

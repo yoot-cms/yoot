@@ -3,6 +3,7 @@ create table users (
     email text not null,
     password varchar(255) not null,
     username text not null,
+    profile_pic text not null default 'https://picsum.photos/300/300',
     plan text not null
 );
 
