@@ -10,10 +10,12 @@
 
 <!--Create project modal -->
 {#if $show_create_project}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
+        on:click={()=>{ show_create_project.set(false) }}
 		class="z-30 hover:cursor-default fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
 	>
-		<div class=" p-2 bg-white w-[30rem] h-80 rounded-lg flex flex-col" >
+		<div on:click={(event)=>{ event.stopPropagation() }} class="z-50 p-2 bg-white w-[30rem] h-80 rounded-lg flex flex-col" >
             <div class=" flex justify-between items-center ">
                 <h1 class=" font-bold text-xl">Create a project</h1>
                 <button on:click={()=>{ show_create_project.set(false) }} >
