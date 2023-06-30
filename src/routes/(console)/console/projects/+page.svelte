@@ -31,7 +31,6 @@
 			await update();
 		};
 	};
-    console.log(data)
 </script>
 
 {#if $show_create_project}
