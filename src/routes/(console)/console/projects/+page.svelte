@@ -27,8 +27,6 @@
                         toast.error("Something went wrong. Please try again or contact support")    
                     case 'success':
                         toast.success("Project  created")
-                    case 'failure':
-                        toast.error("some shit")
                 }
 			await update();
 		};
