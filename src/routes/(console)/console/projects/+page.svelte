@@ -5,13 +5,39 @@
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	let loading = false;
-	import { enhance } from '$app/forms';
+	import { enhance, type SubmitFunction } from '$app/forms';
+	import toast from 'svelte-french-toast';
 	location.set('/console/projects');
 	export let data: PageServerData;
+	function name_is_duplicate(name: string) {
+		return data.projects.some((project) => project.name === name);
+	}
+	const handle_project_creation: SubmitFunction = ({ data, cancel }) => {
+		loading = true;
+		const name = data.get('name')! as string;
+		if (name_is_duplicate(name)) {
+			loading = false;
+			toast.error(`You already have a project named ${name}`);
+			cancel();
+		}
+		return async ({ update, result }) => {
+            loading = false;
+            switch (result.type) {
+                    case 'error':
+                        toast.error("Something went wrong. Please try again or contact support")    
+                    case 'success':
+                        toast.success("Project  created")
+                    case 'failure':
+                        toast.error("some shit")
+                }
+			await update();
+		};
+	};
+    console.log(data)
 </script>
 
 {#if $show_create_project}
-	<div class=" fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50">
+	<div class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50">
 		<div class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5">
 			<div class=" flex justify-between items-center">
 				<h1 class=" font-bold text-xl">Create a project</h1>
@@ -25,10 +51,17 @@
 					<Close />
 				</button>
 			</div>
-			<form action="" method="post" use:enhance class="flex flex-col justify-between gap-5 h-full">
+			<form
+				action="?/create"
+				method="post"
+				use:enhance={handle_project_creation}
+				class="flex flex-col justify-between gap-5 h-full"
+			>
 				<input
 					type="text"
 					placeholder="Project name"
+					name="name"
+                    autocomplete="off"
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
 				<button
@@ -73,7 +106,11 @@
 			</div>
 			<div
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll"
-			/>
+			>
+				{#each data.projects as project}
+					<Project name={project.name} />
+				{/each}
+			</div>
 		</div>
 	{/if}
 </div>
