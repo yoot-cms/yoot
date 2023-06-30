@@ -24,13 +24,13 @@
                     <Close/>
                 </button>
             </div>
-            <form action="" class="flex flex-col justify-between gap-5 h-full">
+            <form action="" use:enhance class="flex flex-col justify-between gap-5 h-full">
                 <input type="text" placeholder="Project name" class=" border p-2 rounded-md w-full focus:outline-none ">
-                <button class="justify-center flex items-center bg-blue-400 h-10 rounded-md text-white">
+                <button disabled={loading} class="justify-center flex items-center bg-blue-400 h-10 rounded-md text-white">
                     {#if loading}
-                        <h1>Loading</h1>
+                        <Loading />
                     {:else}
-                        <Loading/>
+                        <h1>Create project</h1>
                     {/if}
                 </button>
             </form>
@@ -54,7 +54,9 @@
                 <h1 class=" font-bold text-2xl ">Projects</h1>
                 <button on:click={()=>{ show_create_project.set(true) }} class=" bg-blue-500 p-2 rounded-2xl text-white w-32 ">New Project</button>
             </div>
-            <div class=" container p-2 h-full w-full flex flex-wrap justify-start gap-5 overflow-y-scroll">
+            <div class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll">
+                <Project name={"Test"}/>
+                <Project name={"Test"}/>
                 <Project name={"Test"}/>
                 <Project name={"Test"}/>
                 <Project name={"Test"}/>
