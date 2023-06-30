@@ -3,6 +3,8 @@
 	import { location, show_create_project } from '$lib/stores';
     import Project from '$lib/ui/Project.svelte';
     import Close from '$lib/components/Close.svelte';
+    import Loading from '$lib/components/Loading.svelte';
+    let loading = false
 	import { enhance } from '$app/forms';
 	location.set('/console/projects');
 	export let data: PageServerData;
@@ -15,16 +17,22 @@
         on:click={()=>{ show_create_project.set(false) }}
 		class="z-30 hover:cursor-default fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
 	>
-		<div on:click={(event)=>{ event.stopPropagation() }} class="z-50 p-2 bg-white w-[30rem] h-80 rounded-lg flex flex-col" >
+		<div on:click={(event)=>{ event.stopPropagation() }} class="z-50 p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5" >
             <div class=" flex justify-between items-center ">
                 <h1 class=" font-bold text-xl">Create a project</h1>
                 <button on:click={()=>{ show_create_project.set(false) }} >
                     <Close/>
                 </button>
             </div>
-            <form action="" class="flex flex-col justify-start gap-2">
-                <input type="text" placeholder="Project name" class=" bg-neutral-300 p-2 rounded-md w-full focus:outline-none ">
-                <button>Create</button>
+            <form action="" class="flex flex-col justify-between gap-5 h-full">
+                <input type="text" placeholder="Project name" class=" border p-2 rounded-md w-full focus:outline-none ">
+                <button class="justify-center flex items-center bg-blue-400 h-10 rounded-md text-white">
+                    {#if loading}
+                        <h1>Loading</h1>
+                    {:else}
+                        <Loading/>
+                    {/if}
+                </button>
             </form>
         </div>
 	</div>
