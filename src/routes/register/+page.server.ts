@@ -1,4 +1,4 @@
-import { redirect, type Actions } from "@sveltejs/kit";
+import { redirect, type Actions, fail } from "@sveltejs/kit";
 import sql from "$lib/db"
 import bcrypt from "bcrypt"
 import { loading } from "./store"
@@ -12,10 +12,7 @@ export const actions = {
         const { rowCount } = await sql` select email from users where email=${email} `
         if(rowCount!==0){
             loading.set(false)
-            return {
-                error: "Email already in use",
-                email, username, password
-            }
+            return fail(409)
         }
         const hashed_pwd = await bcrypt.hash(password, 10)
         const plan = "basic"
