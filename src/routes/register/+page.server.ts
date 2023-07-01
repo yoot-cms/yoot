@@ -1,7 +1,6 @@
 import { redirect, type Actions, fail } from "@sveltejs/kit";
 import sql from "$lib/db"
 import bcrypt from "bcrypt"
-import { loading } from "./store"
 
 export const actions = {
     default: async ({ request })=>{
@@ -11,7 +10,6 @@ export const actions = {
         const password = data.get("password")! as string
         const { rowCount } = await sql` select email from users where email=${email} `
         if(rowCount!==0){
-            loading.set(false)
             return fail(409)
         }
         const hashed_pwd = await bcrypt.hash(password, 10)
