@@ -13,9 +13,6 @@
 		{ name: 'Name', type: 'Text' },
 		{ name: 'Price', type: 'Number' },
 		{ name: 'Image', type: 'Image' },
-		{ name: 'Name', type: 'Text' },
-		{ name: 'Price', type: 'Number' },
-		{ name: 'Image', type: 'Image' },
 	];
     function show_type_info( data_type:string ){
             switch (data_type) {
