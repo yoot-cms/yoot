@@ -5,7 +5,6 @@ import { loading } from "./store"
 
 export const actions = {
     default: async ({ request })=>{
-        console.log("Something happened")
         const data = await request.formData()
         const email = data.get("email")! as string
         const username = data.get("username")! as string
