@@ -10,8 +10,6 @@
 			switch (result.status) {
 				case 400:
 					toast.error('Invalid credentials');
-				case 500:
-					toast.error('Something went wrong. Please retry');
 			}
 			await update();
 		};
