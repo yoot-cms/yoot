@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
-	import { location, show_create_project } from '$lib/stores';
+	import { location, show_create_project, breadcrumb_items } from '$lib/stores';
 	import Project from '$lib/ui/Project.svelte';
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
@@ -31,6 +31,7 @@
 			await update();
 		};
 	};
+    breadcrumb_items.set([{ title:"Projects", path:"/console/projects" }])
 </script>
 
 {#if $show_create_project}

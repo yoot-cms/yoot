@@ -22,6 +22,7 @@
 			icon: Stats
 		}
 	];
+    export let user_data : { name:string, profile_pic:string }
 </script>
 
 <div class=" w-64 p-5 flex flex-col justify-between h-full border-r border-neutral-300 ">
@@ -46,6 +47,6 @@
 				}  hover:bg-neutral-100  rounded-md p-3 flex items-center gap-2 transition-all`}
 			>
 				<svelte:component this={Avatar} />
-				<h1>Profile</h1>
+				<h1>{user_data.name}</h1>
 			</a>
 </div>
