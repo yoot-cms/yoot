@@ -6,3 +6,12 @@
 html{
     font-family: 'Inter'
 }
+
+.no-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+} 
