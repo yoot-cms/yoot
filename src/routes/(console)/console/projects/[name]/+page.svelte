@@ -5,6 +5,7 @@
 	import type { PageServerData } from './$types';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import Broom from '$lib/components/Broom.svelte';
 	location.set('/console/projects');
 	export let data: PageServerData;
 	breadcrumb_items.set([
@@ -26,7 +27,7 @@
 	}
 	$: schema_to_string = JSON.stringify(schema);
 	let field_name: string = '';
-	let field_type: string = 'text';
+	let field_type: string = 'Text';
 	function add_field() {
 		if (field_type === '' || field_name === '') {
 			toast.error('Empty field name');
@@ -34,13 +35,16 @@
 		}
 		if (schema.some((field) => field.name === field_name)) {
 			toast.error(`Your entity already has a field named ${field_name}`);
-            return
+			return;
 		}
-        schema = [...schema, { name:field_name, type:field_type }]
-        toast.success("Field added")
-        field_name = ""
+		schema = [...schema, { name: field_name, type: field_type }];
+		toast.success('Field added');
+		field_name = '';
 	}
-	function remove_field(name: string) {}
+	function remove_field(name: string) {
+		schema = schema.filter((field) => field.name !== name);
+		toast.success('Field removed');
+	}
 	const handle_entity_creation: SubmitFunction = async ({ data, cancel }) => {
 		return async ({ update, result }) => {
 			await update();
@@ -82,6 +86,12 @@
 					</div>
 					<div class=" flex gap-5 w-full">
 						<input
+							on:keydown={(event) => {
+								if (event.key === 'Enter') {
+									add_field();
+									event.preventDefault();
+								}
+							}}
 							placeholder="Field name"
 							bind:value={field_name}
 							autocomplete="off"
@@ -92,10 +102,10 @@
 							bind:value={field_type}
 							class="bg-white w-full p-2 pr-6 rounded-md border border-blue-400 focus:outline-none"
 						>
-							<option value="text">Text</option>
-							<option value="number">Number</option>
-							<option value="boolean">Boolean</option>
-							<option value="image">Image</option>
+							<option value="Text">Text</option>
+							<option value="Number">Number</option>
+							<option value="Boolean">Boolean</option>
+							<option value="Image">Image</option>
 						</select>
 						<button type="button" on:click={add_field} class=" text-blue-700">
 							<Plus />
@@ -108,8 +118,16 @@
 						<div class="p-2 w-full">
 							<h1 class="font-bold">Field type</h1>
 						</div>
-						<button type="button" class=" text-white">
-							<Trash />
+						<button
+							on:click={() => {
+								schema = [];
+								toast.success('Schema cleared');
+							}}
+							type="button"
+                            class="hover:text-red-500 transition duration-300 initial state: text-black opcaity-0"
+                            title="Clear schema"
+						>
+							<Broom />
 						</button>
 					</div>
 					<div class="w-full flex flex-col gap-2 h-64 overflow-y-scroll no-scroll group">
@@ -124,6 +142,9 @@
 									<h1>{field.type}</h1>
 								</div>
 								<button
+									on:click={() => {
+										remove_field(field.name);
+									}}
 									type="button"
 									class=" group-hover:opacity-100 hover:text-red-500 transition duration-300 initial state: text-black opcaity-0"
 								>
