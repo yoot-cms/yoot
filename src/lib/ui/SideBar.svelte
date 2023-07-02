@@ -27,7 +27,7 @@
 
 <div class=" w-64 p-5 flex flex-col justify-between h-full border-r border-neutral-300 ">
 	<div class="flex flex-col gap-5">
-        <a href="/console/" class=" font-bold bg-clip-text text-transparent text-2xl text-center bg-gradient-to-t from-rose-700 to-pink-600">YOOT</a>
+        <a href="/console/" class=" font-bold bg-clip-text mb-1 text-transparent text-2xl text-center bg-gradient-to-t from-rose-700 to-pink-600">YOOT</a>
 		{#each items as item}
 			<a
 				href={item.path}
