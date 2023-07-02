@@ -248,7 +248,7 @@
 				class=" p-2 pb-6 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
 				{#each entities as entity}
-					<Entity name={entity.name} schema={entity.schema} />
+					<Entity name={entity.name} project={data.name} schema={entity.schema} />
 				{/each}
 			</div>
 		</div>

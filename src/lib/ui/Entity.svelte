@@ -1,8 +1,10 @@
 <script lang="ts">
 	export let name: string;
+    export let project: string
 	export let schema: Record<string, string>;
 	import Trash from '$lib/components/Trash.svelte';
 	import Loading from '$lib/components/Loading.svelte';
+    import { goto } from '$app/navigation';
 	$: schema_array = Object.entries(schema);
 	function color(type: string) {
 		switch (type) {
@@ -19,7 +21,8 @@
 	let loading = false;
 </script>
 
-<div
+<a
+    href={`/console/projects/${project}/${name}`}
 	class=" max-h-full shrink-0 hover:cursor-pointer w-[300px] rounded-lg p-5 flex flex-col drop-shadow-lg hover:drop-shadow-xl bg-neutral-50"
 >
 	<form class=" mb-2 w-full flex justify-between gap-2 items-center">
@@ -46,4 +49,4 @@
 			</div>
 		{/each}
 	</div>
-</div>
+</a>
