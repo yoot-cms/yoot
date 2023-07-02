@@ -12,7 +12,7 @@ export const load : PageServerLoad = async ({ locals, params })=>{
     if(rowCount===0){
         throw redirect(301, "/console/projects")
     }
-    const { rows } = await sql` select * from entity where project=${project.id} `
+    const { rows } = await sql<{ name:string, project:string, schema:Array<{ name:string, type:string }> }>` select * from entity where project=${project.id} `
     return {
         entities: rows,
         name

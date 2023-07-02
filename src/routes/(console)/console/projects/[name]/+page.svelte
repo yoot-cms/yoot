@@ -6,8 +6,11 @@
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	import Broom from '$lib/components/Broom.svelte';
+	import Loading from '$lib/components/Loading.svelte';
 	location.set('/console/projects');
 	export let data: PageServerData;
+    let loading = false
+	$: ({ entities } = data);
 	breadcrumb_items.set([
 		{ title: 'Projects', path: '/console/projects' },
 		{ title: data.name, path: `/console/projects/${data.name}` }
@@ -46,7 +49,31 @@
 		toast.success('Field removed');
 	}
 	const handle_entity_creation: SubmitFunction = async ({ data, cancel }) => {
+        loading = true
+		const name = data.get('name') as string;
+		const schema = data.get('schema') as string;
+		if (entities.some((entity) => entity.name === name)) {
+			toast.error(`You already have an entity named ${name}`);
+            loading = false
+			cancel();
+		}
+		if (schema === '[]') {
+			toast.error('You can not create an entity with an empty schema');
+            loading = false
+			cancel();
+		}
 		return async ({ update, result }) => {
+            loading = false
+			switch (result.status) {
+				case 200:
+					toast.success('Entity created');
+					break;
+				case 409:
+					toast.error('An entity with that name already exists');
+					break;
+				default:
+					break;
+			}
 			await update();
 		};
 	};
@@ -59,7 +86,7 @@
 		<form
 			method="post"
 			action="?/create_entity"
-			use:enhance
+			use:enhance={handle_entity_creation}
 			class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5"
 		>
 			<h1 class="font-bold text-md mb-3">Create your entity</h1>
@@ -124,8 +151,8 @@
 								toast.success('Schema cleared');
 							}}
 							type="button"
-                            class="hover:text-red-500 transition duration-300 initial state: text-black opcaity-0"
-                            title="Clear schema"
+							class="hover:text-red-500 transition duration-300 initial state: text-black opcaity-0"
+							title="Clear schema"
 						>
 							<Broom />
 						</button>
@@ -157,7 +184,11 @@
 						type="submit"
 						class=" p-2 w-full flex justify-center bg-blue-700 rounded-md text-white"
 					>
-						<h1>Create entity</h1>
+                    {#if loading}
+                        <Loading/>
+                    {:else}
+                        <h1>Create entity</h1>
+                    {/if}
 					</button>
 				</div>
 			</div>
