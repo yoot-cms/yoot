@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageServerData } from './$types';
+	import type { PageData } from './$types';
 	import { location, show_create_project, breadcrumb_items } from '$lib/stores';
 	import Project from '$lib/ui/Project.svelte';
 	import Close from '$lib/components/Close.svelte';
@@ -8,7 +8,7 @@
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	location.set('/console/projects');
-	export let data: PageServerData;
+	export let data: PageData;
 	function name_is_duplicate(name: string) {
 		return data.projects.some((project) => project.name === name);
 	}
@@ -103,7 +103,7 @@
 				>
 			</div>
 			<div
-				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll"
+				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
 				{#each data.projects as project}
 					<Project name={project.name} />
