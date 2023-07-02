@@ -20,4 +20,8 @@ export const load : PageServerLoad = async ({ locals, params })=>{
 }
 
 export const actions : Actions = {
+    create_entity: async ({ request })=>{
+        const data = await request.formData()
+        console.log(data.get('name'), data.get('schema'))
+    }
 }
