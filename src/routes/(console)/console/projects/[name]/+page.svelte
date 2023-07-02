@@ -11,13 +11,13 @@
 	import Entity from '$lib/ui/Entity.svelte';
 	location.set('/console/projects');
 	export let data: PageData;
-    let loading = false
+	let loading = false;
 	$: ({ entities } = data);
 	breadcrumb_items.set([
 		{ title: 'Projects', path: '/console/projects' },
 		{ title: data.name, path: `/console/projects/${data.name}` }
 	]);
-	let schema: { name: string; type: string }[] = [];
+	let entity_schema: { name: string; type: string }[] = [];
 	function show_type_info(data_type: string) {
 		switch (data_type) {
 			case 'Text':
@@ -30,7 +30,7 @@
 				return '';
 		}
 	}
-	$: schema_to_string = JSON.stringify(schema);
+	$: schema_to_string = JSON.stringify(entity_schema);
 	let field_name: string = '';
 	let field_type: string = 'Text';
 	function add_field() {
@@ -38,41 +38,51 @@
 			toast.error('Empty field name');
 			return;
 		}
-		if (schema.some((field) => field.name === field_name)) {
+		if (entity_schema.some((field) => field.name === field_name)) {
 			toast.error(`Your entity already has a field named ${field_name}`);
 			return;
 		}
-		schema = [...schema, { name: field_name, type: field_type }];
+		entity_schema = [...entity_schema, { name: field_name, type: field_type }];
 		toast.success('Field added');
 		field_name = '';
 	}
 	function remove_field(name: string) {
-		schema = schema.filter((field) => field.name !== name);
+		entity_schema = entity_schema.filter((field) => field.name !== name);
 		toast.success('Field removed');
 	}
 	const handle_entity_creation: SubmitFunction = async ({ data, cancel }) => {
-        loading = true
+		loading = true;
 		const name = data.get('name') as string;
 		const schema = data.get('schema') as string;
 		if (entities.some((entity) => entity.name === name)) {
 			toast.error(`You already have an entity named ${name}`);
-            loading = false
+			loading = false;
 			cancel();
 		}
 		if (schema === '[]') {
 			toast.error('You can not create an entity with an empty schema');
-            loading = false
+			loading = false;
 			cancel();
 		}
 		return async ({ update, result }) => {
-            loading = false
-			switch (result.status) {
-				case 200:
-					toast.success('Entity created');
+			loading = false;
+			switch (result.type) {
+				case 'error':
+					switch (result.status) {
+						case 409:
+							toast.error(`You already have an entity named ${name}`);
+							break;
+
+						default:
+							break;
+					}
 					break;
-				case 409:
-					toast.error('An entity with that name already exists');
-					break;
+                case 'success':
+                    entity_schema = []
+                    switch (result.status) {
+                        case 204:
+                            toast.success("Entity created")
+                    }
 				default:
 					break;
 			}
@@ -91,12 +101,17 @@
 			use:enhance={handle_entity_creation}
 			class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5"
 		>
-            <div class="flex justify-between" >
-                <h1 class="font-bold text-md mb-3">Create your entity</h1>
-                <button type="button" on:click={()=>{ show_create_entity.set(false) }} >
-                    <Close/>
-                </button>
-            </div>
+			<div class="flex justify-between">
+				<h1 class="font-bold text-md mb-3">Create your entity</h1>
+				<button
+					type="button"
+					on:click={() => {
+						show_create_entity.set(false);
+					}}
+				>
+					<Close />
+				</button>
+			</div>
 			<input hidden name="schema" bind:value={schema_to_string} type="text" />
 			<input hidden name="project" bind:value={data.name} type="text" />
 			<div class=" flex flex-col gap-5">
@@ -155,7 +170,7 @@
 						</div>
 						<button
 							on:click={() => {
-								schema = [];
+								entity_schema = [];
 								toast.success('Schema cleared');
 							}}
 							type="button"
@@ -165,12 +180,12 @@
 							<Broom />
 						</button>
 					</div>
-					<div class="w-full flex flex-col gap-2 h-64 overflow-y-scroll no-scroll group">
-						{#each schema as field}
+					<div class="w-full flex flex-col gap-2 h-64 overflow-y-scroll no-scroll">
+						{#each entity_schema as field}
 							<div
-								class="gap-5 w-full flex justify-between hover:cursor-pointer text-neutral-800 rounded-md"
+								class="group z-10 gap-5 w-full flex justify-between hover:cursor-pointer text-neutral-800 rounded-md"
 							>
-								<div title={field.name} class="p-2 w-full">
+								<div title={field.name} class="truncate overflow-ellipsis p-2 w-full">
 									<h1 class="">{field.name}</h1>
 								</div>
 								<div title={show_type_info(field.type)} class="p-2 w-full">
@@ -181,7 +196,7 @@
 										remove_field(field.name);
 									}}
 									type="button"
-									class=" group-hover:opacity-100 hover:text-red-500 transition duration-300 initial state: text-black opcaity-0"
+									class="z-20 hover:text-red-500 transition duration-300 text-neutral-400 opcaity-0"
 								>
 									<Trash />
 								</button>
@@ -192,11 +207,11 @@
 						type="submit"
 						class=" p-2 w-full flex justify-center bg-blue-700 rounded-md text-white"
 					>
-                    {#if loading}
-                        <Loading/>
-                    {:else}
-                        <h1>Create entity</h1>
-                    {/if}
+						{#if loading}
+							<Loading />
+						{:else}
+							<h1>Create entity</h1>
+						{/if}
 					</button>
 				</div>
 			</div>
@@ -232,9 +247,9 @@
 			<div
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
-                {#each entities as entity}
-                    <Entity name={entity.name} schema={entity.schema}  />
-                {/each}
+				{#each entities as entity}
+					<Entity name={entity.name} schema={entity.schema} />
+				{/each}
 			</div>
 		</div>
 	{/if}
