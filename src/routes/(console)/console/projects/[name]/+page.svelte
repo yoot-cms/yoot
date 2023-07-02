@@ -4,14 +4,14 @@
 	import { breadcrumb_items, location, show_create_entity } from '$lib/stores';
 	import type { PageServerData } from './$types';
 	import { enhance, type SubmitFunction } from '$app/forms';
+	import toast from 'svelte-french-toast';
 	location.set('/console/projects');
 	export let data: PageServerData;
 	breadcrumb_items.set([
 		{ title: 'Projects', path: '/console/projects' },
 		{ title: data.name, path: `/console/projects/${data.name}` }
 	]);
-	let schema: { name: string; type: string }[] = [
-	];
+	let schema: { name: string; type: string }[] = [];
 	function show_type_info(data_type: string) {
 		switch (data_type) {
 			case 'Text':
@@ -24,29 +24,52 @@
 				return '';
 		}
 	}
-	function add_field(field: { name: string; type: string }) {}
+	$: schema_to_string = JSON.stringify(schema);
+	let field_name: string = '';
+	let field_type: string = 'text';
+	function add_field() {
+		if (field_type === '' || field_name === '') {
+			toast.error('Empty field name');
+			return;
+		}
+		if (schema.some((field) => field.name === field_name)) {
+			toast.error(`Your entity already has a field named ${field_name}`);
+            return
+		}
+        schema = [...schema, { name:field_name, type:field_type }]
+        toast.success("Field added")
+        field_name = ""
+	}
 	function remove_field(name: string) {}
 	const handle_entity_creation: SubmitFunction = async ({ data, cancel }) => {
-        
-
 		return async ({ update, result }) => {
 			await update();
 		};
 	};
-    $: schema_to_string = JSON.stringify(schema)
 </script>
 
 {#if !$show_create_entity}
 	<div
 		class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
 	>
-		<form method="post" action="?/create_entity" use:enhance class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5">
+		<form
+			method="post"
+			action="?/create_entity"
+			use:enhance
+			class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5"
+		>
 			<h1 class="font-bold text-md mb-3">Create your entity</h1>
-            <input hidden name="schema" bind:value={schema_to_string} type="text">
+			<input hidden name="schema" bind:value={schema_to_string} type="text" />
 			<div class=" flex flex-col gap-5">
 				<div class=" flex flex-col gap-2">
 					<h1>Entity name</h1>
-					<input type="text" name="name" autocomplete="off" class=" p-3 rounded-md border border-blue-300 focus:outline-none" />
+					<input
+						required
+						type="text"
+						name="name"
+						autocomplete="off"
+						class=" p-3 rounded-md border border-blue-300 focus:outline-none"
+					/>
 				</div>
 				<div class="w-full flex flex-col gap-2">
 					<div class="w-full flex justify-between">
@@ -59,11 +82,14 @@
 					</div>
 					<div class=" flex gap-5 w-full">
 						<input
-                            autocomplete="off"
+							placeholder="Field name"
+							bind:value={field_name}
+							autocomplete="off"
 							type="text"
 							class=" w-full p-2 rounded-md border border-blue-400 focus:outline-none"
 						/>
 						<select
+							bind:value={field_type}
 							class="bg-white w-full p-2 pr-6 rounded-md border border-blue-400 focus:outline-none"
 						>
 							<option value="text">Text</option>
@@ -71,7 +97,7 @@
 							<option value="boolean">Boolean</option>
 							<option value="image">Image</option>
 						</select>
-						<button type="button" class=" text-blue-700">
+						<button type="button" on:click={add_field} class=" text-blue-700">
 							<Plus />
 						</button>
 					</div>
