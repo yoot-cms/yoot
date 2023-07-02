@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Plus from '$lib/components/Plus.svelte';
+	import Info from '$lib/components/Info.svelte';
+import Plus from '$lib/components/Plus.svelte';
 	import Trash from '$lib/components/Trash.svelte';
 	import { breadcrumb_items, location, show_create_entity } from '$lib/stores';
 	import type { PageServerData } from './$types';
@@ -36,12 +37,17 @@
 			<h1 class="font-bold text-md mb-3">Create your entity</h1>
 			<div class=" flex flex-col gap-5">
 				<div class=" flex flex-col gap-2">
-					<h1>Entity name</h1>
+                    <h1>Entity name</h1>
 					<input type="text" required class=" p-3 rounded-md border border-blue-300 focus:outline-none" />
 				</div>
 				<form class="w-full flex flex-col gap-2">
 					<div class="w-full flex justify-between">
-						<h1>Property</h1>
+                        <div class="flex gap-2 items-baseline">
+                            <h1>Schema</h1>
+                            <a class=" text-blue-700 underline text-xs" href="/docs#EntitySchema">
+                                <h1>Learn more</h1>
+                            </a>
+                        </div>
 					</div>
 					<div class=" flex gap-5 w-full">
 						<input
@@ -61,6 +67,19 @@
 						</button>
 					</div>
 					<div class="w-full flex flex-col gap-2 h-64 overflow-y-scroll no-scroll group">
+							<div
+								class="gap-5 w-full flex text-neutral-800 rounded-md "
+							>
+								<div  class="p-2 w-full ">
+									<h1 class="font-bold ">Field name</h1>
+								</div>
+								<div  class="p-2 w-full ">
+									<h1 class="font-bold ">Field type</h1>
+								</div>
+								<button class=" text-white">
+									<Trash />
+								</button>
+							</div>
 						{#each props as prop}
 							<div
 								class="gap-5 w-full flex justify-between hover:cursor-pointer text-neutral-800 rounded-md "
