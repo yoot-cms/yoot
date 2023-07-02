@@ -17,13 +17,13 @@ create table entity (
     id text default gen_random_uuid()::text PRIMARY KEY,
     name text not null,
     project text REFERENCES project(id),
-    schema JSONB
+    schema JSONB[]
 );
 
 create table entry (
     id text default gen_random_uuid()::text PRIMARY KEY,
     entity text REFERENCES entity(id),
-    value JSONB
+    value JSONB[]
 );
 
 create table api_key (
