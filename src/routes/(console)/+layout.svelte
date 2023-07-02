@@ -7,7 +7,7 @@
 	<SideBar user_data={{ name: 'TheWisePigeon', profile_pic: 'greh' }} />
 	<div class=" flex flex-col w-full h-full">
 		<div class=" flex justify-between items-center p-5 w-full h-20 border-b">
-			<div class=" flex ">
+			<div class=" flex gap-1 font-bold">
 				{#each $breadcrumb_items as breadcrumb_item}
 					<a href={breadcrumb_item.path} class=" hover:underline">{breadcrumb_item.title}/</a>
 				{/each}
