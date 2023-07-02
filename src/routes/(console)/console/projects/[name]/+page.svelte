@@ -219,7 +219,7 @@
 	</div>
 {/if}
 
-<div class="w-full h-full bg-neutral-100 flex justify-center">
+<div class="w-full h-full bg-neutral-100 overflow-y-auto flex justify-center">
 	{#if data.entities.length === 0}
 		<div class=" h-full w-full flex justify-center items-center">
 			<button
@@ -245,7 +245,7 @@
 				>
 			</div>
 			<div
-				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
+				class=" p-2 pb-6 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
 				{#each entities as entity}
 					<Entity name={entity.name} schema={entity.schema} />
