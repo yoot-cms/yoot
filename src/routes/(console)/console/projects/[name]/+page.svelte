@@ -2,13 +2,15 @@
 	import Plus from '$lib/components/Plus.svelte';
 	import Trash from '$lib/components/Trash.svelte';
 	import { breadcrumb_items, location, show_create_entity } from '$lib/stores';
-	import type { PageServerData } from './$types';
+	import type { PageData } from './$types';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	import Broom from '$lib/components/Broom.svelte';
 	import Loading from '$lib/components/Loading.svelte';
+	import Close from '$lib/components/Close.svelte';
+	import Entity from '$lib/ui/Entity.svelte';
 	location.set('/console/projects');
-	export let data: PageServerData;
+	export let data: PageData;
     let loading = false
 	$: ({ entities } = data);
 	breadcrumb_items.set([
@@ -79,7 +81,7 @@
 	};
 </script>
 
-{#if !$show_create_entity}
+{#if $show_create_entity}
 	<div
 		class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
 	>
@@ -89,8 +91,14 @@
 			use:enhance={handle_entity_creation}
 			class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5"
 		>
-			<h1 class="font-bold text-md mb-3">Create your entity</h1>
+            <div class="flex justify-between" >
+                <h1 class="font-bold text-md mb-3">Create your entity</h1>
+                <button type="button" on:click={()=>{ show_create_entity.set(false) }} >
+                    <Close/>
+                </button>
+            </div>
 			<input hidden name="schema" bind:value={schema_to_string} type="text" />
+			<input hidden name="project" bind:value={data.name} type="text" />
 			<div class=" flex flex-col gap-5">
 				<div class=" flex flex-col gap-2">
 					<h1>Entity name</h1>
@@ -209,6 +217,25 @@
 			</button>
 		</div>
 	{:else}
-		<h1>You got some</h1>
+		<div
+			class=" p-5 max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2"
+		>
+			<div class=" flex items-center justify-between">
+				<h1 class=" font-bold text-2xl">Entities</h1>
+				<button
+					on:click={() => {
+						show_create_entity.set(true);
+					}}
+					class=" bg-blue-400 p-2 rounded-full text-white w-32">New Entity</button
+				>
+			</div>
+			<div
+				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
+			>
+                {#each entities as entity}
+                    <Entity name={entity.name} schema={entity.schema}  />
+                {/each}
+			</div>
+		</div>
 	{/if}
 </div>
