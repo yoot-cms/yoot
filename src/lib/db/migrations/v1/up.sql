@@ -10,26 +10,30 @@ create table users (
 create table project (
     id text default gen_random_uuid()::text PRIMARY KEY,
     name text not null,
-    owner text REFERENCES users(id)
+    owner text REFERENCES users(id),
+    created_at DATE not null default CURRENT_DATE
 );
 
 create table entity (
     id text default gen_random_uuid()::text PRIMARY KEY,
     name text not null,
     project text REFERENCES project(id),
-    schema JSONB
+    schema JSONB,
+    created_at DATE not null default CURRENT_DATE
 );
 
 create table entry (
     id text default gen_random_uuid()::text PRIMARY KEY,
     entity text REFERENCES entity(id),
-    value JSONB
+    value JSONB,
+    created_at DATE not null default CURRENT_DATE
 );
 
 create table api_key (
     id text default gen_random_uuid()::text PRIMARY KEY,
     key text not null,
-    owner text REFERENCES users(id)
+    owner text REFERENCES users(id),
+    created_at DATE not null default CURRENT_DATE
 );
 
 create table permission (
