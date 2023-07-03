@@ -77,12 +77,12 @@
 							break;
 					}
 					break;
-                case 'success':
-                    entity_schema = []
-                    switch (result.status) {
-                        case 204:
-                            toast.success("Entity created")
-                    }
+				case 'success':
+					entity_schema = [];
+					switch (result.status) {
+						case 204:
+							toast.success('Entity created');
+					}
 				default:
 					break;
 			}
@@ -185,8 +185,8 @@
 							<div
 								class="group z-10 gap-5 w-full flex justify-between hover:cursor-pointer text-neutral-800 rounded-md"
 							>
-								<div title={field.name} class="truncate overflow-ellipsis p-2 w-full">
-									<h1 class="">{field.name}</h1>
+								<div title={field.name} class="truncate p-2 w-full">
+									<h1 class="truncate text-ellipsis">{field.name}</h1>
 								</div>
 								<div title={show_type_info(field.type)} class="p-2 w-full">
 									<h1>{field.type}</h1>
@@ -237,12 +237,19 @@
 		>
 			<div class=" flex items-center justify-between">
 				<h1 class=" font-bold text-2xl">Entities</h1>
-				<button
-					on:click={() => {
-						show_create_entity.set(true);
-					}}
-					class=" bg-blue-400 p-2 rounded-full text-white w-32">New Entity</button
-				>
+				<div class="flex gap-2">
+					<input
+						type="text"
+						class=" bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
+						placeholder="Search your entities"
+					/>
+					<button
+						on:click={() => {
+							show_create_entity.set(true);
+						}}
+						class=" bg-blue-400 p-2 rounded-full text-white w-32">New Entity</button
+					>
+				</div>
 			</div>
 			<div
 				class=" p-2 pb-6 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"

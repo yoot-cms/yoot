@@ -21,21 +21,23 @@
 			cancel();
 		}
 		return async ({ update, result }) => {
-            loading = false;
-            switch (result.type) {
-                    case 'error':
-                        toast.error("Something went wrong. Please try again or contact support")    
-                    case 'success':
-                        toast.success("Project  created")
-                }
+			loading = false;
+			switch (result.type) {
+				case 'error':
+					toast.error('Something went wrong. Please try again or contact support');
+				case 'success':
+					toast.success('Project  created');
+			}
 			await update();
 		};
 	};
-    breadcrumb_items.set([{ title:"Projects", path:"/console/projects" }])
+	breadcrumb_items.set([{ title: 'Projects', path: '/console/projects' }]);
 </script>
 
 {#if $show_create_project}
-	<div class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50">
+	<div
+		class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
+	>
 		<div class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5">
 			<div class=" flex justify-between items-center">
 				<h1 class=" font-bold text-xl">Create a project</h1>
@@ -59,7 +61,7 @@
 					type="text"
 					placeholder="Project name"
 					name="name"
-                    autocomplete="off"
+					autocomplete="off"
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
 				<button
@@ -95,12 +97,19 @@
 		>
 			<div class=" flex items-center justify-between">
 				<h1 class=" font-bold text-2xl">Projects</h1>
-				<button
-					on:click={() => {
-						show_create_project.set(true);
-					}}
-					class=" bg-blue-400 p-2 rounded-full text-white w-32">New Project</button
-				>
+				<div class="flex gap-2">
+					<input
+						type="text"
+						class=" bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
+						placeholder="Search your projects"
+					/>
+					<button
+						on:click={() => {
+							show_create_project.set(true);
+						}}
+						class=" bg-blue-400 p-2 rounded-full text-white w-32">New Project</button
+					>
+				</div>
 			</div>
 			<div
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"

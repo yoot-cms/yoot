@@ -4,20 +4,7 @@
 	export let schema: Record<string, string>;
 	import Trash from '$lib/components/Trash.svelte';
 	import Loading from '$lib/components/Loading.svelte';
-    import { goto } from '$app/navigation';
 	$: schema_array = Object.entries(schema);
-	function color(type: string) {
-		switch (type) {
-			case 'Image':
-				return 'text-yellow-500';
-			case 'Number':
-				return 'text-orange-500';
-			case 'Text':
-				return 'text-sky-500';
-			case 'Boolean':
-				return 'text-violet-500';
-		}
-	}
 	let loading = false;
 </script>
 
@@ -36,16 +23,16 @@
                 <Loading />
             </button>
 		{:else}
-			<button type="button" class="p-2 text-neutral-300 hover:text-red-500 transition-all duration-300">
+			<button on:click={()=>{ alert("Somerhing") }} type="button" class="z-20 text-neutral-300 hover:text-red-500 transition-all duration-300">
 				<Trash />
 			</button>
 		{/if}
 	</form>
-	<div class="overflow-y-auto no-scroll pr-5 h-full pb-5 text-lg">
+	<div class="overflow-y-auto no-scroll h-full pb-5 text-lg">
 		{#each schema_array as property}
 			<div class="flex w-full items-center justify-between pt-6">
 				<span class="font-medium text-neutral-600">{property[0]}</span>
-				<span class={color(property[1])}>{property[1]}</span>
+				<span class=' text-neutral-300 '>{property[1]}</span>
 			</div>
 		{/each}
 	</div>
