@@ -5,7 +5,6 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
-	import Loading_1 from '$lib/components/Loading_1.svelte';
 	location.set('/console/keys');
 	breadcrumb_items.set([{ title: 'Keys', path: '/console/keys' }]);
 	export let data: PageData;
@@ -75,14 +74,14 @@
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
 				<select required class=" p-2 rounded-md bg-white border" name="project" id="">
-					<option value="">Link a project to the key</option>
+					<option >Link a project to the key</option>
 					{#each projects as project}
 						<option value={project.id}>{project.name}</option>
 					{/each}
 				</select>
 				<h1>Permissions</h1>
 				<div class=" flex gap-2">
-					<input disabled type="checkbox" checked={read_permission} />
+					<input disabled value="on" type="checkbox" checked />
 					<h1 class=" text-neutral-500">Key can read from entities</h1>
 				</div>
 				<div class=" flex gap-2">
