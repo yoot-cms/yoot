@@ -11,3 +11,7 @@ export const show_delete_project = writable(false)
 export const show_create_entity = writable(false)
 
 export const show_delete_entity = writable(false)
+
+export const show_create_api_key = writable(false)
+
+export const show_delete_api_key = writable(false)

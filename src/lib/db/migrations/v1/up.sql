@@ -31,8 +31,11 @@ create table entry (
 
 create table api_key (
     id text default gen_random_uuid()::text PRIMARY KEY,
+    name text not null,
     key text not null,
     owner text REFERENCES users(id),
+    project text REFERENCES project(id),
+    entities text[] not null,
     created_at DATE not null default CURRENT_DATE
 );
 
