@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { location, breadcrumb_items, show_create_api_key, api_key_store } from '$lib/stores';
-	import type { ActionData, PageData } from './$types';
+	import type { PageData } from './$types';
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
