@@ -15,3 +15,5 @@ export const show_delete_entity = writable(false)
 export const show_create_api_key = writable(false)
 
 export const show_delete_api_key = writable(false)
+
+export const api_key_store = writable("")

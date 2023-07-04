@@ -2,11 +2,11 @@ import type { PageServerLoad } from "./$types";
 import type { Actions } from "@sveltejs/kit";
 import sql from "$lib/db"
 import bcrypt from "bcrypt"
-import { ENCRYPTION_SECRET, API_KEY_PREFIX } from "$env/static/private";
+import { API_KEY_PREFIX } from "$env/static/private";
 
-function generate_random_api_key(length:number) {
-  for (var s=''; s.length < length; s += 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.charAt(Math.random()*62|0));
-  return s;
+function generate_random_api_key(length: number) {
+    for (var s = ''; s.length < length; s += 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.charAt(Math.random() * 62 | 0));
+    return s;
 }
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -36,7 +36,6 @@ export const actions: Actions = {
         const project = data.get("project") as string
         const permissions = data.get("permissions") as string
         const key_id = crypto.randomUUID()
-        //yoot_api_key_uuid-randomkey
         const api_key = generate_random_api_key(15)
         const hashed_key = await bcrypt.hash(api_key, 10)
         const key_to_be_inserted = `${API_KEY_PREFIX}_${key_id}`

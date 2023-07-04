@@ -1,15 +1,14 @@
 <script lang="ts">
-	import { location, breadcrumb_items, show_create_api_key } from '$lib/stores';
+	import { location, breadcrumb_items, show_create_api_key, api_key_store } from '$lib/stores';
 	import type { ActionData, PageData } from './$types';
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import Copy from '$lib/components/Copy.svelte';
 	location.set('/console/keys');
 	breadcrumb_items.set([{ title: 'Keys', path: '/console/keys' }]);
 	export let data: PageData;
-	export let form: ActionData;
-    $: console.log(form)
 	$: ({ keys, projects } = data);
 	let loading = false;
 	let write_permission = false;
@@ -23,24 +22,20 @@
 	const handle_key_creation: SubmitFunction = ({ data, cancel }) => {
 		loading = true;
 		const key_name = data.get('name') as string;
-        const project = data.get('project') as string
-		if (keys.some((key) => key.name === key_name&&key.project===project)) {
+		const project = data.get('project') as string;
+		if (keys.some((key) => key.name === key_name && key.project === project)) {
 			loading = false;
 			toast.error(`You already have a key named ${key_name} in the specified project`);
 			cancel();
 		}
 		return async ({ update, result }) => {
 			loading = false;
-            switch (result.type) {
-                case "success":
-                    console.log(result)
-                    toast.success(`Key created`)
-                    break;
-                case "error":
-                    toast.error("Something went wrong while creating your key")
-                default:
-                    break;
-            }
+			switch (result.type) {
+				case 'success':
+					toast.success(`Key created`);
+                    const key = result.data!.key as string
+                    api_key_store.set(key)
+			}
 			await update();
 		};
 	};
@@ -49,6 +44,44 @@
 <svelte:head>
 	<title>YOOT | Keys</title>
 </svelte:head>
+
+{#if $api_key_store!==""}
+	<div
+		class=" z-50 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
+	>
+		<div class=" p-5 bg-white w-[40rem] rounded-lg flex flex-col gap-5">
+			<div class=" flex justify-between items-center">
+				<h1 class=" font-bold text-xl">Your API key</h1>
+				<button
+					on:click={() => {
+                        api_key_store.set("")
+					}}
+				>
+					<Close />
+				</button>
+			</div>
+			<div class="flex justify-between w-full overflow-x-scroll border rounded-md bg-neutral-300 p-2">
+				<h1 class="text-neutral-900">
+					{$api_key_store}
+				</h1>
+				<button
+					type="button"
+					on:click={async (event) => {
+						event.stopPropagation();
+                        await navigator.clipboard.writeText($api_key_store).then(()=>{ toast.success("Key copied into clipboard") })
+					}}
+					title="Copy key"
+					class=" text-neutral-900"
+				>
+					<Copy />
+				</button>
+			</div>
+			<h1 class=" text-red-500 text-center">
+				Make sure to copy and store it safely. <br> Once you dismiss this modal you won't be able to see it again
+			</h1>
+		</div>
+	</div>
+{/if}
 
 {#if $show_create_api_key}
 	<div
