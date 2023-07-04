@@ -42,6 +42,10 @@
 	};
 </script>
 
+<svelte:head>
+    <title>YOOT | Keys</title>
+</svelte:head>
+
 {#if $show_create_api_key}
 	<div
 		class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
@@ -69,7 +73,7 @@
 					type="text"
 					name="name"
 					required
-					placeholder="Key name"
+					placeholder="Give a name to your key"
 					autocomplete="off"
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
@@ -80,10 +84,9 @@
 					{/each}
 				</select>
 				<h1>Permissions</h1>
-				<div class=" flex gap-2">
-					<input disabled value="on" type="checkbox" checked />
-					<h1 class=" text-neutral-500">Key can read from entities</h1>
-				</div>
+				<div class="flex text-red-500">
+                    <h1>Read permission is required and granted by default</h1>
+                </div>
 				<div class=" flex gap-2">
 					<input bind:checked={write_permission} type="checkbox" />
 					<h1 class=" text-neutral-500">Key can write to entities</h1>

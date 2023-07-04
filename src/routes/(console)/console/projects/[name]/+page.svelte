@@ -91,6 +91,10 @@
 	};
 </script>
 
+<svelte:head>
+    <title>YOOT | Entities</title>
+</svelte:head>
+
 {#if $show_create_entity}
 	<div
 		class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"

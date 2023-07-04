@@ -34,6 +34,10 @@
 	breadcrumb_items.set([{ title: 'Projects', path: '/console/projects' }]);
 </script>
 
+<svelte:head>
+    <title>YOOT | Projects</title>
+</svelte:head>
+
 {#if $show_create_project}
 	<div
 		class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
