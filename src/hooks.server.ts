@@ -3,7 +3,6 @@ import kv from "$lib/kv"
 import type { User } from "./app";
 
 export const handle: Handle = async ({ event, resolve }) => {
-    console.log(event.url.pathname)
     if (event.url.pathname.startsWith('/console')) {
         const { cookies } = event
         const session_id = cookies.get("session") ?? ""
