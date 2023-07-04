@@ -31,7 +31,7 @@ create table entry (
 );
 
 create table api_key (
-    id text default gen_random_uuid()::text PRIMARY KEY,
+    id text PRIMARY KEY,
     name text not null,
     key text not null,
     owner text REFERENCES users(id),

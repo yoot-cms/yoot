@@ -9,14 +9,13 @@
 	breadcrumb_items.set([{ title: 'Keys', path: '/console/keys' }]);
 	export let data: PageData;
 	export let form: ActionData;
+    $: console.log(form)
 	$: ({ keys, projects } = data);
 	let loading = false;
-	let read_permission = true;
 	let write_permission = false;
 	let create_permission = false;
 	let delete_permission = false;
 	$: permissions = JSON.stringify({
-		read_permission,
 		write_permission,
 		create_permission,
 		delete_permission
@@ -24,26 +23,31 @@
 	const handle_key_creation: SubmitFunction = ({ data, cancel }) => {
 		loading = true;
 		const key_name = data.get('name') as string;
-		if (read_permission === false) {
-            loading = false
-			toast.error('The read permission is required for all keys');
-			cancel();
-		}
-		if (keys.some((key) => key.name === key_name)) {
-            loading = false
-			toast.error(`You already have a key named ${key_name}`);
+        const project = data.get('project') as string
+		if (keys.some((key) => key.name === key_name&&key.project===project)) {
+			loading = false;
+			toast.error(`You already have a key named ${key_name} in the specified project`);
 			cancel();
 		}
 		return async ({ update, result }) => {
 			loading = false;
-			console.log(form);
+            switch (result.type) {
+                case "success":
+                    console.log(result)
+                    toast.success(`Key created`)
+                    break;
+                case "error":
+                    toast.error("Something went wrong while creating your key")
+                default:
+                    break;
+            }
 			await update();
 		};
 	};
 </script>
 
 <svelte:head>
-    <title>YOOT | Keys</title>
+	<title>YOOT | Keys</title>
 </svelte:head>
 
 {#if $show_create_api_key}
@@ -78,15 +82,15 @@
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
 				<select required class=" p-2 rounded-md bg-white border" name="project" id="">
-					<option >Link a project to the key</option>
+					<option>Link a project to the key</option>
 					{#each projects as project}
 						<option value={project.id}>{project.name}</option>
 					{/each}
 				</select>
 				<h1>Permissions</h1>
 				<div class="flex text-red-500">
-                    <h1>Read permission is required and granted by default</h1>
-                </div>
+					<h1>Read permission is required and granted by default</h1>
+				</div>
 				<div class=" flex gap-2">
 					<input bind:checked={write_permission} type="checkbox" />
 					<h1 class=" text-neutral-500">Key can write to entities</h1>
