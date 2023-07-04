@@ -4,7 +4,8 @@ create table users (
     password varchar(255) not null,
     username text not null,
     profile_pic text not null default 'https://picsum.photos/300/300',
-    plan text not null
+    plan text not null default "BASIC",
+    role text not null default 'USER'
 );
 
 create table project (

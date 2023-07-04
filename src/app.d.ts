@@ -1,10 +1,18 @@
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
+export type User = { 
+    email: string,
+    username: string,
+    password: string, 
+    id: string, 
+    plan: string, 
+    role: string, 
+    profile_picture: string 
+}
+
 declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-            user_id: string | undefined
+            user: User
         }
 		// interface PageData {}
 		// interface Platform {}

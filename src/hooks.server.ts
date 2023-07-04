@@ -1,12 +1,18 @@
-import type { Handle } from "@sveltejs/kit";
+import { redirect, type Handle } from "@sveltejs/kit";
 import kv from "$lib/kv"
+import type { User } from "./app";
 
 export const handle: Handle = async ({ event, resolve }) => {
-    const { cookies } = event
-    const session_id = cookies.get("session") ?? ""
-    const user_id = await kv.get(session_id)
-    if (typeof user_id === "string") {
-        event.locals.user_id = user_id
+    if (event.url.pathname.startsWith('/console')) {
+        const { cookies } = event
+        const session_id = cookies.get("session") ?? ""
+        const user = await kv.get(session_id)
+        if (!user) {
+            throw redirect(302, "/login")
+        }
+        if (typeof user === "string") {
+            event.locals.user = JSON.parse(user) as User
+        }
     }
     return await resolve(event)
 }

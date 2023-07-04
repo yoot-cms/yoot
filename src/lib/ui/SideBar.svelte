@@ -59,6 +59,7 @@
 		}  hover:bg-neutral-100  rounded-md p-3 flex items-center gap-2 transition-all`}
 	>
 		<svelte:component this={Avatar} />
+        <img src={user_data.profile_pic} class="w-6 h-6" alt="Profile">
 		<h1>{user_data.name}</h1>
 	</a>
 </div>
