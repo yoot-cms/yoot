@@ -3,6 +3,7 @@ import kv from "$lib/kv"
 import type { User } from "./app";
 
 export const handle: Handle = async ({ event, resolve }) => {
+    console.log(event.url.pathname)
     if (event.url.pathname.startsWith('/console')) {
         const { cookies } = event
         const session_id = cookies.get("session") ?? ""
@@ -10,9 +11,7 @@ export const handle: Handle = async ({ event, resolve }) => {
         if (!user) {
             throw redirect(302, "/login")
         }
-        if (typeof user === "string") {
-            event.locals.user = JSON.parse(user) as User
-        }
+        event.locals.user = user as User
     }
     return await resolve(event)
 }

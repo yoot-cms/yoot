@@ -1,12 +1,9 @@
 import type { PageServerLoad } from "./$types";
-import { redirect, type Actions, error } from "@sveltejs/kit";
+import type { Actions } from "@sveltejs/kit";
 import sql from "$lib/db"
 
 export const load: PageServerLoad = async ({ locals }) => {
-    const { user_id } = locals
-    if (!user_id) {
-        throw redirect(301, "/login")
-    }
+    const { user } = locals
     const { rows } = await sql<{
         id: string,
         name: string,
@@ -16,8 +13,8 @@ export const load: PageServerLoad = async ({ locals }) => {
         entities: string[],
         created_at: string
     }>
-        ` select * from api_key where owner=${user_id} `
-    const projects = await sql<{ name: string, id: string }>` select * from project where owner=${user_id} `
+        ` select * from api_key where owner=${user.id} `
+    const projects = await sql<{ name: string, id: string }>` select * from project where owner=${user.id} `
     return {
         keys: rows,
         projects: projects.rows

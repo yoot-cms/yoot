@@ -7,7 +7,7 @@
 </script>
 
 <div class="  w-full h-screen flex">
-	<SideBar user_data={{ name: user.username, profile_pic: user.profile_picture }} />
+	<SideBar user_data={{ name: user.username, profile_pic: user.profile_pic }} />
 	<div class=" flex flex-col w-full h-full">
 		<div class=" flex justify-between items-center p-5 w-full h-20 border-b">
 			<div class=" flex gap-1 font-bold">

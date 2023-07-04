@@ -5,7 +5,7 @@ export type User = {
     id: string, 
     plan: string, 
     role: string, 
-    profile_picture: string 
+    profile_pic: string 
 }
 
 declare global {
