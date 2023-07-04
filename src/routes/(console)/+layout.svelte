@@ -16,8 +16,8 @@
 				{/each}
 			</div>
 			<div class=" flex gap-5">
-				<h1>{` ${user.plan==="BASIC"?"Free":"Pro"} `}</h1>
-                {#if user.plan==="BASIC"}
+				<h1>{` ${user.plan==="basic"?"Free":"Pro"} `}</h1>
+                {#if user.plan==="basic"}
                     <h1>Upgrade to pro</h1>
                 {/if}
 			</div>

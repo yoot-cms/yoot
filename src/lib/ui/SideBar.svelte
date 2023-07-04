@@ -3,7 +3,6 @@
 	import { location } from '$lib/stores';
 	import Projects from '$lib/components/Projects.svelte';
 	import ApiKeys from '$lib/components/ApiKeys.svelte';
-	import Avatar from '$lib/components/Avatar.svelte';
 	import Stats from '$lib/components/Stats.svelte';
 	import Shared from '$lib/components/Shared.svelte';
 	const items: { name: string; path: string; icon: typeof SvelteComponent }[] = [
