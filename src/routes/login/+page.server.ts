@@ -18,12 +18,11 @@ export const actions: Actions = {
             return fail(400)
         }
         const session_id = crypto.randomUUID()
-        await kv.set(session_id, user.id)
+        await kv.setex(session_id, 60 * 60 * 24, user.id)
         cookies.set("session", session_id, {
             path: "/",
             httpOnly: true,
             sameSite: 'strict',
-            maxAge: 60 * 60 * 24 * 30,
             secure: process.env.NODE_ENV === "production"
         })
         throw redirect(302, '/console')
