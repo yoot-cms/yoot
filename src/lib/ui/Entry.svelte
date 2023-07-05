@@ -56,14 +56,14 @@
 	];
 </script>
 
-<div class="w-[1000px] overflow-scroll bg-yellow-400 flex flex-col gap-3">
+<div class="w-[1000px] h-[500px] overflow-x-scroll bg-yellow-400 flex flex-col gap-3">
 	<div class="p-3 flex gap-5 w-full justify-between">
 		{#each Object.entries(entity.schema) as [field, type]}
 			<h1 class=" text-center w-52 shrink-0">{field}</h1>
 		{/each}
 		<h1 class=" text-center w-52 shrink-0">Actions</h1>
 	</div>
-	<div class=" overflow-y-scroll h-96">
+	<div class="p3 flex flex-col h-52 gap-5 w-full justify-between">
 		{#each entries as entry}
 			<div class="p-3 flex gap-5 w-full justify-between">
 				{#each Object.entries(entry.value) as [field, value]}
@@ -75,7 +75,7 @@
 						<h1 class="break-all text-center w-52 shrink-0">{value.value}</h1>
 					{/if}
 				{/each}
-				<h1 class="break-all text-center w-52 shrink-0">Actions</h1>
+				<h1 class="break-all text-center w-52 shrink-0">ActionsSSSSSSSSS</h1>
 			</div>
 		{/each}
 	</div>
