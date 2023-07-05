@@ -17,8 +17,8 @@ export const load: PageServerLoad = async ({ locals }) => {
         key: string,
         owner: string,
         project: string,
-        entities: string[],
-        created_at: string
+        created_at: string,
+        permissions: string
     }>
         ` select * from api_key where owner=${user.id} `
     const projects = await sql<{ name: string, id: string }>` select * from project where owner=${user.id} `

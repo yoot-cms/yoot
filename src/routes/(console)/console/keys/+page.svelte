@@ -6,6 +6,7 @@
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	import Copy from '$lib/components/Copy.svelte';
+	import ApiKey from '$lib/ui/ApiKey.svelte';
 	location.set('/console/keys');
 	breadcrumb_items.set([{ title: 'Keys', path: '/console/keys' }]);
 	export let data: PageData;
@@ -33,8 +34,8 @@
 			switch (result.type) {
 				case 'success':
 					toast.success(`Key created`);
-                    const key = result.data!.key as string
-                    api_key_store.set(key)
+					const key = result.data!.key as string;
+					api_key_store.set(key);
 			}
 			await update();
 		};
@@ -45,7 +46,7 @@
 	<title>YOOT | Keys</title>
 </svelte:head>
 
-{#if $api_key_store!==""}
+{#if $api_key_store !== ''}
 	<div
 		class=" z-50 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
 	>
@@ -54,13 +55,15 @@
 				<h1 class=" font-bold text-xl">Your API key</h1>
 				<button
 					on:click={() => {
-                        api_key_store.set("")
+						api_key_store.set('');
 					}}
 				>
 					<Close />
 				</button>
 			</div>
-			<div class="flex justify-between w-full overflow-x-scroll border rounded-md bg-neutral-300 p-2">
+			<div
+				class="flex justify-between w-full overflow-x-scroll border rounded-md bg-neutral-300 p-2"
+			>
 				<h1 class="text-neutral-900">
 					{$api_key_store}
 				</h1>
@@ -68,7 +71,9 @@
 					type="button"
 					on:click={async (event) => {
 						event.stopPropagation();
-                        await navigator.clipboard.writeText($api_key_store).then(()=>{ toast.success("Key copied into clipboard") })
+						await navigator.clipboard.writeText($api_key_store).then(() => {
+							toast.success('Key copied into clipboard');
+						});
 					}}
 					title="Copy key"
 					class=" text-neutral-900"
@@ -77,7 +82,8 @@
 				</button>
 			</div>
 			<h1 class=" text-red-500 text-center">
-				Make sure to copy and store it safely. <br> Once you dismiss this modal you won't be able to see it again
+				Make sure to copy and store it safely. <br /> Once you dismiss this modal you won't be able to
+				see it again
 			</h1>
 		</div>
 	</div>
@@ -153,27 +159,46 @@
 {/if}
 
 <div class="w-full h-full bg-neutral-100 flex justify-center">
-	<div
-		class=" p-5 max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2"
-	>
-		<div class=" flex items-center justify-between">
-			<h1 class=" font-bold text-2xl">Keys</h1>
-			<div class="flex gap-2">
-				<input
-					type="text"
-					class=" bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
-					placeholder="Search your keys"
-				/>
-				<button
-					on:click={() => {
-						show_create_api_key.set(true);
-					}}
-					class=" bg-blue-400 p-2 rounded-full text-white w-32">New Key</button
-				>
-			</div>
+	{#if keys.length === 0}
+		<div class=" h-full w-full flex justify-center items-center">
+			<button
+				on:click={() => {
+					show_create_api_key.set(true);
+				}}
+				class=" group transition-all flex flex-col gap-3 items-center justify-center border-2 border-neutral-300 hover:border-neutral-500 border-dashed w-64 h-64 rounded-lg"
+			>
+				<h1 class=" group-hover:text-neutral-500 text-center text-neutral-400">
+					Create an API key
+				</h1>
+			</button>
 		</div>
+	{:else}
 		<div
-			class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
-		/>
-	</div>
+			class=" p-5 max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2"
+		>
+			<div class=" flex items-center justify-between">
+				<h1 class=" font-bold text-2xl">Keys</h1>
+				<div class="flex gap-2">
+					<input
+						type="text"
+						class=" bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
+						placeholder="Search your keys"
+					/>
+					<button
+						on:click={() => {
+							show_create_api_key.set(true);
+						}}
+						class=" bg-blue-400 p-2 rounded-full text-white w-32">New Key</button
+					>
+				</div>
+			</div>
+			<div
+				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
+			>
+                {#each keys as key}
+                    <ApiKey {key} />
+                {/each}
+            </div>
+		</div>
+	{/if}
 </div>

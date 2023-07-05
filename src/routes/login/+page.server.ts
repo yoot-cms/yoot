@@ -4,7 +4,6 @@ import sql from "$lib/db"
 import kv from "$lib/kv"
 import type { User } from "../../app";
 
-
 export const actions: Actions = {
     default: async ({ request, cookies }) => {
         const data = await request.formData()
