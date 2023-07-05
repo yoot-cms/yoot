@@ -63,18 +63,20 @@
 		{/each}
 		<h1 class=" text-center w-52 shrink-0">Actions</h1>
 	</div>
-	{#each entries as entry}
-		<div class="p-3 flex gap-5 w-full justify-between">
-			{#each Object.entries(entry.value) as [field, value]}
-                {#if value.type==="image"}
-                    <div class="w-52 h-52 shrink-0">
-                        <img src={value.value.toString()} alt="">
-                    </div>
-                {:else}
-                    <h1 class="break-all text-center w-52 shrink-0">{value.value}</h1>
-                {/if}
-			{/each}
-			<h1 class="break-all text-center w-52 shrink-0">Actions</h1>
-		</div>
-	{/each}
+	<div class=" overflow-y-scroll h-96">
+		{#each entries as entry}
+			<div class="p-3 flex gap-5 w-full justify-between">
+				{#each Object.entries(entry.value) as [field, value]}
+					{#if value.type === 'image'}
+						<div class="w-52 h-52 shrink-0">
+							<img src={value.value.toString()} alt="" />
+						</div>
+					{:else}
+						<h1 class="break-all text-center w-52 shrink-0">{value.value}</h1>
+					{/if}
+				{/each}
+				<h1 class="break-all text-center w-52 shrink-0">Actions</h1>
+			</div>
+		{/each}
+	</div>
 </div>
