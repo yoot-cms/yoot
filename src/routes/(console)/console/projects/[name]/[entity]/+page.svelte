@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { location, breadcrumb_items } from '$lib/stores';
+    import Entry from '$lib/ui/Entry.svelte';
 	location.set('/console/projects');
 	export let data: PageData;
 	breadcrumb_items.set([
@@ -22,6 +23,7 @@
 			<div
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
+            
 			</div>
 		</div>
 </div>
