@@ -5,6 +5,7 @@
 	import ApiKeys from '$lib/components/ApiKeys.svelte';
 	import Stats from '$lib/components/Stats.svelte';
 	import Shared from '$lib/components/Shared.svelte';
+	import Trash from '$lib/components/Trash.svelte';
 	const items: { name: string; path: string; icon: typeof SvelteComponent }[] = [
 		{
 			name: 'Projects',
@@ -25,6 +26,11 @@
 			name: 'Stats',
 			path: '/console/stats',
 			icon: Stats
+		},
+		{
+			name: 'Trash',
+			path: '/console/trash',
+			icon: Trash
 		}
 	];
 	export let user_data: { name: string; profile_pic: string };
@@ -57,7 +63,7 @@
 				: ' text-black'
 		}  hover:bg-neutral-100  rounded-md p-3 flex items-center gap-2 transition-all`}
 	>
-        <img src={user_data.profile_pic} class="w-8 h-8 rounded-full" alt="Profile">
+		<img src={user_data.profile_pic} class="w-8 h-8 rounded-full" alt="Profile" />
 		<h1>{user_data.name}</h1>
 	</a>
 </div>
