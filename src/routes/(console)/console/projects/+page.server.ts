@@ -4,7 +4,7 @@ import sql from "$lib/db"
 
 export const load: PageServerLoad = async ({ locals }) => {
     const { user } = locals
-    const { rows } = await sql<{ id: string, name: string }>`select * from project where owner=${user.id}`
+    const { rows } = await sql<{ id: string, name: string, trashed: boolean }>`select * from project where owner=${user.id} and trashed=false`
     return {
         projects: rows
     }
