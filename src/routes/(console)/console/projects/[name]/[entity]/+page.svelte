@@ -55,7 +55,7 @@
 					{#if loading}
 						<Loading />
 					{:else}
-						<h1>Create project</h1>
+						<h1>Insert Entry</h1>
 					{/if}
 				</button>
 			</form>
