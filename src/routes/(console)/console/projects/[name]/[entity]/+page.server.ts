@@ -19,9 +19,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
     const { user } = locals
     const { name, entity } = params
     const { rows:[project] } = await sql<{id:string}>`select id from project where owner=${user.id} and name=${name}`
-    if(!project) return redirect(301, '/console/projects')
+    if(!project) throw redirect(301, '/console/projects')
     const { rows:[entity_data] } = await sql<Entity>` select * from entity where name=${entity} and project=${project.id} `
-    if(!entity_data) return redirect(301, `/console/projects/${name}`)
+    if(!entity_data) throw redirect(301, `/console/projects/${name}`)
     const { rows } = await sql<Entry>` select * from entry where entity=${entity_data.id} `
     return {
         project_name: name,
