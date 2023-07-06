@@ -1,9 +1,12 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageServerData } from './$types';
 	import { location, breadcrumb_items } from '$lib/stores';
     import Entry from '$lib/ui/Entry.svelte';
 	location.set('/console/projects');
-	export let data: PageData;
+	export let data: PageServerData;
+    $: ({ entries, entity } = data)
+    $: fields = Object.keys(entity.schema)
+    $: console.log(fields)
 	breadcrumb_items.set([
 		{ title: data.project_name, path: `/console/projects/${data.project_name}` },
 		{ title: data.entity_name, path: `/console/projects/${data.project_name}/${data.entity_name}` }
@@ -21,11 +24,11 @@
 				>
 			</div>
 			<div
-				class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
+				class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-scroll no-scroll"
 			>
-                <div class=" flex justify-between items-center p-2 w-full overflow-x-scroll no-scroll bg-red-500 h-10 rounded-md">
-                    {#each [1,2,3,4,5,6,7,8,9,1,2,2,2,2,2,2] as _}
-                        <h1 class=" w-32 shrink-0 border-r ">Property</h1>
+                <div class=" flex justify-between items-center p-2 w-full overflow-x-scroll no-scroll border-b border-neutral-700 text-black h-10 ">
+                    {#each fields as field}
+                        <h1 class=" w-60 shrink-0 border-r">{field.toUpperCase()}</h1>
                     {/each}
                 </div>    
 			</div>
