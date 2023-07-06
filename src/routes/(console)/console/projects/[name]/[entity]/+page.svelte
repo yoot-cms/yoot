@@ -15,10 +15,6 @@
     let loading = false
 </script>
 
-<svelte:head>
-    YOOT | Entries
-</svelte:head>
-
 {#if $show_create_entry}
 	<div
 		class=" z-30 fixed inset-0 h-full w-full flex flex-col justify-center items-center bg-black/50"
