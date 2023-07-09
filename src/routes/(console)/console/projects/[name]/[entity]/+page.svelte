@@ -9,7 +9,6 @@
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
 	$: fields = Object.entries(entity.schema);
-    $: console.log(fields)
 	breadcrumb_items.set([
 		{ title: data.project_name, path: `/console/projects/${data.project_name}` },
 		{ title: data.entity_name, path: `/console/projects/${data.project_name}/${data.entity_name}` }
@@ -23,7 +22,7 @@
 	>
 		<div class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5">
 			<div class=" flex justify-between items-center">
-				<h1 class=" font-bold text-xl">Insert an entry</h1>
+				<h1 class=" font-bold text-xl truncate">Insert an entry in {data.entity_name}</h1>
 				<button
 					on:click={() => {
 						if (!loading) {
@@ -39,13 +38,6 @@
 				method="post"
 				class="flex flex-col justify-between gap-5 h-full"
 			>
-				<input
-					type="text"
-					placeholder="Project name"
-					name="name"
-					autocomplete="off"
-					class=" border p-2 rounded-md w-full focus:outline-none"
-				/>
                 {#each fields as [field_name, data_type]}
                     <EntryField  {data_type} {field_name} />
                 {/each}
