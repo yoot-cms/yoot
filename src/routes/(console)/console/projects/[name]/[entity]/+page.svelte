@@ -2,6 +2,7 @@
 	import type { PageServerData } from './$types';
 	import { location, breadcrumb_items, show_create_entry } from '$lib/stores';
 	import Entry from '$lib/ui/Entry.svelte';
+    import EntryField from '$lib/ui/EntryField.svelte';
 	import Close from '$lib/components/Close.svelte';
     import Loading from '$lib/components/Loading.svelte';
 	location.set('/console/projects');
@@ -44,6 +45,9 @@
 					autocomplete="off"
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
+                {#each [""] as _}
+                    <EntryField  data_type={"Text"} field_name={"test"} />
+                {/each}
 				<button
 					disabled={loading}
 					class="justify-center flex items-center bg-blue-400 h-10 rounded-md text-white"
