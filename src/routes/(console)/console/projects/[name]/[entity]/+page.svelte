@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	import { location, breadcrumb_items, show_create_entry } from '$lib/stores';
-	import Entry from '$lib/ui/Entry.svelte';
     import EntryField from '$lib/ui/EntryField.svelte';
 	import Close from '$lib/components/Close.svelte';
     import Loading from '$lib/components/Loading.svelte';
