@@ -1,6 +1,16 @@
 <script lang="ts">
 	export let data_type: string;
 	export let field_name: string;
+	let preview: HTMLElement;
+	let image: HTMLInputElement | null;
+	function preview_image(input_name: string) {
+		image = document.getElementById(input_name) as HTMLInputElement;
+		let file = image.files ? image.files[0] : null;
+		let image_element = document.createElement('img');
+		image_element.className = 'bg-red-500 z-50 absolute top-1/2 rounded-md left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 ';
+		image_element.src = window.URL.createObjectURL(file as Blob);
+		preview.replaceChildren(image_element);
+	}
 </script>
 
 {#if data_type === 'Text'}
@@ -40,16 +50,29 @@
 {/if}
 
 {#if data_type === 'Image'}
-	<div class="flex flex-col gap-2 ">
+	<div class="flex flex-col gap-2 w-full h-full relative">
 		<h1>{field_name}</h1>
-		<div >
+		<div
+			bind:this={preview}
+		/>
+		<div>
 			<div class="relative">
 				<label
-					for="file"
+					for={field_name}
 					class="flex min-h-[175px] w-full cursor-pointer items-center justify-center rounded-md border border-dashed border-primary p-6"
 				>
 					<div>
-						<input type="file" accept="image/*" name={field_name} id="file" class="sr-only" />
+						<input
+							on:change={(event) => {
+								event.preventDefault();
+								preview_image(field_name);
+							}}
+							type="file"
+							accept="image/*"
+							name={field_name}
+							id={field_name}
+							class="sr-only"
+						/>
 						<span
 							class="mx-auto mb-3 flex h-[50px] w-[50px] items-center justify-center rounded-full border border-stroke bg-white"
 						>

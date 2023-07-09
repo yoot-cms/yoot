@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
 	import { location, breadcrumb_items, show_create_entry } from '$lib/stores';
-    import EntryField from '$lib/ui/EntryField.svelte';
+	import EntryField from '$lib/ui/EntryField.svelte';
 	import Close from '$lib/components/Close.svelte';
-    import Loading from '$lib/components/Loading.svelte';
+	import Loading from '$lib/components/Loading.svelte';
+	import { enhance, type SubmitFunction } from '$app/forms';
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -12,7 +13,11 @@
 		{ title: data.project_name, path: `/console/projects/${data.project_name}` },
 		{ title: data.entity_name, path: `/console/projects/${data.project_name}/${data.entity_name}` }
 	]);
-    let loading = false
+	let loading = false;
+	const handle_entry_creation: SubmitFunction = ({ data, cancel }) => {
+            console.log(data)
+            cancel()
+        };
 </script>
 
 {#if $show_create_entry}
@@ -36,10 +41,11 @@
 				action="?/create"
 				method="post"
 				class="flex flex-col justify-between gap-5 h-full"
+				use:enhance={handle_entry_creation}
 			>
-                {#each fields as [field_name, data_type]}
-                    <EntryField  {data_type} {field_name} />
-                {/each}
+				{#each fields as [field_name, data_type]}
+					<EntryField {data_type} {field_name} />
+				{/each}
 				<button
 					disabled={loading}
 					class="justify-center flex items-center bg-blue-400 h-10 rounded-md text-white"
@@ -61,7 +67,12 @@
 	>
 		<div class=" flex items-center justify-between">
 			<h1 class=" font-bold text-2xl">Entries</h1>
-			<button on:click={()=>{ show_create_entry.set(true) }} class=" bg-blue-400 p-2 rounded-full text-white w-32">New Entry</button>
+			<button
+				on:click={() => {
+					show_create_entry.set(true);
+				}}
+				class=" bg-blue-400 p-2 rounded-full text-white w-32">New Entry</button
+			>
 		</div>
 		<div
 			class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-scroll no-scroll"
