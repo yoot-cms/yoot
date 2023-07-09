@@ -8,7 +8,8 @@
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
-	$: fields = Object.keys(entity.schema);
+	$: fields = Object.entries(entity.schema);
+    $: console.log(fields)
 	breadcrumb_items.set([
 		{ title: data.project_name, path: `/console/projects/${data.project_name}` },
 		{ title: data.entity_name, path: `/console/projects/${data.project_name}/${data.entity_name}` }
@@ -45,8 +46,8 @@
 					autocomplete="off"
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
-                {#each [""] as _}
-                    <EntryField  data_type={"Text"} field_name={"test"} />
+                {#each fields as [field_name, data_type]}
+                    <EntryField  {data_type} {field_name} />
                 {/each}
 				<button
 					disabled={loading}
@@ -78,7 +79,7 @@
 				class=" flex justify-between items-center p-2 w-full overflow-x-scroll no-scroll border-b border-neutral-700 text-black h-10"
 			>
 				{#each fields as field}
-					<h1 class=" w-60 shrink-0 border-r">{field.toUpperCase()}</h1>
+					<h1 class=" w-60 shrink-0 border-r">{field[0].toUpperCase()}</h1>
 				{/each}
 			</div>
 		</div>
