@@ -5,12 +5,18 @@
 	export let field_name: string;
 	let preview: HTMLElement;
 	let image: HTMLInputElement | null;
+	let loaded_preview = false;
 	function preview_image(input_name: string) {
 		image = document.getElementById(input_name) as HTMLInputElement;
 		let file = image.files ? image.files[0] : null;
 		let image_element = document.createElement('img');
 		image_element.src = window.URL.createObjectURL(file as Blob);
+        loaded_preview = true
 		preview.replaceChildren(image_element);
+        preview.addEventListener("click", (_)=>{
+                preview.replaceChildren()
+                loaded_preview = false
+            })
 	}
 </script>
 
@@ -53,8 +59,9 @@
 {#if data_type === 'Image'}
 	<div class="flex flex-col gap-2 w-full h-full relative">
 		<h1>{field_name}</h1>
-		<div>
-			<div class="relative" >
+		<div class="flex">
+			<div bind:this={preview} />
+			<div class="relative w-full" hidden={loaded_preview}>
 				<label
 					for={field_name}
 					class="flex min-h-[175px] w-full cursor-pointer items-center justify-center rounded-md border border-dashed border-primary p-6"
