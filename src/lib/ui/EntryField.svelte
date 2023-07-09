@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Project from './Project.svelte';
+
 	export let data_type: string;
 	export let field_name: string;
 	let preview: HTMLElement;
@@ -7,7 +9,6 @@
 		image = document.getElementById(input_name) as HTMLInputElement;
 		let file = image.files ? image.files[0] : null;
 		let image_element = document.createElement('img');
-		image_element.className = 'bg-red-500 z-50 absolute top-1/2 rounded-md left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 ';
 		image_element.src = window.URL.createObjectURL(file as Blob);
 		preview.replaceChildren(image_element);
 	}
@@ -52,11 +53,8 @@
 {#if data_type === 'Image'}
 	<div class="flex flex-col gap-2 w-full h-full relative">
 		<h1>{field_name}</h1>
-		<div
-			bind:this={preview}
-		/>
 		<div>
-			<div class="relative">
+			<div class="relative" >
 				<label
 					for={field_name}
 					class="flex min-h-[175px] w-full cursor-pointer items-center justify-center rounded-md border border-dashed border-primary p-6"
