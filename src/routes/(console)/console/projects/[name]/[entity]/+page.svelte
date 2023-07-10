@@ -14,13 +14,24 @@
 		{ title: data.entity_name, path: `/console/projects/${data.project_name}/${data.entity_name}` }
 	]);
 	let loading = false;
-	const handle_entry_creation: SubmitFunction = ({ data, cancel }) => {
+	const handle_entry_creation: SubmitFunction = async ({ data, cancel }) => {
 		let entry_value: Record<string, string | number> = {};
 		loading = true;
 		fields.map(([field_name, field_type]) => {
 			console.log(field_name, field_type);
 		});
+        const file = data.get("image")
+        const new_form = new FormData()
+        new_form.set("file", file as File)
+        const response = await fetch(
+        "http://localhost:5173/api/upload",
+        {
+                method:"post",
+                body: new_form
+            }
+        )
 		cancel();
+        loading = false
 		return async ({ update }) => {
 			loading = false;
 			await update();
