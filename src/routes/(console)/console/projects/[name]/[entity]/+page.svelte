@@ -15,8 +15,11 @@
 	]);
 	let loading = false;
 	const handle_entry_creation: SubmitFunction = ({ data, cancel }) => {
-		console.log(data);
-		cancel();
+		loading = true;
+		return async ({ update }) => {
+			loading = false;
+			await update();
+		};
 	};
 </script>
 
@@ -42,11 +45,12 @@
 				</button>
 			</div>
 			<form
-				action="?/create"
+				action="?/create_entry"
 				method="post"
 				class="flex flex-col justify-between gap-5 "
 				use:enhance={handle_entry_creation}
 			>
+                <input type="text" name="entity" hidden value={data.entity}>
 				<div class="max-h-[500px] flex flex-col gap-2 overflow-y-scroll no-scroll ">
 					{#each fields as [field_name, data_type]}
 						<EntryField {data_type} {field_name} />
@@ -83,18 +87,19 @@
 		<div
 			class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-auto no-scroll"
 		>
-			<table class=" max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-5 overflow-auto">
+			<table
+				class=" max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-5 overflow-auto"
+			>
 				<thead class="w-full ">
-						<div
-							class=" flex items-center min-w-full border p-2 border-neutral-300 rounded-lg  w-fit text-black h-10"
-						>
-							{#each fields as field}
-								<h1 class=" w-[300px] shrink-0 ">{field[0].toUpperCase()}</h1>
-							{/each}
-						</div>
+					<div
+						class=" flex items-center min-w-full border p-2 border-neutral-300 rounded-lg  w-fit text-black h-10"
+					>
+						{#each fields as field}
+							<h1 class=" w-[300px] shrink-0 ">{field[0].toUpperCase()}</h1>
+						{/each}
+					</div>
 				</thead>
-				<tbody>
-				</tbody>
+				<tbody />
 			</table>
 		</div>
 	</div>

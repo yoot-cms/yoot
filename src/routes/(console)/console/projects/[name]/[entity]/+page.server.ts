@@ -1,6 +1,8 @@
 import type { PageServerLoad } from "./$types";
 import { type Actions, redirect } from "@sveltejs/kit";
 import sql from "$lib/db"
+import { v2 as cloudinary } from "cloudinary";
+import { CLOUDINARY_API_KEY, CLOUDINARY_NAME, CLOUDINARY_API_SECRET } from "$env/static/private";
 
 type Entity = {
     id: string,
@@ -32,7 +34,17 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 }
 
 export const actions: Actions = {
-    create_entry: async ({ }) => {
-
+    create_entry: async ({ request, locals }) => {
+        const form_data = await request.formData()
+        const entity = JSON.parse(form_data.get("entity")! as string) as Entity
+        console.log(entity)
+        const data = Object.entries(form_data)
+        console.log(data)
+        // cloudinary.config({
+        //     cloud_name:CLOUDINARY_NAME,
+        //     api_key:CLOUDINARY_API_KEY,
+        //     api_secret:CLOUDINARY_API_SECRET
+        // })
+        // const upload_result = await cloudinary.uploader.upload("")
     }
 }
