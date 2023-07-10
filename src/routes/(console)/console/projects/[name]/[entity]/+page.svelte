@@ -86,7 +86,7 @@
 			<table class=" max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-5 overflow-auto">
 				<thead class="w-full ">
 						<div
-							class=" flex items-center min-w-full border p-2 border-neutral-500 rounded-lg  w-fit text-black h-10"
+							class=" flex items-center min-w-full border p-2 border-neutral-300 rounded-lg  w-fit text-black h-10"
 						>
 							{#each fields as field}
 								<h1 class=" w-[300px] shrink-0 ">{field[0].toUpperCase()}</h1>
