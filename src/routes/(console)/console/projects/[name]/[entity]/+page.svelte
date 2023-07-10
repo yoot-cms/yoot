@@ -83,7 +83,7 @@
 		<div
 			class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-auto no-scroll"
 		>
-			<table class="p-5 max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2 overflow-auto">
+			<table class=" max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-5 overflow-auto">
 				<thead class="w-full ">
 						<div
 							class=" flex items-center min-w-full border p-2 border-neutral-500 rounded-lg  w-fit text-black h-10"
