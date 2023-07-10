@@ -15,10 +15,14 @@
 	]);
 	let loading = false;
 	const handle_entry_creation: SubmitFunction = ({ data, cancel }) => {
-            console.log(data)
-            cancel()
-        };
+		console.log(data);
+		cancel();
+	};
 </script>
+
+<svelte:head>
+	<title>YOOT | Entries in {data.entity_name}</title>
+</svelte:head>
 
 {#if $show_create_entry}
 	<div
@@ -40,15 +44,17 @@
 			<form
 				action="?/create"
 				method="post"
-				class="flex flex-col justify-between gap-5 h-full"
+				class="flex flex-col justify-between gap-5 "
 				use:enhance={handle_entry_creation}
 			>
-				{#each fields as [field_name, data_type]}
-					<EntryField {data_type} {field_name} />
-				{/each}
+				<div class="max-h-[500px] flex flex-col gap-2 overflow-y-scroll no-scroll ">
+					{#each fields as [field_name, data_type]}
+						<EntryField {data_type} {field_name} />
+					{/each}
+				</div>
 				<button
 					disabled={loading}
-					class="justify-center flex items-center bg-blue-400 h-10 rounded-md text-white"
+					class="p-2 justify-center flex items-center bg-blue-400 h-10 rounded-md text-white"
 				>
 					{#if loading}
 						<Loading />
@@ -77,13 +83,21 @@
 		<div
 			class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-scroll no-scroll"
 		>
-			<div
-				class=" flex justify-between items-center p-2 w-full overflow-x-scroll no-scroll border-b border-neutral-700 text-black h-10"
-			>
-				{#each fields as field}
-					<h1 class=" w-60 shrink-0 border-r">{field[0].toUpperCase()}</h1>
-				{/each}
-			</div>
+			<table class="p-5 max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2 border-4 overflow-scroll">
+				<thead>
+					<tr>
+						<div
+							class=" flex justify-between items-center p-2 w-full no-scroll border-b border-neutral-500 text-black h-10"
+						>
+							{#each fields as field}
+								<h1 class=" w-60 shrink-0 border-r">{field[0].toUpperCase()}</h1>
+							{/each}
+						</div>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
