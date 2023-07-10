@@ -5,7 +5,6 @@
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
-	import { v2 as cloudinary } from 'cloudinary';
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -18,11 +17,6 @@
 	const handle_entry_creation: SubmitFunction = ({ data, cancel }) => {
 		let entry_value: Record<string, string | number> = {};
 		loading = true;
-		cloudinary.config({
-			api_key: import.meta.env.VITE_CLOUDINARY_API_KEY,
-			cloud_name: import.meta.env.VITE_CLOUDINARY_NAME,
-			api_secret: import.meta.env.VITE_CLOUDINARY_API_SECRET
-		});
 		fields.map(([field_name, field_type]) => {
 			console.log(field_name, field_type);
 		});
