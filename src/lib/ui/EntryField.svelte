@@ -1,15 +1,16 @@
 <script lang="ts">
-    import ImagePreview from "./ImagePreview.svelte";
-    import { loaded_preview } from "$lib/stores"
+	import ImagePreview from './ImagePreview.svelte';
+	import Discard from '$lib/components/Discard.svelte';
 	export let data_type: string;
 	export let field_name: string;
 	let image_element: HTMLInputElement | null;
-    let image : Blob
+	let image: Blob;
+	let loaded_preview = false;
 	function preview_image(input_name: string) {
 		image_element = document.getElementById(input_name) as HTMLInputElement;
 		let file = image_element.files ? image_element.files[0] : null;
-        image = file as Blob
-        loaded_preview.set(true)
+		image = file as Blob;
+		loaded_preview = true;
 	}
 </script>
 
@@ -51,14 +52,24 @@
 
 {#if data_type === 'Image'}
 	<div class="flex flex-col gap-2 w-full h-full relative">
-        <div class="flex gap-2">
-            <h1>{field_name}</h1>
-        </div>
+		<div class="flex gap-2">
+			<h1>{field_name}</h1>
+		</div>
 		<div class="flex">
-            {#if $loaded_preview}
-                <ImagePreview {image}/>
-            {/if}
-			<div class="relative w-full" hidden={$loaded_preview}>
+			{#if loaded_preview}
+				<div class=" w-full relative">
+					<img class=" w-full max-h-[200px]" src={window.URL.createObjectURL(image)} alt="" />
+					<button
+						on:click|preventDefault={() => {
+							loaded_preview = false;
+						}}
+						class="bg-red-500 rounded-full z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute"
+					>
+						<Discard />
+					</button>
+				</div>
+			{/if}
+			<div class="relative w-full" hidden={loaded_preview}>
 				<label
 					for={field_name}
 					class="flex min-h-[175px] w-full cursor-pointer items-center justify-center rounded-md border border-dashed border-primary p-6"
