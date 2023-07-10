@@ -21,3 +21,5 @@ export const api_key_store = writable("")
 export const show_create_entry = writable(false)
 
 export const show_delete_entry = writable(false)
+
+export const loaded_preview = writable(false)

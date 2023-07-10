@@ -1,22 +1,15 @@
 <script lang="ts">
-	import Project from './Project.svelte';
-
+    import ImagePreview from "./ImagePreview.svelte";
+    import { loaded_preview } from "$lib/stores"
 	export let data_type: string;
 	export let field_name: string;
-	let preview: HTMLElement;
-	let image: HTMLInputElement | null;
-	let loaded_preview = false;
+	let image_element: HTMLInputElement | null;
+    let image : Blob
 	function preview_image(input_name: string) {
-		image = document.getElementById(input_name) as HTMLInputElement;
-		let file = image.files ? image.files[0] : null;
-		let image_element = document.createElement('img');
-		image_element.src = window.URL.createObjectURL(file as Blob);
-        loaded_preview = true
-		preview.replaceChildren(image_element);
-        preview.addEventListener("click", (_)=>{
-                preview.replaceChildren()
-                loaded_preview = false
-            })
+		image_element = document.getElementById(input_name) as HTMLInputElement;
+		let file = image_element.files ? image_element.files[0] : null;
+        image = file as Blob
+        loaded_preview.set(true)
 	}
 </script>
 
@@ -45,12 +38,12 @@
 {/if}
 
 {#if data_type === 'Boolean'}
-	<div class="flex flex-col gap-2">
+	<div class=" flex flex-col gap-2">
 		<h1 class="">{field_name}</h1>
 		<label class="relative inline-flex items-center cursor-pointer">
-			<input type="checkbox" value="" class="sr-only peer" />
+			<input type="checkbox" name={field_name} class="sr-only peer" />
 			<div
-				class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+				class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
 			/>
 		</label>
 	</div>
@@ -58,10 +51,14 @@
 
 {#if data_type === 'Image'}
 	<div class="flex flex-col gap-2 w-full h-full relative">
-		<h1>{field_name}</h1>
+        <div class="flex gap-2">
+            <h1>{field_name}</h1>
+        </div>
 		<div class="flex">
-			<div bind:this={preview} />
-			<div class="relative w-full" hidden={loaded_preview}>
+            {#if $loaded_preview}
+                <ImagePreview {image}/>
+            {/if}
+			<div class="relative w-full" hidden={$loaded_preview}>
 				<label
 					for={field_name}
 					class="flex min-h-[175px] w-full cursor-pointer items-center justify-center rounded-md border border-dashed border-primary p-6"
