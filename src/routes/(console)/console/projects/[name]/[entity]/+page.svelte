@@ -5,6 +5,7 @@
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
+	import { v2 as cloudinary } from 'cloudinary';
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -15,7 +16,17 @@
 	]);
 	let loading = false;
 	const handle_entry_creation: SubmitFunction = ({ data, cancel }) => {
+		let entry_value: Record<string, string | number> = {};
 		loading = true;
+		cloudinary.config({
+			api_key: import.meta.env.VITE_CLOUDINARY_API_KEY,
+			cloud_name: import.meta.env.VITE_CLOUDINARY_NAME,
+			api_secret: import.meta.env.VITE_CLOUDINARY_API_SECRET
+		});
+		fields.map(([field_name, field_type]) => {
+			console.log(field_name, field_type);
+		});
+		cancel();
 		return async ({ update }) => {
 			loading = false;
 			await update();
@@ -50,7 +61,7 @@
 				class="flex flex-col justify-between gap-5 "
 				use:enhance={handle_entry_creation}
 			>
-                <input type="text" name="entity" hidden value={data.entity}>
+				<input type="text" name="entry_value" hidden />
 				<div class="max-h-[500px] flex flex-col gap-2 overflow-y-scroll no-scroll ">
 					{#each fields as [field_name, data_type]}
 						<EntryField {data_type} {field_name} />
