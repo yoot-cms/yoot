@@ -81,19 +81,17 @@
 			>
 		</div>
 		<div
-			class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-scroll no-scroll"
+			class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-auto no-scroll"
 		>
-			<table class="p-5 max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2 border-4 overflow-scroll">
-				<thead>
-					<tr>
+			<table class="p-5 max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-2 overflow-auto">
+				<thead class="w-full ">
 						<div
-							class=" flex justify-between items-center p-2 w-full no-scroll border-b border-neutral-500 text-black h-10"
+							class=" flex items-center min-w-full border p-2 border-neutral-500 rounded-lg  w-fit text-black h-10"
 						>
 							{#each fields as field}
-								<h1 class=" w-60 shrink-0 border-r">{field[0].toUpperCase()}</h1>
+								<h1 class=" w-[300px] shrink-0 ">{field[0].toUpperCase()}</h1>
 							{/each}
 						</div>
-					</tr>
 				</thead>
 				<tbody>
 				</tbody>
