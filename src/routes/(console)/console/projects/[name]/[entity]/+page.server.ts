@@ -34,6 +34,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 export const actions: Actions = {
     create_entry: async ({ request, locals }) => {
         const data = await request.formData()
-        console.log(data)
+        const entry_value = data.get("entry_value")! as string
+        const entry = JSON.parse()
     }
 }

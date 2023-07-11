@@ -17,7 +17,8 @@
 	]);
 	let loading = false;
 	const handle_entry_creation: SubmitFunction = async ({ data, cancel }) => {
-		toast.loading('Inserting entry', { id:"0" });
+		toast.loading('Inserting entry', { id: '0' });
+		loading = true;
 		let entry_value: Record<string, string | number | boolean> = {};
 		fields.map(([field_name, field_type]) => {
 			if (field_type === 'Text') {
@@ -36,9 +37,11 @@
 				entry_value[field_name] = value === 'on' ? true : false;
 			}
 		});
-		console.log(entry_value);
-		toast.dismiss('0');
-		cancel();
+		data.set('entry_value', JSON.stringify(entry_value));
+
+		return async ({ update, result }) => {
+			await update();
+		};
 	};
 </script>
 
@@ -79,11 +82,7 @@
 					disabled={loading}
 					class="p-2 justify-center flex items-center bg-blue-400 h-10 rounded-md text-white"
 				>
-					{#if loading}
-						<Loading />
-					{:else}
-						<h1>Insert Entry</h1>
-					{/if}
+					<h1>Insert Entry</h1>
 				</button>
 			</form>
 		</div>
