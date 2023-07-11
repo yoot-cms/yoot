@@ -6,6 +6,7 @@
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
+	import toast from 'svelte-french-toast';
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -16,24 +17,28 @@
 	]);
 	let loading = false;
 	const handle_entry_creation: SubmitFunction = async ({ data, cancel }) => {
-		let entry_value: Record<string, string | number> = {};
-		loading = true;
+		toast.loading('Inserting entry', { id:"0" });
+		let entry_value: Record<string, string | number | boolean> = {};
 		fields.map(([field_name, field_type]) => {
-			console.log(field_name, field_type);
+			if (field_type === 'Text') {
+				entry_value[field_name] = data.get(field_name)! as string;
+			}
+			if (field_type === 'Number') {
+				const value = data.get(field_name)! as string;
+				entry_value[field_name] = Number(value);
+			}
+			if (field_type === 'Image') {
+				//Upload shit
+				entry_value[field_name] = 'image:';
+			}
+			if (field_type === 'Boolean') {
+				const value = data.get(field_name)! as string;
+				entry_value[field_name] = value === 'on' ? true : false;
+			}
 		});
-		const file = data.get('image');
-		const new_form = new FormData();
-		new_form.set('file', file as File);
-		const response = await fetch('http://localhost:3000', {
-			method: 'post',
-			body: new_form
-		});
-		loading = false;
+		console.log(entry_value);
+		toast.dismiss('0');
 		cancel();
-		return async ({ update }) => {
-			loading = false;
-			await update();
-		};
 	};
 </script>
 
