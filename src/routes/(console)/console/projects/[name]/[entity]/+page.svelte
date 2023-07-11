@@ -2,6 +2,7 @@
 	import type { PageServerData } from './$types';
 	import { location, breadcrumb_items, show_create_entry } from '$lib/stores';
 	import EntryField from '$lib/ui/EntryField.svelte';
+	import Entry from '$lib/ui/Entry.svelte';
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
@@ -20,18 +21,15 @@
 		fields.map(([field_name, field_type]) => {
 			console.log(field_name, field_type);
 		});
-        const file = data.get("image")
-        const new_form = new FormData()
-        new_form.set("file", file as File)
-        const response = await fetch(
-        "http://localhost:5173/api/upload",
-        {
-                method:"post",
-                body: new_form
-            }
-        )
+		const file = data.get('image');
+		const new_form = new FormData();
+		new_form.set('file', file as File);
+		const response = await fetch('http://localhost:3000', {
+			method: 'post',
+			body: new_form
+		});
+		loading = false;
 		cancel();
-        loading = false
 		return async ({ update }) => {
 			loading = false;
 			await update();
@@ -115,7 +113,13 @@
 						{/each}
 					</div>
 				</thead>
-				<tbody />
+				<tbody>
+					{#each entries as entry}
+						{#each fields as _}
+							<Entry schema={data.entity.schema} {entry} />
+						{/each}
+					{/each}
+				</tbody>
 			</table>
 		</div>
 	</div>
