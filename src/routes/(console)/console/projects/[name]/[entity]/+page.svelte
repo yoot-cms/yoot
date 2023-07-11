@@ -38,6 +38,7 @@
 			}
 		});
 		data.set('entry_value', JSON.stringify(entry_value));
+        data.set('entity', entity.id)
 
 		return async ({ update, result }) => {
 			await update();
@@ -69,11 +70,12 @@
 			<form
 				action="?/create_entry"
 				method="post"
-				class="flex flex-col justify-between gap-5 "
+				class="flex flex-col justify-between gap-5"
 				use:enhance={handle_entry_creation}
 			>
 				<input type="text" name="entry_value" hidden />
-				<div class="max-h-[500px] flex flex-col gap-2 overflow-y-scroll no-scroll ">
+				<input type="text" name="entity" hidden />
+				<div class="max-h-[500px] flex flex-col gap-2 overflow-y-scroll no-scroll">
 					{#each fields as [field_name, data_type]}
 						<EntryField {data_type} {field_name} />
 					{/each}
@@ -108,12 +110,12 @@
 			<table
 				class=" max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-5 overflow-auto"
 			>
-				<thead class="w-full ">
+				<thead class="w-full">
 					<div
-						class=" flex items-center min-w-full border p-2 border-neutral-300 rounded-lg  w-fit text-black h-10"
+						class=" flex items-center min-w-full border p-2 border-neutral-300 rounded-lg w-fit text-black h-10"
 					>
 						{#each fields as field}
-							<h1 class=" w-[300px] shrink-0 ">{field[0].toUpperCase()}</h1>
+							<h1 class=" w-[300px] shrink-0">{field[0].toUpperCase()}</h1>
 						{/each}
 					</div>
 				</thead>

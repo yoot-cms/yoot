@@ -1,5 +1,5 @@
 import type { PageServerLoad } from "./$types";
-import { type Actions, redirect } from "@sveltejs/kit";
+import { type Actions, redirect, fail } from "@sveltejs/kit";
 import sql from "$lib/db"
 
 type Entity = {
@@ -32,9 +32,15 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 }
 
 export const actions: Actions = {
-    create_entry: async ({ request, locals }) => {
-        const data = await request.formData()
-        const entry_value = data.get("entry_value")! as string
-        const entry = JSON.parse()
+    create_entry: async ({ request }) => {
+        try {
+            const data = await request.formData()
+            const entry_value = data.get("entry_value")! as string
+            const entity = data.get("entity")! as string
+            await sql` insert into entry(entity, value) values( ${entity}, ${entry_value} ) `
+        } catch (err) {
+            console.log(err)
+            return fail(500)
+        }
     }
 }

@@ -12,7 +12,7 @@ create table project (
     id text default gen_random_uuid()::text PRIMARY KEY,
     name text not null,
     owner text REFERENCES users(id),
-    created_at DATE not null default CURRENT_DATE
+    created_at DATE not null default CURRENT_DATE,
 );
 
 create table entity (
