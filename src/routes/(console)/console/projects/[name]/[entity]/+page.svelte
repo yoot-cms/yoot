@@ -6,14 +6,8 @@
 	import Close from '$lib/components/Close.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
-	import Imagekit from 'imagekit';
 	const { VITE_IMAGEKIT_PUBLIC_KEY, VITE_IMAGEKIT_PRIVATE_KEY, VITE_IMAGEKIT_URL_ENDPOINT } =
 		import.meta.env;
-	const imagekit = new Imagekit({
-		privateKey: VITE_IMAGEKIT_PRIVATE_KEY,
-		publicKey: VITE_IMAGEKIT_PUBLIC_KEY,
-		urlEndpoint: VITE_IMAGEKIT_URL_ENDPOINT
-	});
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -46,10 +40,6 @@
 			if (field_type === 'Image') {
 				const file = data.get(field_name)! as File;
 				const file_data = await getbase64(file) as string;
-                console.log(file_data)
-                loading = false
-                toast.dismiss('0')
-                cancel()
 				entry_value[field_name] = 'image:';
 			}
 			if (field_type === 'Boolean') {
