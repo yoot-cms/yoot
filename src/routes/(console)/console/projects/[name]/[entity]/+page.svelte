@@ -45,7 +45,11 @@
 			}
 			if (field_type === 'Image') {
 				const file = data.get(field_name)! as File;
-				const file_data = await getbase64(file);
+				const file_data = await getbase64(file) as string;
+                console.log(file_data)
+                loading = false
+                toast.dismiss('0')
+                cancel()
 				entry_value[field_name] = 'image:';
 			}
 			if (field_type === 'Boolean') {
