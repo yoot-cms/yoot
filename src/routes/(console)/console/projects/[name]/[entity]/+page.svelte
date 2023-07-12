@@ -4,9 +4,16 @@
 	import EntryField from '$lib/ui/EntryField.svelte';
 	import Entry from '$lib/ui/Entry.svelte';
 	import Close from '$lib/components/Close.svelte';
-	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import Imagekit from 'imagekit';
+	const { VITE_IMAGEKIT_PUBLIC_KEY, VITE_IMAGEKIT_PRIVATE_KEY, VITE_IMAGEKIT_URL_ENDPOINT } =
+		import.meta.env;
+	const imagekit = new Imagekit({
+		privateKey: VITE_IMAGEKIT_PRIVATE_KEY,
+		publicKey: VITE_IMAGEKIT_PUBLIC_KEY,
+		urlEndpoint: VITE_IMAGEKIT_URL_ENDPOINT
+	});
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -16,11 +23,19 @@
 		{ title: data.entity_name, path: `/console/projects/${data.project_name}/${data.entity_name}` }
 	]);
 	let loading = false;
+	async function getbase64(file: File) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = reject;
+		});
+	}
 	const handle_entry_creation: SubmitFunction = async ({ data, cancel }) => {
 		toast.loading('Inserting entry', { id: '0' });
 		loading = true;
 		let entry_value: Record<string, string | number | boolean> = {};
-		fields.map(([field_name, field_type]) => {
+		fields.map(async ([field_name, field_type]) => {
 			if (field_type === 'Text') {
 				entry_value[field_name] = data.get(field_name)! as string;
 			}
@@ -29,7 +44,8 @@
 				entry_value[field_name] = Number(value);
 			}
 			if (field_type === 'Image') {
-				//Upload shit
+				const file = data.get(field_name)! as File;
+				const file_data = await getbase64(file);
 				entry_value[field_name] = 'image:';
 			}
 			if (field_type === 'Boolean') {
@@ -38,7 +54,7 @@
 			}
 		});
 		data.set('entry_value', JSON.stringify(entry_value));
-        data.set('entity', entity.id)
+		data.set('entity', entity.id);
 
 		return async ({ update, result }) => {
 			await update();
@@ -121,7 +137,7 @@
 				</thead>
 				<tbody>
 					{#each entries as entry}
-                        <Entry schema={data.entity.schema} {entry} />
+						<Entry schema={data.entity.schema} {entry} />
 					{/each}
 				</tbody>
 			</table>

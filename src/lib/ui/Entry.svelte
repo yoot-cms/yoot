@@ -7,7 +7,7 @@
 	};
 </script>
 
-<div class="w-[1000px] h-[500px] overflow-x-scroll bg-yellow-400 flex gap-3">
+<div class="w-full p-2 overflow-x-scroll bg-yellow-400 flex gap-3">
 	{#each Object.entries(schema) as [field_name, field_type]}
 		{#if field_type === 'Image'}
 			<img src={entry.value[field_name].toString()} alt="" />
