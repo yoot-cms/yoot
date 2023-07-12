@@ -121,9 +121,7 @@
 				</thead>
 				<tbody>
 					{#each entries as entry}
-						{#each fields as _}
-							<Entry schema={data.entity.schema} {entry} />
-						{/each}
+                        <Entry schema={data.entity.schema} {entry} />
 					{/each}
 				</tbody>
 			</table>
