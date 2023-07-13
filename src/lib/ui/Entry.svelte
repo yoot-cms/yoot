@@ -5,7 +5,6 @@
 		entity: string;
 		value: Record<string, string | number | boolean>;
 	};
-    $: console.log(entry)
 </script>
 
 <div class="w-full p-2 overflow-x-scroll bg-yellow-400 flex gap-3">
