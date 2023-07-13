@@ -7,12 +7,14 @@
 	};
 </script>
 
-<div class="w-full p-2 overflow-x-scroll bg-yellow-400 flex gap-3">
+<div class="truncate w-full p-2 h-16 overflow-x-scroll flex items-center ">
 	{#each Object.entries(schema) as [field_name, field_type]}
 		{#if field_type === 'Image'}
-			<img class=" w-16 h-16" src={entry.value[field_name].toString()} alt="" />
+            <div class="w-[300px] shrink-0 ">
+                <img class="hover:cursor-pointer w-16 shrink-0 h-10" src={entry.value[field_name].toString()} alt="" />
+            </div>
         {:else}
-            <h1>{entry.value[field_name]}</h1>
+            <h1 class=" truncate w-[300px] shrink-0">{entry.value[field_name]}</h1>
 		{/if}
 	{/each}
 </div>

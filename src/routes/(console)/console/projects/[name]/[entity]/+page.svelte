@@ -92,7 +92,7 @@
 			class=" p-2 max-h-full w-full flex flex-col flex-wrap justify-start items-start gap-5 overflow-auto no-scroll"
 		>
 			<table
-				class=" max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] h-full w-full flex flex-col justify-start transition-all gap-5 overflow-auto"
+				class=" max-w-[600px] lg:max-w-[800px] 2xl:max-w-[1000px] max-h-full w-full flex flex-col justify-start transition-all gap-5 overflow-auto"
 			>
 				<thead class="w-full">
 					<div
@@ -103,9 +103,10 @@
 						{/each}
 					</div>
 				</thead>
-				<tbody>
+				<tbody class=" flex flex-col gap-3">
 					{#each entries as entry}
 						<Entry schema={data.entity.schema} {entry} />
+                        <hr>
 					{/each}
 				</tbody>
 			</table>
