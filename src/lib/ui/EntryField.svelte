@@ -1,5 +1,4 @@
 <script lang="ts">
-	import ImagePreview from './ImagePreview.svelte';
 	import Discard from '$lib/components/Discard.svelte';
 	export let data_type: string;
 	export let field_name: string;

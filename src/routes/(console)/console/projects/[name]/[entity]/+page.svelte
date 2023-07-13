@@ -6,8 +6,24 @@
 	import Close from '$lib/components/Close.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import Imagekit from 'imagekit';
 	const { VITE_IMAGEKIT_PUBLIC_KEY, VITE_IMAGEKIT_PRIVATE_KEY, VITE_IMAGEKIT_URL_ENDPOINT } =
 		import.meta.env;
+	const imagekit = new Imagekit({
+		privateKey: VITE_IMAGEKIT_PRIVATE_KEY,
+		publicKey: VITE_IMAGEKIT_PUBLIC_KEY,
+		urlEndpoint: VITE_IMAGEKIT_URL_ENDPOINT
+	});
+
+	async function getbase64(file: File) {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = reject;
+		});
+	}
+
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -17,40 +33,15 @@
 		{ title: data.entity_name, path: `/console/projects/${data.project_name}/${data.entity_name}` }
 	]);
 	let loading = false;
-	async function getbase64(file: File) {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result);
-			reader.onerror = reject;
-		});
-	}
-	const handle_entry_creation: SubmitFunction = async ({ data, cancel }) => {
+	const handle_entry_creation: SubmitFunction = async ({ data }) => {
+		data.set('fields', JSON.stringify(fields));
+		data.set('entity', entity.id);
 		toast.loading('Inserting entry', { id: '0' });
 		loading = true;
-		let entry_value: Record<string, string | number | boolean> = {};
-		fields.map(async ([field_name, field_type]) => {
-			if (field_type === 'Text') {
-				entry_value[field_name] = data.get(field_name)! as string;
-			}
-			if (field_type === 'Number') {
-				const value = data.get(field_name)! as string;
-				entry_value[field_name] = Number(value);
-			}
-			if (field_type === 'Image') {
-				const file = data.get(field_name)! as File;
-				const file_data = await getbase64(file) as string;
-				entry_value[field_name] = 'image:';
-			}
-			if (field_type === 'Boolean') {
-				const value = data.get(field_name)! as string;
-				entry_value[field_name] = value === 'on' ? true : false;
-			}
-		});
-		data.set('entry_value', JSON.stringify(entry_value));
-		data.set('entity', entity.id);
-
 		return async ({ update, result }) => {
+			toast.dismiss('0');
+			loading = false;
+			console.log(result);
 			await update();
 		};
 	};
@@ -82,9 +73,10 @@
 				method="post"
 				class="flex flex-col justify-between gap-5"
 				use:enhance={handle_entry_creation}
+                enctype="multipart/form-data"
 			>
-				<input type="text" name="entry_value" hidden />
 				<input type="text" name="entity" hidden />
+				<input type="text" name="fields" hidden />
 				<div class="max-h-[500px] flex flex-col gap-2 overflow-y-scroll no-scroll">
 					{#each fields as [field_name, data_type]}
 						<EntryField {data_type} {field_name} />
