@@ -2,13 +2,12 @@ import type { PageServerLoad } from "./$types";
 import { type Actions, redirect, fail } from "@sveltejs/kit";
 import sql from "$lib/db"
 import { writeFileSync, readFileSync, unlinkSync } from "fs"
+import { IMAGEKIT_PUBLIC_KEY, IMAGEKIT_PRIVATE_KEY, IMAGEKIT_URL_ENDPOINT } from "$env/static/private";
 import Imagekit from 'imagekit';
-const { VITE_IMAGEKIT_PUBLIC_KEY, VITE_IMAGEKIT_PRIVATE_KEY, VITE_IMAGEKIT_URL_ENDPOINT } =
-    import.meta.env;
 const imagekit = new Imagekit({
-    privateKey: VITE_IMAGEKIT_PRIVATE_KEY,
-    publicKey: VITE_IMAGEKIT_PUBLIC_KEY,
-    urlEndpoint: VITE_IMAGEKIT_URL_ENDPOINT
+    privateKey: IMAGEKIT_PRIVATE_KEY,
+    publicKey: IMAGEKIT_PUBLIC_KEY,
+    urlEndpoint: IMAGEKIT_URL_ENDPOINT
 });
 
 type Entity = {

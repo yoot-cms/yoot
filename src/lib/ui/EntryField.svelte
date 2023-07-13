@@ -17,6 +17,7 @@
 	<div class="flex flex-col gap-2 ">
 		<h1 class="">{field_name}</h1>
 		<input
+            autocomplete="off"
 			required
 			class=" border p-2 rounded-md w-full focus:outline-none"
 			type="text"

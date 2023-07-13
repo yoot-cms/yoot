@@ -10,7 +10,7 @@
 <div class="w-full p-2 overflow-x-scroll bg-yellow-400 flex gap-3">
 	{#each Object.entries(schema) as [field_name, field_type]}
 		{#if field_type === 'Image'}
-			<img src={entry.value[field_name].toString()} alt="" />
+			<img class=" w-16 h-16" src={entry.value[field_name].toString()} alt="" />
         {:else}
             <h1>{entry.value[field_name]}</h1>
 		{/if}
