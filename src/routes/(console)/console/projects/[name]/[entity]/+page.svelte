@@ -6,24 +6,6 @@
 	import Close from '$lib/components/Close.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
-	import Imagekit from 'imagekit';
-	const { VITE_IMAGEKIT_PUBLIC_KEY, VITE_IMAGEKIT_PRIVATE_KEY, VITE_IMAGEKIT_URL_ENDPOINT } =
-		import.meta.env;
-	const imagekit = new Imagekit({
-		privateKey: VITE_IMAGEKIT_PRIVATE_KEY,
-		publicKey: VITE_IMAGEKIT_PUBLIC_KEY,
-		urlEndpoint: VITE_IMAGEKIT_URL_ENDPOINT
-	});
-
-	async function getbase64(file: File) {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result);
-			reader.onerror = reject;
-		});
-	}
-
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
