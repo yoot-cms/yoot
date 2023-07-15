@@ -4,14 +4,14 @@
 	import toast from 'svelte-french-toast';
 	let loading = false;
 	const handle_registration: SubmitFunction = async () => {
-        loading = true
+		loading = true;
 		return async ({ update, result }) => {
-            loading = false
-            switch (result.status) {
-                case 409:
-                    toast.error("Email already in use")    
-            }
-            await update()
+			loading = false;
+			switch (result.status) {
+				case 409:
+					toast.error('Email already in use');
+			}
+			await update();
 		};
 	};
 </script>
@@ -25,14 +25,14 @@
 				class="border-2 border-gray-500 focus:outline-none p-2 rounded-md"
 				type="email"
 				required
-                autocomplete="off"
+				autocomplete="off"
 				name="email"
 				placeholder="Enter your email"
 			/>
 			<input
 				class="border-2 border-gray-500 focus:outline-none p-2 rounded-md"
 				type="text"
-                autocomplete="off"
+				autocomplete="off"
 				required
 				name="username"
 				placeholder="Enter your username"
@@ -40,15 +40,12 @@
 			<input
 				class="border-2 border-gray-500 focus:outline-none p-2 rounded-md"
 				type="password"
-                autocomplete="off"
+				autocomplete="off"
 				required
 				name="password"
 				placeholder="Enter your password"
 			/>
-			<button
-				disabled={loading}
-				class="flex justify-center p-2 bg-blue-500 text-white rounded-md"
-			>
+			<button disabled={loading} class="flex justify-center p-2 bg-blue-500 text-white rounded-md">
 				{#if !loading}
 					<h1>Register</h1>
 				{:else}
