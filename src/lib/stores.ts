@@ -31,3 +31,5 @@ export const show_share_project = writable(false)
 export const show_delete_or_trash_project = writable(false)
 
 export const show_delete_confirmation = writable(false)
+
+export const targetted_project = writable("")

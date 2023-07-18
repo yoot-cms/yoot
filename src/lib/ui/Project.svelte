@@ -4,6 +4,7 @@
 	import Trash from '$lib/components/Trash.svelte';
 	import Shared from '$lib/components/Shared.svelte';
 	import { createEventDispatcher } from 'svelte';
+    import { targetted_project, show_delete_confirmation } from "$lib/stores"
 	const dispatch = createEventDispatcher();
 	export let name: string;
 </script>
@@ -19,6 +20,7 @@
 			class=" z-50 hover:text-green-500"
 			on:click={(e) => {
 				e.stopPropagation();
+                targetted_project.set(name)
 				dispatch('share', {
 					project: name
 				});
@@ -30,6 +32,7 @@
 			class="z-50 hover:text-blue-500"
 			on:click={(e) => {
 				e.stopPropagation();
+                targetted_project.set(name)
 				dispatch('edit_project', {
 					project: name
 				});
@@ -41,6 +44,8 @@
 			class="z-50 hover:text-red-500"
 			on:click={(e) => {
 				e.stopPropagation();
+                targetted_project.set(name)
+                show_delete_confirmation.set(true)
 				dispatch('delete_or_trash_project', {
 					project: name
 				});

@@ -28,5 +28,20 @@ export const actions: Actions = {
             console.log(error)
             return fail(500)
         }
+    },
+    delete: async ({ locals, request}) => {
+        try {
+            const { user } = locals
+            const data = await request.formData()
+            const delete_mode = data.get("mode")! as "trash" | "delete_mode"
+            const project = data.get("name")! as string
+            if( delete_mode === "trash"){
+                await sql` update project set trashed=true where name=${project} and owner=${user.id}`
+            }
+        } catch (error) {
+            console.log("Error while deleting")
+            console.log(error)
+            return fail(500)
+        }
     }
 }

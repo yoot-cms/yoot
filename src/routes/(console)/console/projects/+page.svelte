@@ -4,6 +4,7 @@
 	import Project from '$lib/ui/Project.svelte';
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
+    import DeleteOptions from '$lib/ui/modals/DeleteOptions.svelte';
 	let loading = false;
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
@@ -32,14 +33,15 @@
 		};
 	};
 	breadcrumb_items.set([{ title: 'Projects', path: '/console/projects' }]);
-    function handle_share(){}
-    function handle_delete_or_trash(){}
-    function handle_edit(){}
+	function handle_share() {}
+	function handle_edit() {}
 </script>
 
 <svelte:head>
-    <title>YOOT | Projects</title>
+	<title>YOOT | Projects</title>
 </svelte:head>
+
+<DeleteOptions/>
 
 {#if $show_create_project}
 	<div
@@ -65,7 +67,7 @@
 				class="flex flex-col justify-between gap-5 h-full"
 			>
 				<input
-                    required
+					required
 					type="text"
 					placeholder="Project name"
 					name="name"
@@ -123,7 +125,14 @@
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
 				{#each data.projects as project}
-					<Project name={project.name} on:share={()=>{alert("share me daddy")}} on:edit_project={()=>{}} on:delete_or_trash_project={()=>{}} />
+					<Project
+						name={project.name}
+						on:share={(e) => {
+							alert('share me daddy');
+						}}
+						on:edit_project={() => {}}
+						on:delete_or_trash_project={() => {}}
+					/>
 				{/each}
 			</div>
 		</div>
