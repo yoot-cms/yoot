@@ -23,3 +23,11 @@ export const show_create_entry = writable(false)
 export const show_delete_entry = writable(false)
 
 export const loaded_preview = writable(false)
+
+export const show_edit_project = writable(false)
+
+export const show_share_project = writable(false)
+
+export const show_delete_or_trash_project = writable(false)
+
+export const show_delete_confirmation = writable(false)

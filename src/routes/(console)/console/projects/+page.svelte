@@ -32,6 +32,9 @@
 		};
 	};
 	breadcrumb_items.set([{ title: 'Projects', path: '/console/projects' }]);
+    function handle_share(){}
+    function handle_delete_or_trash(){}
+    function handle_edit(){}
 </script>
 
 <svelte:head>
@@ -120,7 +123,7 @@
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
 				{#each data.projects as project}
-					<Project name={project.name} />
+					<Project name={project.name} on:share={()=>{alert("share me daddy")}} on:edit_project={()=>{}} on:delete_or_trash_project={()=>{}} />
 				{/each}
 			</div>
 		</div>
