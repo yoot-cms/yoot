@@ -62,6 +62,7 @@
 				class="flex flex-col justify-between gap-5 h-full"
 			>
 				<input
+                    required
 					type="text"
 					placeholder="Project name"
 					name="name"
