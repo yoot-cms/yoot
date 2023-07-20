@@ -1,15 +1,7 @@
 import type { PageServerLoad } from "./$types";
 import { type Actions, redirect, fail } from "@sveltejs/kit";
 import sql from "$lib/db"
-import { writeFileSync, readFileSync, unlinkSync } from "fs"
-import { IMAGEKIT_PUBLIC_KEY, IMAGEKIT_PRIVATE_KEY, IMAGEKIT_URL_ENDPOINT } from "$env/static/private";
-import Imagekit from 'imagekit';
-const imagekit = new Imagekit({
-  privateKey: IMAGEKIT_PRIVATE_KEY,
-  publicKey: IMAGEKIT_PUBLIC_KEY,
-  urlEndpoint: IMAGEKIT_URL_ENDPOINT
-});
-
+import { MEDIA_API_URL } from "$env/static/private";
 type Entity = {
   id: string,
   name: string,
@@ -62,7 +54,7 @@ export const actions: Actions = {
             form_data.append('file_extension', file_extension)
             form_data.append('file_data', file)
             await fetch(
-              'http://localhost:3000',
+              MEDIA_API_URL,
               {
                 method: "POST",
                 body: form_data
