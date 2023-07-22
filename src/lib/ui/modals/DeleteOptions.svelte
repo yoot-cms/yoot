@@ -5,8 +5,18 @@
 	import Close from '$lib/components/Close.svelte';
 	import toast from 'svelte-french-toast';
 	let loading = false;
-	const handle_delete_or_trash: SubmitFunction = () => {
+	const handle_delete_or_trash: SubmitFunction = ({ data, cancel }) => {
 		loading = true;
+		const delete_mode = data.get('mode')! as string;
+		if (delete_mode === 'delete') {
+			const confirmation = confirm(
+				`You are about to permanently delete this project and everything related to it. Proceed?`
+			);
+			if (!confirmation) {
+				loading = false;
+				cancel();
+			}
+		}
 
 		return async ({ update, result }) => {
 			loading = false;
@@ -53,24 +63,28 @@
 				<input hidden type="text" name="name" value={$targetted_project} />
 				<div class="flex gap-2 w-full">
 					<button
-                        type="button"
+						type="button"
 						disabled={loading}
-						class={` ${ delete_mode==="trash"?"bg-red-700":"" } justify-center transition-all duration-100 w-full flex items-center bg-red-500 hover:bg-red-700 h-10 rounded-md text-white`}
+						class={` ${
+							delete_mode === 'trash' ? 'border border-red-700' : ''
+						} justify-center transition-all duration-100 w-full flex items-center hover:border h-10 rounded-md text-red-500`}
 						on:click={() => {
 							delete_mode = 'trash';
 						}}
 					>
-                        <h1>Move to trash</h1>
+						<h1>Move to trash</h1>
 					</button>
 					<button
-                        type="button"
+						type="button"
 						disabled={loading}
-						class={` ${ delete_mode==="delete"?"bg-red-700":"" } justify-center transition-all duration-100 w-full flex items-center bg-red-500 hover:bg-red-700 h-10 rounded-md text-white`}
+						class={` ${
+							delete_mode === 'delete' ? 'border border-red-700' : ''
+						} justify-center transition-all duration-100 w-full flex items-center hover:border h-10 rounded-md text-red-500`}
 						on:click={() => {
 							delete_mode = 'delete';
 						}}
 					>
-                        <h1>Delete permanently</h1>
+						<h1>Delete permanently</h1>
 					</button>
 				</div>
 				<button
