@@ -27,6 +27,7 @@
 			switch (result.type) {
 				case 'error':
 					toast.error('Something went wrong. Please try again or contact support');
+                    break
 				case 'success':
 					toast.success('Project  created');
                     show_create_project.set(false)

@@ -24,6 +24,11 @@
 		loading = true;
 		const key_name = data.get('name') as string;
 		const project = data.get('project') as string;
+		if (project === '') {
+			loading = false;
+			toast.error('You have to link your key to a project');
+			cancel();
+		}
 		if (keys.some((key) => key.name === key_name && key.project === project)) {
 			loading = false;
 			toast.error(`You already have a key named ${key_name} in the specified project`);
@@ -33,9 +38,13 @@
 			loading = false;
 			switch (result.type) {
 				case 'success':
-					toast.success(`Key created`);
+					toast.success('Key created');
 					const key = result.data!.key as string;
 					api_key_store.set(key);
+					show_create_api_key.set(false);
+					break;
+				case 'failure':
+					toast.error('Something went wrong. Try again or contact support');
 			}
 			await update();
 		};
@@ -120,8 +129,11 @@
 					autocomplete="off"
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
+                {#if projects.length===0}
+                    <a class="text-blue-500 text-sm" href="/console/projects">You don't have any projects. Create one <span class="text-blue-700 underline">here</span></a>
+                {/if}
 				<select required class=" p-2 rounded-md bg-white border" name="project" id="">
-					<option>Link a project to the key</option>
+					<option value="">Link a project to your key</option>
 					{#each projects as project}
 						<option value={project.id}>{project.name}</option>
 					{/each}
@@ -195,10 +207,10 @@
 			<div
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
-                {#each keys as key}
-                    <ApiKey {key} />
-                {/each}
-            </div>
+				{#each keys as key}
+					<ApiKey {key} />
+				{/each}
+			</div>
 		</div>
 	{/if}
 </div>
