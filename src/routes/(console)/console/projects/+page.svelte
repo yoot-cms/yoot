@@ -4,10 +4,11 @@
 	import Project from '$lib/ui/Project.svelte';
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
-    import DeleteOptions from '$lib/ui/modals/DeleteOptions.svelte';
+	import DeleteOptions from '$lib/ui/modals/DeleteOptions.svelte';
 	let loading = false;
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import EditProject from '$lib/ui/modals/EditProject.svelte';
 	location.set('/console/projects');
 	export let data: PageData;
 	function name_is_duplicate(name: string) {
@@ -41,7 +42,9 @@
 	<title>YOOT | Projects</title>
 </svelte:head>
 
-<DeleteOptions/>
+<DeleteOptions />
+
+<EditProject />
 
 {#if $show_create_project}
 	<div
@@ -128,7 +131,6 @@
 					<Project
 						name={project.name}
 						on:share={(e) => {
-							alert('share me daddy');
 						}}
 						on:edit_project={() => {}}
 						on:delete_or_trash_project={() => {}}

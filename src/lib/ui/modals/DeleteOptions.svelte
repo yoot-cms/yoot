@@ -5,7 +5,7 @@
 	import Close from '$lib/components/Close.svelte';
 	import toast from 'svelte-french-toast';
 	let loading = false;
-	const handle_delete_trash: SubmitFunction = () => {
+	const handle_delete_or_trash: SubmitFunction = () => {
 		loading = true;
 
 		return async ({ update, result }) => {
@@ -42,7 +42,7 @@
 				</button>
 			</div>
 			<form
-				use:enhance={handle_delete_trash}
+				use:enhance={handle_delete_or_trash}
 				action="?/delete"
 				method="post"
 				class="flex flex-col justify-between gap-5 h-full"

@@ -4,7 +4,7 @@
 	import Trash from '$lib/components/Trash.svelte';
 	import Shared from '$lib/components/Shared.svelte';
 	import { createEventDispatcher } from 'svelte';
-    import { targetted_project, show_delete_confirmation } from "$lib/stores"
+    import { targetted_project, show_delete_confirmation, show_edit_project } from "$lib/stores"
 	const dispatch = createEventDispatcher();
 	export let name: string;
 </script>
@@ -13,7 +13,7 @@
 	on:click={() => {
 		goto(`/console/projects/${name}`);
 	}}
-	class=" relative truncate p-2 drop-shadow-lg hover:drop-shadow-xl relative group h-[200px] w-[200px] bg-neutral-50 border-neutral-200 rounded-lg transition-all"
+	class=" truncate p-2 drop-shadow-lg hover:drop-shadow-xl relative group h-[200px] w-[200px] bg-neutral-50 border-neutral-200 rounded-lg transition-all"
 >
 	<div class=" w-32 h-10 absolute top-0 right-0 m-2 flex justify-end gap-5">
 		<button
@@ -33,6 +33,7 @@
 			on:click={(e) => {
 				e.stopPropagation();
                 targetted_project.set(name)
+                show_edit_project.set(true)
 				dispatch('edit_project', {
 					project: name
 				});
