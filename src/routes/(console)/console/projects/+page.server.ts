@@ -43,7 +43,7 @@ export const actions: Actions = {
             }
             await sql` delete from project where name=${project} and owner=${user.id}`
             return {
-                message:"Project delete"
+                message:"Project deleted"
             }
         } catch (error) {
             console.log(`Error while deleting project ${error}`)
