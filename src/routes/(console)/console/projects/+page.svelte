@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { location, show_create_project, breadcrumb_items } from '$lib/stores';
+	import { location, show_create_project, breadcrumb_items, show_edit_project } from '$lib/stores';
 	import Project from '$lib/ui/Project.svelte';
 	import Close from '$lib/components/Close.svelte';
 	import Loading from '$lib/components/Loading.svelte';
@@ -29,13 +29,12 @@
 					toast.error('Something went wrong. Please try again or contact support');
 				case 'success':
 					toast.success('Project  created');
+                    show_edit_project.set(false)
 			}
 			await update();
 		};
 	};
 	breadcrumb_items.set([{ title: 'Projects', path: '/console/projects' }]);
-	function handle_share() {}
-	function handle_edit() {}
 </script>
 
 <svelte:head>
