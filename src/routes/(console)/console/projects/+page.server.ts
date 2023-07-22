@@ -37,9 +37,16 @@ export const actions: Actions = {
             const project = data.get("name")! as string
             if( delete_mode === "trash"){
                 await sql` update project set trashed=true where name=${project} and owner=${user.id}`
+                return {
+                    message:"Project moved in trash"
+                }
+            }
+            await sql` delete from project where name=${project} and owner=${user.id}`
+            return {
+                message:"Project delete"
             }
         } catch (error) {
-            console.log("Error while deleting")
+            console.log(`Error while deleting project ${error}`)
             console.log(error)
             return fail(500)
         }

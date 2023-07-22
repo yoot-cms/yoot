@@ -12,16 +12,18 @@
 			loading = false;
 			switch (result.type) {
 				case 'success':
-					toast.success('Entity moved in trash');
+					const data = result.data?.message as string;
+					toast.success(data);
 					show_delete_confirmation.set(false);
 					break;
-				default:
+				case 'error':
 					toast.error('Something went wrong. Please try again or contact support');
+					break;
 			}
 			await update();
 		};
 	};
-	let delete_mode = 'trash';
+	$: delete_mode = 'trash';
 </script>
 
 {#if $show_delete_confirmation}
@@ -30,7 +32,7 @@
 	>
 		<div class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5">
 			<div class=" flex justify-between items-center">
-				<h1>What do you want to do</h1>
+				<h1 class="truncate">What do you want to do with <b>{$targetted_project}</b></h1>
 				<button
 					on:click={() => {
 						if (!loading) {
@@ -51,29 +53,36 @@
 				<input hidden type="text" name="name" value={$targetted_project} />
 				<div class="flex gap-2 w-full">
 					<button
+                        type="button"
 						disabled={loading}
-						class="justify-center w-full flex items-center bg-red-500 hover:bg-red-700 h-10 rounded-md text-white"
+						class={` ${ delete_mode==="trash"?"bg-red-700":"" } justify-center transition-all duration-100 w-full flex items-center bg-red-500 hover:bg-red-700 h-10 rounded-md text-white`}
+						on:click={() => {
+							delete_mode = 'trash';
+						}}
 					>
-						{#if loading}
-							<Loading />
-						{:else}
-							<h1>Move to trash</h1>
-						{/if}
+                        <h1>Move to trash</h1>
 					</button>
 					<button
+                        type="button"
 						disabled={loading}
-						class="justify-center w-full flex items-center bg-red-500 hover:bg-red-700 h-10 rounded-md text-white"
+						class={` ${ delete_mode==="delete"?"bg-red-700":"" } justify-center transition-all duration-100 w-full flex items-center bg-red-500 hover:bg-red-700 h-10 rounded-md text-white`}
 						on:click={() => {
 							delete_mode = 'delete';
 						}}
 					>
-						{#if loading}
-							<Loading />
-						{:else}
-							<h1>Delete permanently</h1>
-						{/if}
+                        <h1>Delete permanently</h1>
 					</button>
 				</div>
+				<button
+					disabled={loading}
+					class="justify-center transition-all duration-100 w-full flex items-center bg-red-500 hover:bg-red-700 h-10 rounded-md text-white"
+				>
+					{#if loading}
+						<Loading />
+					{:else}
+						<h1>Apply</h1>
+					{/if}
+				</button>
 			</form>
 		</div>
 	</div>
