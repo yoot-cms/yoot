@@ -41,9 +41,9 @@ export const actions: Actions = {
             const hashed_key = await bcrypt.hash(api_key, 10)
             const key_to_be_inserted = `${API_KEY_PREFIX}_${key_id}`
             await sql` 
-            insert into api_key(id, name, key, owner, project, permissions) 
-            values ( ${key_to_be_inserted}, ${key_name}, ${hashed_key}, ${user.id}, ${project}, ${permissions} ) 
-        `
+                insert into api_key(id, name, key, owner, project, permissions) 
+                values ( ${key_to_be_inserted}, ${key_name}, ${hashed_key}, ${user.id}, ${project}, ${permissions} ) 
+            `
             return {
                 success: true,
                 key: `${key_id}$${api_key}`
@@ -52,6 +52,17 @@ export const actions: Actions = {
             console.log(`Error while creating api key ${err}`)
             return fail(500)
 
+        }
+    },
+    delete: async ({ locals, request }) =>{
+        try {
+            const { user } = locals
+            const data = await request.formData()
+            const key_name = data.get("key")! as string
+            await sql` delete from api_key where name=${key_name} and owner=${user.id}`
+        } catch (err) {
+            console.log(`Error while deleting api key ${err}`)
+            return fail(500)
         }
     }
 }

@@ -7,6 +7,7 @@
 	import toast from 'svelte-french-toast';
 	import Copy from '$lib/components/Copy.svelte';
 	import ApiKey from '$lib/ui/ApiKey.svelte';
+    import DeleteApiKey from '$lib/ui/modals/DeleteApiKey.svelte';
 	location.set('/console/keys');
 	breadcrumb_items.set([{ title: 'Keys', path: '/console/keys' }]);
 	export let data: PageData;
@@ -54,6 +55,8 @@
 <svelte:head>
 	<title>YOOT | Keys</title>
 </svelte:head>
+
+<DeleteApiKey/>
 
 {#if $api_key_store !== ''}
 	<div

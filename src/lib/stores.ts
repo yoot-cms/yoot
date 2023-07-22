@@ -16,6 +16,10 @@ export const show_create_api_key = writable(false)
 
 export const show_delete_api_key = writable(false)
 
+export const show_edit_api_key = writable(false)
+
+export const targetted_key = writable("")
+
 export const api_key_store = writable("")
 
 export const show_create_entry = writable(false)
@@ -33,3 +37,4 @@ export const show_delete_or_trash_project = writable(false)
 export const show_delete_confirmation = writable(false)
 
 export const targetted_project = writable("")
+
