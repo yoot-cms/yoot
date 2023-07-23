@@ -21,7 +21,7 @@
 			on:click={(e) => {
 				e.stopPropagation();
                 show_edit_api_key.set(true)
-                targetted_key.set(key.name)
+                targetted_key.set(key)
 			}}
 		>
 			<Edit />
@@ -31,7 +31,7 @@
 			on:click={(e) => {
 				e.stopPropagation();
                 show_delete_api_key.set(true)
-                targetted_key.set(key.name)
+                targetted_key.set(key)
 			}}
 		>
 			<Trash />

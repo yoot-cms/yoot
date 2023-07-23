@@ -8,6 +8,7 @@
 	import Copy from '$lib/components/Copy.svelte';
 	import ApiKey from '$lib/ui/ApiKey.svelte';
     import DeleteApiKey from '$lib/ui/modals/DeleteApiKey.svelte';
+	import EditApikey from '$lib/ui/modals/EditApikey.svelte';
 	location.set('/console/keys');
 	breadcrumb_items.set([{ title: 'Keys', path: '/console/keys' }]);
 	export let data: PageData;
@@ -57,6 +58,8 @@
 </svelte:head>
 
 <DeleteApiKey/>
+
+<EditApikey/>
 
 {#if $api_key_store !== ''}
 	<div

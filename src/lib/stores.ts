@@ -2,7 +2,7 @@ import { writable } from "svelte/store"
 
 export const location = writable("")
 
-export const breadcrumb_items = writable<{ title:string, path:string }[]>([ { title:"Projects", path:"/console/projects" } ])
+export const breadcrumb_items = writable<{ title: string, path: string }[]>([{ title: "Projects", path: "/console/projects" }])
 
 export const show_create_project = writable(false)
 
@@ -18,7 +18,21 @@ export const show_delete_api_key = writable(false)
 
 export const show_edit_api_key = writable(false)
 
-export const targetted_key = writable("")
+export const targetted_key = writable<{
+    id: string;
+    key: string;
+    name: string;
+    project: string;
+    created_at: string;
+    permissions: string;
+}>({
+    id: "",
+    key:"",
+    name:"",
+    project:"",
+    created_at:"",
+    permissions:'{"write_permission":true,"create_permission":true,"delete_permission":true}'
+})
 
 export const api_key_store = writable("")
 

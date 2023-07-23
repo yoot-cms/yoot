@@ -30,7 +30,7 @@
 	>
 		<div class=" p-5 bg-white w-[30rem] rounded-lg flex flex-col gap-5">
 			<div class=" flex justify-between items-center">
-				<h1 class="truncate">Delete key <b>{$targetted_key}</b> ?</h1>
+				<h1 class="truncate">Delete key <b>{$targetted_key.name}</b> ?</h1>
 				<button
 					on:click={() => {
 						if (!loading) {
@@ -47,7 +47,7 @@
 				method="post"
 				class="flex justify-between gap-5 h-full"
 			>
-                <input type="text" name="key" value={$targetted_key} hidden>
+                <input type="text" name="key" value={$targetted_key.name} hidden>
 				<button
 					disabled={loading}
 					class="justify-center transition-all duration-100 w-full flex items-center bg-blue-500 hover:bg-blue-700 h-10 rounded-md text-white"

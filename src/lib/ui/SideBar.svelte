@@ -27,11 +27,6 @@
 			path: '/console/stats',
 			icon: Stats
 		},
-		{
-			name: 'Trash',
-			path: '/console/trash',
-			icon: Trash
-		}
 	];
 	export let user_data: { name: string; profile_pic: string };
 </script>
