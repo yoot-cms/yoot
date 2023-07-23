@@ -3,17 +3,17 @@ import type { PageServerLoad } from "./$types";
 import sql from "$lib/db"
 
 export const load : PageServerLoad = async ({ locals, params })=>{
-    const { user } = locals
-    const { name } = params
-    const { rows:[project], rowCount } = await sql<{ id:string }>` select id from project where name=${name} and owner=${user.id} `
-    if(rowCount===0){
-        throw redirect(301, "/console/projects")
-    }
-    const { rows } = await sql<{ name:string, project:string, schema:Record<string, string>, trashed: boolean }>` select * from entity where project=${project.id} and trashed=false `
-    return {
-        entities: rows,
-        name
-    }
+  const { user } = locals
+  const { name } = params
+  const { rows:[project], rowCount } = await sql<{ id:string }>` select id from project where name=${name} and owner=${user.id} `
+  if(rowCount===0){
+    throw redirect(301, "/console/projects")
+  }
+  const { rows } = await sql<{ name:string, project:string, schema:Record<string, string>, trashed: boolean }>` select * from entity where project=${project.id} and trashed=false `
+  return {
+    entities: rows,
+    name
+  }
 }
 
 export const actions : Actions = {

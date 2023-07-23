@@ -53,21 +53,27 @@ export const actions: Actions = {
             const form_data = new FormData()
             form_data.append('file_extension', file_extension)
             form_data.append('file_data', file)
-            await fetch(
-              MEDIA_API_URL,
-              {
-                method: "POST",
-                body: form_data
+            try {
+              const res = await fetch(
+                MEDIA_API_URL,
+                {
+                  method: "POST",
+                  body: form_data
+                }
+              )
+              if(res.ok){
+                if(res.status===200){
+                  const { url } = await res.json() as { url: string }
+                  entry_value[field_name] = url
+                }
+              }else{
+                console.log(`Error handling file upload ${res}`)
+                return fail(500)
               }
-            ).then(async res => {
-              const { url } = await res.json() as { url:string }
-              console.log(url)
-              entry_value[field_name] = url
-            }).catch(err => { 
-              console.log('Error while posting file to media server')
-              console.log(err)
+            } catch (err) {
+              console.log(`Error handling file upload ${err}`)
               return fail(500)
-            })
+            }
           }
           if (field_type === 'Boolean') {
             const value = data.get(field_name)! as string;

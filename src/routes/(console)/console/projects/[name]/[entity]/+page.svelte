@@ -23,15 +23,15 @@
 		return async ({ update, result }) => {
 			toast.dismiss('0');
 			loading = false;
-            switch (result.type) {
-                case "success":
-                    toast.success("Entry inserted")
-                    show_create_entry.set(false)
-                    break;
-                case "failure":
-                    toast.error("Something went wrong. Try again or contact support")
-                    break
-            }
+      switch (result.type) {
+        case "success":
+          toast.success("Entry inserted")
+          show_create_entry.set(false)
+          break;
+        case "failure":
+          toast.error("Something went wrong. Try again or contact support")
+          break
+      }
 			await update();
 		};
 	};

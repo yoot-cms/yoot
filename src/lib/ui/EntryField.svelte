@@ -34,6 +34,7 @@
 			class=" border p-2 rounded-md w-full focus:outline-none"
 			type="number"
 			name={field_name}
+      step="0.01"
 		/>
 	</div>
 {/if}
