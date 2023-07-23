@@ -6,25 +6,25 @@
 	import toast from 'svelte-french-toast';
 	let loading = false;
 	const handle_edit_project: SubmitFunction = ({ data }) => {
-        const new_name = data.get("new_name")! as string
+    const new_name = data.get("new_name")! as string
 		loading = true;
 		return async ({ result, update }) => {
 			loading = false;
 			switch (result.type) {
 				case 'failure':
-                    switch (result.status) {
-                        case 500:
-                            toast.error('Something went wrong. Try again or contact support');
-                            break;
-                        case 409:
-                            toast.error(`You already have a project named ${new_name}`)
-                        default:
-                            break;
-                    }
+          switch (result.status) {
+            case 500:
+              toast.error('Something went wrong. Try again or contact support');
+              break;
+            case 409:
+              toast.error(`You already have a project named ${new_name}`)
+            default:
+              break;
+          }
 					break;
 				case 'success':
 					toast.success('Changes applied');
-                    show_edit_project.set(false)
+          show_edit_project.set(false)
 					break;
 			}
 			await update();
@@ -55,7 +55,7 @@
 				method="post"
 				class="flex flex-col justify-between gap-5 h-full"
 			>
-                <input type="text" name="project" value={$targetted_project}>
+        <input type="text" hidden name="project" value={$targetted_project}>
 				<input
 					required
 					type="text"

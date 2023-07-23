@@ -3,9 +3,7 @@
 	import Edit from '$lib/components/Edit.svelte';
 	import Trash from '$lib/components/Trash.svelte';
 	import Shared from '$lib/components/Shared.svelte';
-	import { createEventDispatcher } from 'svelte';
-    import { targetted_project, show_delete_confirmation, show_edit_project } from "$lib/stores"
-	const dispatch = createEventDispatcher();
+  import { targetted_project, show_edit_project, show_delete_project } from "$lib/stores"
 	export let name: string;
 </script>
 
@@ -20,10 +18,7 @@
 			class=" z-50 hover:text-green-500"
 			on:click={(e) => {
 				e.stopPropagation();
-                targetted_project.set(name)
-				dispatch('share', {
-					project: name
-				});
+        targetted_project.set(name)
 			}}
 		>
 			<Shared />
@@ -32,11 +27,8 @@
 			class="z-50 hover:text-blue-500"
 			on:click={(e) => {
 				e.stopPropagation();
-                targetted_project.set(name)
-                show_edit_project.set(true)
-				dispatch('edit_project', {
-					project: name
-				});
+        targetted_project.set(name)
+        show_edit_project.set(true)
 			}}
 		>
 			<Edit />
@@ -45,11 +37,8 @@
 			class="z-50 hover:text-red-500"
 			on:click={(e) => {
 				e.stopPropagation();
-                targetted_project.set(name)
-                show_delete_confirmation.set(true)
-				dispatch('delete_or_trash_project', {
-					project: name
-				});
+        targetted_project.set(name)
+        show_delete_project.set(true)
 			}}
 		>
 			<Trash />
