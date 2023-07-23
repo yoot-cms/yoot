@@ -72,7 +72,6 @@
 						case 409:
 							toast.error(`You already have an entity named ${name}`);
 							break;
-
 						default:
 							break;
 					}
@@ -82,6 +81,7 @@
 					switch (result.status) {
 						case 204:
 							toast.success('Entity created');
+              show_create_entity.set(false)
 					}
 				default:
 					break;
