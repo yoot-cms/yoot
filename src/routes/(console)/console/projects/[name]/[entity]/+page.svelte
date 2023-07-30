@@ -111,10 +111,10 @@
 						{/each}
 					</div>
 				</thead>
-				<tbody class=" flex flex-col gap-3">
+				<tbody class=" max-h-[600px] overflow-scroll flex flex-col gap-3">
 					{#each entries as entry}
 						<Entry schema={data.entity.schema} {entry} />
-                        <hr>
+            <hr>
 					{/each}
 				</tbody>
 			</table>

@@ -7,7 +7,7 @@
 	};
 </script>
 
-<div class="truncate w-full p-2 h-16 overflow-x-scroll flex items-center ">
+<div class="shrink-0 truncate w-full p-2 h-16 overflow-x-scroll flex items-center ">
 	{#each Object.entries(schema) as [field_name, field_type]}
 		{#if field_type === 'Image'}
             <div class="w-[300px] shrink-0 ">
