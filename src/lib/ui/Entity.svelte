@@ -4,7 +4,6 @@
 	export let schema: Record<string, string>;
 	import Trash from '$lib/components/Trash.svelte';
 	import Loading from '$lib/components/Loading.svelte';
-    import Edit from '$lib/components/Edit.svelte';
 	import { goto } from '$app/navigation';
 	$: schema_array = Object.entries(schema);
 	let loading = false;
@@ -23,9 +22,6 @@
 			>
 				{name}
 			</span>
-            <button class=" text-neutral-300 hover:text-blue-500 transition-all duration-300 ">
-                <Edit />
-            </button>
 		</div>
 		{#if loading}
 			<button type="button" class=" text-neutral-300">
