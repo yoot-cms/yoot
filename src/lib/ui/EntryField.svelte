@@ -59,7 +59,7 @@
 		<div class="flex">
 			{#if loaded_preview}
 				<div class=" w-full relative">
-					<img class=" w-full max-h-[200px]" src={window.URL.createObjectURL(image)} alt="" />
+					<img class="bg-cover max-h-[200px]" src={window.URL.createObjectURL(image)} alt="" />
 					<button
 						on:click|preventDefault={() => {
 							loaded_preview = false;
