@@ -15,16 +15,6 @@
       path: '/console/keys',
       icon: ApiKeys
     },
-    {
-      name: 'Shared',
-      path: '/console/shared',
-      icon: Shared
-    },
-    {
-      name: 'Stats',
-      path: '/console/stats',
-      icon: Stats
-    },
   ];
   export let user_data: { name: string; profile_pic: string };
 </script>
