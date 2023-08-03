@@ -113,7 +113,8 @@
 				<div class="flex gap-2">
 					<input
 						type="text"
-						class=" bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
+            disabled
+						class="hover:cursor-not-allowed bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
 						placeholder="Search your projects"
 					/>
 					<button
@@ -130,10 +131,6 @@
 				{#each data.projects as project}
 					<Project
 						name={project.name}
-						on:share={(e) => {
-						}}
-						on:edit_project={() => {}}
-						on:delete_or_trash_project={() => {}}
 					/>
 				{/each}
 			</div>

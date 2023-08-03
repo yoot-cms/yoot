@@ -7,7 +7,7 @@
 	};
 </script>
 
-<div class=" w-fit shrink-0 truncate p-2 h-16 overflow-x-scroll flex items-center ">
+<div class=" w-full shrink-0 truncate p-2 h-16 overflow-x-scroll flex items-center ">
 	{#each Object.entries(schema) as [field_name, field_type]}
 		{#if field_type === 'Image'}
 			<div class="w-[300px] shrink-0 ">
@@ -18,7 +18,7 @@
 				/>
 			</div>
 		{:else}
-			<h1 class=" truncate w-[300px] shrink-0">{entry.value[field_name]}</h1>
+			<h1 title={entry.value[field_name].toString()} class=" truncate w-[300px] shrink-0">{entry.value[field_name]}</h1>
 		{/if}
 	{/each}
 </div>

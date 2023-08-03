@@ -23,15 +23,15 @@
 		return async ({ update, result }) => {
 			toast.dismiss('0');
 			loading = false;
-      switch (result.type) {
-        case "success":
-          toast.success("Entry inserted")
-          show_create_entry.set(false)
-          break;
-        case "failure":
-          toast.error("Something went wrong. Try again or contact support")
-          break
-      }
+			switch (result.type) {
+				case 'success':
+					toast.success('Entry inserted');
+					show_create_entry.set(false);
+					break;
+				case 'failure':
+					toast.error('Something went wrong. Try again or contact support');
+					break;
+			}
 			await update();
 		};
 	};
@@ -63,7 +63,7 @@
 				method="post"
 				class="flex flex-col justify-between gap-5"
 				use:enhance={handle_entry_creation}
-                enctype="multipart/form-data"
+				enctype="multipart/form-data"
 			>
 				<input type="text" name="entity" hidden />
 				<input type="text" name="fields" hidden />
@@ -111,12 +111,14 @@
 						{/each}
 					</div>
 				</thead>
-				<tbody class=" max-h-[600px] overflow-scroll flex flex-col gap-3">
-					{#each entries as entry}
-						<Entry schema={data.entity.schema} {entry} />
-            <hr>
-					{/each}
-				</tbody>
+				<div class="w-full">
+					<tbody class="">
+						{#each entries as entry}
+							<Entry schema={data.entity.schema} {entry} />
+							<hr />
+						{/each}
+					</tbody>
+				</div>
 			</table>
 		</div>
 	</div>

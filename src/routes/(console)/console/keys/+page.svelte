@@ -7,7 +7,7 @@
 	import toast from 'svelte-french-toast';
 	import Copy from '$lib/components/Copy.svelte';
 	import ApiKey from '$lib/ui/ApiKey.svelte';
-    import DeleteApiKey from '$lib/ui/modals/DeleteApiKey.svelte';
+	import DeleteApiKey from '$lib/ui/modals/DeleteApiKey.svelte';
 	import EditApikey from '$lib/ui/modals/EditApikey.svelte';
 	location.set('/console/keys');
 	breadcrumb_items.set([{ title: 'Keys', path: '/console/keys' }]);
@@ -57,9 +57,9 @@
 	<title>YOOT | Keys</title>
 </svelte:head>
 
-<DeleteApiKey/>
+<DeleteApiKey />
 
-<EditApikey/>
+<EditApikey />
 
 {#if $api_key_store !== ''}
 	<div
@@ -135,9 +135,13 @@
 					autocomplete="off"
 					class=" border p-2 rounded-md w-full focus:outline-none"
 				/>
-                {#if projects.length===0}
-                    <a class="text-blue-500 text-sm" href="/console/projects">You don't have any projects. Create one <span class="text-blue-700 underline">here</span></a>
-                {/if}
+				{#if projects.length === 0}
+					<a class="text-blue-500 text-sm" href="/console/projects"
+						>You don't have any projects. Create one <span class="text-blue-700 underline"
+							>here</span
+						></a
+					>
+				{/if}
 				<select required class=" p-2 rounded-md bg-white border" name="project" id="">
 					<option value="">Link a project to your key</option>
 					{#each projects as project}
@@ -198,8 +202,9 @@
 				<h1 class=" font-bold text-2xl">Keys</h1>
 				<div class="flex gap-2">
 					<input
+						disabled
 						type="text"
-						class=" bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
+						class="hover:cursor-not-allowed bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
 						placeholder="Search your keys"
 					/>
 					<button

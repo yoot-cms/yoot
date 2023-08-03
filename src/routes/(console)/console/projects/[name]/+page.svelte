@@ -243,8 +243,9 @@
 				<h1 class=" font-bold text-2xl">Entities</h1>
 				<div class="flex gap-2">
 					<input
+            disabled
 						type="text"
-						class=" bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
+						class="hover:cursor-not-allowed bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
 						placeholder="Search your entities"
 					/>
 					<button
