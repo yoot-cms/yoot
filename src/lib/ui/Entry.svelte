@@ -18,7 +18,7 @@
 				/>
 			</div>
 		{:else if field_type === 'Boolean'}
-			<div class=" flex flex-col gap-2">
+			<div class=" flex flex-col gap-2 truncate w-[300px] shrink-0">
 				<label class="relative inline-flex items-center cursor-pointer">
 					<input type="checkbox" checked={entry.value[field_name]} class="sr-only peer" />
 					<div
