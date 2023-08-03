@@ -40,6 +40,8 @@ export const show_create_entry = writable(false)
 
 export const show_delete_entry = writable(false)
 
+export const targetted_entry = writable("")
+
 export const loaded_preview = writable(false)
 
 export const show_edit_project = writable(false)

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { PageServerData } from './$types';
-	import { location, breadcrumb_items, show_create_entry } from '$lib/stores';
+	import { location, breadcrumb_items, show_create_entry, show_delete_entry, targetted_entry } from '$lib/stores';
 	import EntryField from '$lib/ui/EntryField.svelte';
 	import Entry from '$lib/ui/Entry.svelte';
 	import Close from '$lib/components/Close.svelte';
+  import DeleteEntry from '$lib/ui/modals/DeleteEntry.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	location.set('/console/projects');
@@ -40,6 +41,8 @@
 <svelte:head>
 	<title>YOOT | Entries in {data.entity_name}</title>
 </svelte:head>
+
+<DeleteEntry/>
 
 {#if $show_create_entry}
 	<div
@@ -109,6 +112,7 @@
 						{#each fields as field}
 							<h1 class=" w-[300px] shrink-0">{field[0].toUpperCase()}</h1>
 						{/each}
+            <h1 class=" w-[300px] shrink-0">Actions</h1>
 					</div>
 				</thead>
 				<div class="w-full">

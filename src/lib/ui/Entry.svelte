@@ -1,4 +1,7 @@
 <script lang="ts">
+	import Trash from '$lib/components/Trash.svelte';
+	import Edit from '$lib/components/Edit.svelte';
+	import { show_delete_entry, targetted_entry } from '$lib/stores';
 	export let schema: Record<string, string>;
 	export let entry: {
 		id: string;
@@ -32,4 +35,18 @@
 			</h1>
 		{/if}
 	{/each}
+	<div class="w-[300px] gap-5 flex shrink-0">
+		<button
+			on:click={() => {
+        targetted_entry.set(entry.id)
+				show_delete_entry.set(true);
+			}}
+			class="hover:text-red-500"
+		>
+			<Trash />
+		</button>
+		<button class="hover:text-blue-500">
+			<Edit />
+		</button>
+	</div>
 </div>
