@@ -61,12 +61,12 @@ export const actions: Actions = {
                   body: form_data
                 }
               )
-              if(res.ok){
-                if(res.status===200){
+              if (res.ok) {
+                if (res.status === 200) {
                   const { url } = await res.json() as { url: string }
                   entry_value[field_name] = url
                 }
-              }else{
+              } else {
                 console.log(`Error handling file upload ${res}`)
                 return fail(500)
               }
@@ -85,6 +85,15 @@ export const actions: Actions = {
     } catch (err) {
       console.log('Error creating entry')
       console.log(err)
+      return fail(500)
+    }
+  },
+  delete: async ({ request })=>{
+    try {
+      const data = await request.formData()
+      const entry_id = data.get('entry')! as string
+      await sql` delete from entry where id=${entry_id}`
+    } catch (err) {
       return fail(500)
     }
   }
