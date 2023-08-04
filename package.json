@@ -38,12 +38,12 @@
 	"type": "module",
 	"dependencies": {
 		"@vercel/kv": "^0.2.2",
-		"@vercel/postgres": "^0.3.0",
 		"bcrypt": "^5.1.0",
 		"cloudinary": "^1.37.3",
 		"dotenv": "^16.1.4",
 		"jsonwebtoken": "^9.0.0",
 		"nprogress": "^0.2.0",
+		"postgres": "^3.3.5",
 		"svelte-french-toast": "^1.0.4"
 	}
 }
