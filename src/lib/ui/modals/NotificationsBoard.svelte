@@ -5,7 +5,6 @@
   import Loading from '$lib/components/Loading.svelte';
   import Notification from '../Notification.svelte';
   let loading  = false
-  console.log(notifications)
 </script>
 
 {#if $show_notifications}
