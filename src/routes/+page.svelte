@@ -887,91 +887,32 @@
 						<div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
 							<div class="md:grid md:grid-cols-2 md:gap-8">
 								<div>
-									<h3 class="text-sm font-semibold leading-6 text-white">Solutions</h3>
-									<ul role="list" class="mt-6 space-y-4">
+									<h3 class="text-sm font-semibold leading-6 text-white">Developers</h3>
+									<ul class="mt-6 space-y-4">
 										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Marketing</a
+											<a href="https://github.com/TheWisePigeon/yoot" target="_blank" rel="noreferrer" class="text-sm leading-6 text-gray-300 hover:text-white"
+												>GitHub</a
 											>
 										</li>
 										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Analytics</a
+											<a href="https://docs.yootcms.xyz" target="_blank" rel="noreferrer" class="text-sm leading-6 text-gray-300 hover:text-white"
+												>Documentation</a
 											>
 										</li>
 										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Commerce</a
-											>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Insights</a
+											<a href="https://github.com/dev-mantas" target="_blank" rel="noreferrer" class="text-sm leading-6 text-gray-300 hover:text-white"
+												>Credits to @MantasDev for this landing page</a
 											>
 										</li>
 									</ul>
 								</div>
 								<div class="mt-10 md:mt-0">
 									<h3 class="text-sm font-semibold leading-6 text-white">Support</h3>
-									<ul role="list" class="mt-6 space-y-4">
+									<ul class="mt-6 space-y-4">
 										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Pricing</a
+											<a href="mailto:yootcms@gmail.com" class="text-sm leading-6 text-gray-300 hover:text-white"
+												>Email us</a
 											>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Documentation</a
-											>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Guides</a
-											>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>API Status</a
-											>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="md:grid md:grid-cols-2 md:gap-8">
-								<div>
-									<h3 class="text-sm font-semibold leading-6 text-white">Company</h3>
-									<ul role="list" class="mt-6 space-y-4">
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">About</a>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Blog</a>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Jobs</a>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Press</a>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Partners</a
-											>
-										</li>
-									</ul>
-								</div>
-								<div class="mt-10 md:mt-0">
-									<h3 class="text-sm font-semibold leading-6 text-white">Legal</h3>
-									<ul role="list" class="mt-6 space-y-4">
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Claim</a>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white"
-												>Privacy</a
-											>
-										</li>
-										<li>
-											<a href="#" class="text-sm leading-6 text-gray-300 hover:text-white">Terms</a>
 										</li>
 									</ul>
 								</div>
