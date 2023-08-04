@@ -10,7 +10,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     if (!user) {
       throw redirect(302, "/login")
     }
-    event.locals.user = user as User
+    event.locals.user = JSON.parse(user) as User
   }
   return await resolve(event)
 }
