@@ -1,22 +1,32 @@
 <script lang="ts">
-  import { location } from '$lib/stores';
-  import Projects from '$lib/components/Projects.svelte';
-  import ApiKeys from '$lib/components/ApiKeys.svelte';
-  import Stats from '$lib/components/Stats.svelte';
-  import Shared from '$lib/components/Shared.svelte';
-  const items: { name: string; path: string; icon: any }[] = [
-    {
-      name: 'Projects',
-      path: '/console/projects',
-      icon: Projects
-    },
-    {
-      name: 'API keys',
-      path: '/console/keys',
-      icon: ApiKeys
-    },
-  ];
-  export let user_data: { name: string; profile_pic: string };
+	import { location } from '$lib/stores';
+	import Projects from '$lib/components/Projects.svelte';
+	import ApiKeys from '$lib/components/ApiKeys.svelte';
+	import Stats from '$lib/components/Stats.svelte';
+	import Shared from '$lib/components/Shared.svelte';
+	const items: { name: string; path: string; icon: any }[] = [
+		{
+			name: 'Projects',
+			path: '/console/projects',
+			icon: Projects
+		},
+		{
+			name: 'API keys',
+			path: '/console/keys',
+			icon: ApiKeys
+		},
+		{
+			name: 'Shared',
+			path: '/console/shared',
+			icon: Shared
+		}
+		//    {
+		//      name: 'Stats',
+		//      path: '/console/stats',
+		//      icon: Stats
+		//    },
+	];
+	export let user_data: { name: string; profile_pic: string };
 </script>
 
 <div class=" w-64 p-5 flex flex-col justify-between h-full border-r border-neutral-300">

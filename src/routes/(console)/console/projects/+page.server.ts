@@ -29,16 +29,16 @@ export const actions: Actions = {
       return fail(500)
     }
   },
-  delete: async ({ locals, request}) => {
+  delete: async ({ locals, request }) => {
     try {
       const { user } = locals
       const data = await request.formData()
       const project = data.get("project")! as string
       await sql` delete from project where name=${project} and owner=${user.id}`
     } catch (error) {
-        console.log(`Error while deleting project ${error}`)
-        console.log(error)
-        return fail(500)
+      console.log(`Error while deleting project ${error}`)
+      console.log(error)
+      return fail(500)
     }
   },
   edit: async ({ locals, request }) => {
@@ -48,13 +48,13 @@ export const actions: Actions = {
       const new_name = data.get("new_name")! as string
       const project = data.get("project")! as string
       const { rowCount } = await sql` select name from project where name=${new_name} and owner=${user.id} `
-      if(rowCount!==0){
+      if (rowCount !== 0) {
         return fail(409)
       }
       await sql` update project set name=${new_name} where name=${project} and owner=${user.id} `
     } catch (err) {
-        console.log(`Error while editing project ${err}`)
-        return fail(500)
+      console.log(`Error while editing project ${err}`)
+      return fail(500)
     }
   }
 }

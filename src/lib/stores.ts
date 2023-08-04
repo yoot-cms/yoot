@@ -54,3 +54,4 @@ export const show_delete_confirmation = writable(false)
 
 export const targetted_project = writable("")
 
+export const show_notifications = writable(false)
