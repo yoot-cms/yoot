@@ -1,10 +1,11 @@
 <script lang="ts">
-  export let notifications: {}[]
+  export let notifications: { id:string, type:"notification"|"invitation", read:boolean, invitation:string }[]
 	import { show_notifications } from '$lib/stores';
   import Close from '$lib/components/Close.svelte';
   import Loading from '$lib/components/Loading.svelte';
   import Notification from '../Notification.svelte';
   let loading  = false
+  console.log(notifications)
 </script>
 
 {#if $show_notifications}

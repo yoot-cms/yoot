@@ -5,10 +5,10 @@
 	import type { LayoutData } from './$types';
 	import NotificationsBoard from '$lib/ui/modals/NotificationsBoard.svelte';
 	export let data: LayoutData;
-	$: ({ user } = data);
+	$: ({ user, notifications } = data);
 </script>
 
-<NotificationsBoard />
+<NotificationsBoard {notifications} />
 
 <div class=" w-full h-screen flex">
 	<SideBar user_data={{ name: user.username, profile_pic: user.profile_pic }} />
