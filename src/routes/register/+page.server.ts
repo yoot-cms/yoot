@@ -18,6 +18,5 @@ export const actions = {
       INSERT INTO users(email, password, username, plan)
       values(${email}, ${hashed_pwd}, ${username}, ${plan})
     `
-    throw redirect(301, "/login")
   }
 } satisfies Actions

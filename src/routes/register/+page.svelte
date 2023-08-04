@@ -2,6 +2,7 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import { goto } from '$app/navigation';
 	let loading = false;
 	const handle_registration: SubmitFunction = async () => {
 		loading = true;
@@ -10,7 +11,10 @@
 			switch (result.status) {
 				case 409:
 					toast.error('Email already in use');
+          return
 			}
+      toast.success('Account created!')
+      goto('/login')
 			await update();
 		};
 	};
