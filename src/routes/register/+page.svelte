@@ -11,10 +11,10 @@
 			switch (result.status) {
 				case 409:
 					toast.error('Email already in use');
-          return
+					return;
 			}
-      toast.success('Account created!')
-      goto('/login')
+			toast.success('Account created!');
+			goto('/login');
 			await update();
 		};
 	};
