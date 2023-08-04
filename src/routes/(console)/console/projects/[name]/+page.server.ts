@@ -34,7 +34,7 @@ export const actions: Actions = {
       }
       await sql`
         INSERT INTO entity(name, project, schema)
-        values( ${entity_name}, ${project.id}, ${JSON.stringify(entity_schema)} )
+        values( ${entity_name}, ${project.id}, ${sql.json(entity_schema)} )
       `
     } catch (err) {
       console.log(err)

@@ -1,4 +1,4 @@
-import { redirect, type Actions, fail } from "@sveltejs/kit";
+import { type Actions, fail } from "@sveltejs/kit";
 import sql from "$lib/db"
 import bcrypt from "bcrypt"
 
