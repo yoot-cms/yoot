@@ -1,1 +1,1 @@
-# YOOT is a minimalistic and simple to use CMS
+# YOOT is a minimalistic CMS focused on ease of use and simplicity
