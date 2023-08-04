@@ -41,3 +41,27 @@ create table api_key (
   permissions text not null,
   created_at DATE not null default CURRENT_DATE
 );
+
+create table invitations (
+  id text default gen_random_uuid()::text PRIMARY KEY,
+  inviter text not null REFERENCES users(id) ON DELETE CASCADE,
+  invitee text not null,
+  accepted boolean default false,
+  project text not null REFERENCES project(id) ON DELETE CASCADE,
+  permissions text not null
+);
+
+create table notification (
+  id text default gen_random_uuid()::text PRIMARY KEY,
+  type text not null,
+  read boolean default false,
+  invitation text REFERENCES invitations(id) ON DELETE CASCADE
+);
+
+create table shares (
+  id text default gen_random_uuid()::text PRIMARY KEY,
+  project text not null REFERENCES project(id) ON DELETE CASCADE,
+  sharee text not null,
+  active boolean default false,
+  permissions text not null
+);
