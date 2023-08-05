@@ -146,7 +146,7 @@
 				</div>
 			</nav>
 			<!-- Mobile menu, show/hide based on menu open state. -->
-			<div class="lg:hidden" role="dialog" aria-modal="true">
+			<div class="lg:hidden hidden" role="dialog" aria-modal="true">
 				<!-- Background backdrop, show/hide based on slide-over state. -->
 				<div class="fixed inset-0 z-50" />
 				<div
@@ -275,7 +275,7 @@
 									rel="noreferrer"
 									target="_blank"
 									class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-									>GitHub</a
+									>xGitHub</a
 								>
 							</div>
 							<div class="py-6">

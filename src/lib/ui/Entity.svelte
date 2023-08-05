@@ -45,7 +45,7 @@
 			</button>
 		{/if}
 	</div>
-	<div class="overflow-y-auto no-scroll h-full pb-5 text-lg">
+	<div class="overflow-y-auto no-scroll w-full h-full pb-5 text-lg">
 		{#each schema_array as property}
 			<div class="flex w-full items-center justify-between pt-6">
 				<span class="font-medium text-neutral-600">{property[0]}</span>
