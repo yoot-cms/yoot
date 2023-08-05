@@ -12,6 +12,8 @@ export const show_create_entity = writable(false)
 
 export const show_delete_entity = writable(false)
 
+export const targetted_entity = writable<{name:string, project:string}>({name:"", project:""})
+
 export const show_create_api_key = writable(false)
 
 export const show_delete_api_key = writable(false)

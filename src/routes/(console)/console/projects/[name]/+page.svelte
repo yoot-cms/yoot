@@ -9,6 +9,7 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import Close from '$lib/components/Close.svelte';
 	import Entity from '$lib/ui/Entity.svelte';
+  import DeleteEntity from '$lib/ui/modals/DeleteEntity.svelte';
 	location.set('/console/projects');
 	export let data: PageData;
 	let loading = false;
@@ -94,6 +95,8 @@
 <svelte:head>
     <title>YOOT | Entities</title>
 </svelte:head>
+
+<DeleteEntity/>
 
 {#if $show_create_entity}
 	<div

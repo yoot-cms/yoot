@@ -2,6 +2,7 @@
 	export let name: string;
 	export let project: string;
 	export let schema: Record<string, string>;
+	import { show_delete_entity, targetted_entity } from '$lib/stores';
 	import Trash from '$lib/components/Trash.svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { goto } from '$app/navigation';
@@ -31,7 +32,11 @@
 			<button
 				on:click={(event) => {
 					event.stopPropagation();
-					alert('Somerhing');
+					targetted_entity.set({
+						name,
+						project
+					});
+          show_delete_entity.set(true)
 				}}
 				type="button"
 				class=" text-neutral-300 hover:text-red-500 transition-all duration-300"
