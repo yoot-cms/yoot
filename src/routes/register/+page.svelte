@@ -3,6 +3,10 @@
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	onMount(() => {
+		goto('/');
+	});
 	let loading = false;
 	const handle_registration: SubmitFunction = async () => {
 		loading = true;
