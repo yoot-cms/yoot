@@ -2,12 +2,7 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	let loading = false;
-	onMount(() => {
-		goto('/');
-	});
 	const handle_login: SubmitFunction = async () => {
 		loading = true;
 		return async ({ update, result }) => {
