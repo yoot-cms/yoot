@@ -140,7 +140,7 @@
 					>
 				</div>
 				<div class="hidden lg:flex lg:flex-1 lg:justify-end">
-					<a href="/login" class="text-sm font-semibold leading-6 text-white"
+					<a href="/#" class="text-sm font-semibold leading-6 text-white"
 						>Log in <span aria-hidden="true">&rarr;</span></a
 					>
 				</div>
@@ -280,7 +280,7 @@
 							</div>
 							<div class="py-6">
 								<a
-									href="/login"
+									href="/#"
 									class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
 									>Log in</a
 								>
@@ -530,7 +530,7 @@
 							</li>
 						</ul>
 						<a
-							href="/register"
+							href="/#"
 							aria-describedby="tier-hobby"
 							class="mt-8 block rounded-md py-2.5 px-3.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10 text-blue-600 ring-1 ring-inset ring-blue-200 hover:ring-blue-300 focus-visible:outline-blue-600"
 							>Get started today</a
