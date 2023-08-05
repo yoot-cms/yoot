@@ -136,7 +136,7 @@
 					<div class="w-full flex justify-between">
 						<div class="flex gap-2 items-baseline">
 							<h1>Schema</h1>
-							<a class=" text-blue-700 underline text-xs" href="/docs#EntitySchema">
+							<a class=" text-blue-700 underline text-xs" target="_blank" rel="noreferrer" href="https://www.thewisepigeon.tech/posts/introducing-yoot">
 								<h1>Learn more</h1>
 							</a>
 						</div>
