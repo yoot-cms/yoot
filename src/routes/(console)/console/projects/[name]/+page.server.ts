@@ -40,5 +40,20 @@ export const actions: Actions = {
       console.log(err)
       return fail(500)
     }
+  },
+  delete: async ({ request, locals})=>{
+    try {
+      const { user } = locals
+      const data = await request.formData()
+      const project = data.get("project")! as string
+      const entity = data.get("entity")! as string
+      const [{ id }] = await sql<{id:string}[]>`select id from project where name=${project} and owner=${user.id}`
+      if(!id){
+        return fail(404)
+      }
+      await sql`delete from entity where name=${entity} and project=${id}`
+    } catch (err) {
+      return fail(500)
+    }
   }
 }

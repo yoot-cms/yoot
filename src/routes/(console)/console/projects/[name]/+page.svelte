@@ -9,7 +9,7 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import Close from '$lib/components/Close.svelte';
 	import Entity from '$lib/ui/Entity.svelte';
-  import DeleteEntity from '$lib/ui/modals/DeleteEntity.svelte';
+	import DeleteEntity from '$lib/ui/modals/DeleteEntity.svelte';
 	location.set('/console/projects');
 	export let data: PageData;
 	let loading = false;
@@ -82,7 +82,7 @@
 					switch (result.status) {
 						case 204:
 							toast.success('Entity created');
-              show_create_entity.set(false)
+							show_create_entity.set(false);
 					}
 				default:
 					break;
@@ -93,10 +93,10 @@
 </script>
 
 <svelte:head>
-    <title>YOOT | Entities</title>
+	<title>YOOT | Entities</title>
 </svelte:head>
 
-<DeleteEntity/>
+<DeleteEntity />
 
 {#if $show_create_entity}
 	<div
@@ -246,7 +246,7 @@
 				<h1 class=" font-bold text-2xl">Entities</h1>
 				<div class="flex gap-2">
 					<input
-            disabled
+						disabled
 						type="text"
 						class="hover:cursor-not-allowed bg-white rounded-full px-5 placeholder:text-neutral-200 focus:outline-none"
 						placeholder="Search your entities"
