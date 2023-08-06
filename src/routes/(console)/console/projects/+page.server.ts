@@ -1,4 +1,4 @@
-import { type Actions, fail } from "@sveltejs/kit";
+import { type Actions, fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import sql from "$lib/db"
 
@@ -54,6 +54,39 @@ export const actions: Actions = {
       await sql` update project set name=${new_name} where name=${project} and owner=${user.id} `
     } catch (err) {
       console.log(`Error while editing project ${err}`)
+      return fail(500)
+    }
+  },
+  share: async({ locals, request })=>{
+    try {
+      const { user } = locals
+      const data = await request.formData()
+      const project = data.get("project")! as string
+      const sharee = data.get("sharee")! as string
+      if(sharee===user.email){
+        return fail(409)
+      }
+      const [invitee] = await sql<{id:string}[]>`select id from users where email=${sharee}`
+      if(!invitee){
+        return fail(404)
+      }
+      const [targetted_project] = await sql`select id from project where name=${project} and owner=${user.id}`
+      if(!targetted_project){
+        return redirect(301, '/projects')
+      }
+      const write_permission = data.get("write")
+      const write = write_permission==="on"
+      const [{ id }] = await sql`
+        insert into invitations( inviter, invitee, project, permissions )
+        values ( ${user.id}, ${invitee.id}, ${targetted_project.id}, ${sql.json({write})})
+        returning id
+      `
+      await sql`
+        insert into notification( type, invitation, notifiee )
+        values ( ${"invitation"}, ${id}, ${invitee.id})
+      `
+    } catch (err) {
+      console.log(err)
       return fail(500)
     }
   }

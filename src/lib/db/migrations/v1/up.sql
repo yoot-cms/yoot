@@ -55,7 +55,8 @@ create table notification (
   id text default gen_random_uuid()::text PRIMARY KEY,
   type text not null,
   read boolean default false,
-  invitation text REFERENCES invitations(id) ON DELETE CASCADE
+  invitation text REFERENCES invitations(id) ON DELETE CASCADE,
+  notifiee text REFERENCES users(id) ON DELETE CASCADE
 );
 
 create table shares (

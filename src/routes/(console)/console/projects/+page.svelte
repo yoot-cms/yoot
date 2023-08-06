@@ -9,6 +9,7 @@
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	import EditProject from '$lib/ui/modals/EditProject.svelte';
+	import ShareProject from '$lib/ui/modals/ShareProject.svelte';
 	location.set('/console/projects');
 	export let data: PageData;
 	function name_is_duplicate(name: string) {
@@ -45,6 +46,8 @@
 <DeleteOptions />
 
 <EditProject />
+
+<ShareProject/>
 
 {#if $show_create_project}
 	<div
