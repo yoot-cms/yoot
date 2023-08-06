@@ -8,7 +8,8 @@ export const load: LayoutServerLoad = async ({ locals }) => {
     type: "notification" | "invitation", 
     read: boolean, 
     invitation: string, 
-    notifiee: string 
+    notifiee: string,
+    message:string
   }[]>` select * from notification where read=${false} and notifiee=${user.id}`
   return {
     user,

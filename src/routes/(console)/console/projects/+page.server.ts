@@ -81,9 +81,10 @@ export const actions: Actions = {
         values ( ${user.id}, ${invitee.id}, ${targetted_project.id}, ${sql.json({write})})
         returning id
       `
+      const message = `${user.email} is inviting you on his project ${project}`
       await sql`
-        insert into notification( type, invitation, notifiee )
-        values ( ${"invitation"}, ${id}, ${invitee.id})
+        insert into notification( type, invitation, notifiee, message )
+        values ( ${"invitation"}, ${id}, ${invitee.id}, ${message})
       `
     } catch (err) {
       console.log(err)

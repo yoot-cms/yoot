@@ -56,7 +56,8 @@ create table notification (
   type text not null,
   read boolean default false,
   invitation text REFERENCES invitations(id) ON DELETE CASCADE,
-  notifiee text REFERENCES users(id) ON DELETE CASCADE
+  notifiee text REFERENCES users(id) ON DELETE CASCADE,
+  message text not null
 );
 
 create table shares (

@@ -1,24 +1,16 @@
 <script lang="ts">
-  import Check from "$lib/components/Check.svelte";
-  import OpenInvitation from "$lib/components/OpenInvitation.svelte";
-  export let notification: { id:string, type:"notification"|"invitation", read:boolean, invitation:string, notifiee:string }
-  export let show_read: boolean
+  import EnvelopeOpened from "$lib/components/EnvelopeOpened.svelte";
+  import EnvelopeClosed from "$lib/components/EnvelopeClosed.svelte";
+  export let notification: { id:string, type:"notification"|"invitation", read:boolean, invitation:string, notifiee:string, message:string }
 </script>
 
-<div hidden={show_read&&notification.read} class={` w-full ${notification.read?"bg-white":"bg-neutral-300"} rounded-md p-2 flex justify-between `}>
-  <h1>Some message</h1>
-  <div class=" flex gap-2">
-    {#if notification.type==="invitation"}
-      <button>
-        <OpenInvitation/>
-      </button>
+<button class={` w-full bg-neutral-500 rounded-md p-2 flex justify-between `}>
+  <h1 class="text-white">{ notification.type==="invitation"?"New invitation":"New message" }</h1>
+  <div class=" flex gap-2 text-white">
+    {#if notification.read}
+      <EnvelopeOpened/>
     {:else}
-      <button>
-        <Check/>
-      </button>
+      <EnvelopeClosed/>
     {/if}
-    <button class=" ">
-      <Check/>
-    </button>
   </div>
-</div>
+</button>
