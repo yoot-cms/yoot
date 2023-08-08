@@ -65,3 +65,11 @@ create table shares (
   active boolean default false,
   permissions text not null
 );
+
+create table invitation_links (
+  id text default gen_random_uuid()::text PRIMARY KEY,
+  link textuser not null,
+  project text not null REFERENCES projects(id),
+  invitee text not null REFERENCES users(id),
+  expired boolean default false
+);

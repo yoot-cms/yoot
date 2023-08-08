@@ -57,3 +57,18 @@ export const show_delete_confirmation = writable(false)
 export const targetted_project = writable("")
 
 export const show_notifications = writable(false)
+
+export const show_notification_viewer = writable(false)
+
+export const targetted_notification = writable<{
+  id:string,
+  type:"invitation"|"notification",
+  read: boolean,
+  notifiee:string,
+  message:string,
+  invitation?:string
+}>({id:"", type:"invitation",notifiee:"", message:"", read:false})
+
+export const invitation_token = writable("")
+
+export const show_invitation_token = writable(false)

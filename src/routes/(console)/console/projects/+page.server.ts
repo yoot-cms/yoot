@@ -1,6 +1,8 @@
 import { type Actions, fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import sql from "$lib/db"
+import * as jwt from "jsonwebtoken"
+import { JWT_SECRET } from "$env/static/private";
 
 export const load: PageServerLoad = async ({ locals }) => {
   const { user } = locals
@@ -74,18 +76,16 @@ export const actions: Actions = {
       if(!targetted_project){
         return redirect(301, '/projects')
       }
-      const write_permission = data.get("write")
-      const write = write_permission==="on"
-      const [{ id }] = await sql`
-        insert into invitations( inviter, invitee, project, permissions )
-        values ( ${user.id}, ${invitee.id}, ${targetted_project.id}, ${sql.json({write})})
-        returning id
+      const token = jwt.sign({ yoot:"yoot" }, JWT_SECRET, {
+        expiresIn:"24h"
+      })
+      await sql` 
+        insert into invitation_links(link, project, invitee) 
+        values( ${token}, ${targetted_project.id}, ${invitee.id} )
       `
-      const message = `${user.email} is inviting you on his project ${project}`
-      await sql`
-        insert into notification( type, invitation, notifiee, message )
-        values ( ${"invitation"}, ${id}, ${invitee.id}, ${message})
-      `
+      return {
+        token
+      }
     } catch (err) {
       console.log(err)
       return fail(500)
