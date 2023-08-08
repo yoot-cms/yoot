@@ -3,7 +3,7 @@
 	import Edit from '$lib/components/Edit.svelte';
 	import Trash from '$lib/components/Trash.svelte';
   import Shared from '$lib/components/Shared.svelte';
-  import { targetted_project, show_edit_project, show_delete_project } from "$lib/stores"
+  import { targetted_project, show_edit_project, show_delete_project, show_share_project } from "$lib/stores"
 	export let name: string;
 </script>
 
@@ -19,7 +19,7 @@
 			on:click={(e) => {
 				e.stopPropagation();
         targetted_project.set(name)
-        show_edit_project.set(true)
+        show_share_project.set(true)
 			}}
 		>
 			<Shared />

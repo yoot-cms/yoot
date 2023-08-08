@@ -1,6 +1,8 @@
-import { type Actions, fail } from "@sveltejs/kit";
+import { type Actions, fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import sql from "$lib/db"
+import * as jwt from "jsonwebtoken"
+import { JWT_SECRET } from "$env/static/private";
 
 export const load: PageServerLoad = async ({ locals }) => {
   const { user } = locals
@@ -54,6 +56,38 @@ export const actions: Actions = {
       await sql` update project set name=${new_name} where name=${project} and owner=${user.id} `
     } catch (err) {
       console.log(`Error while editing project ${err}`)
+      return fail(500)
+    }
+  },
+  share: async({ locals, request })=>{
+    try {
+      const { user } = locals
+      const data = await request.formData()
+      const project = data.get("project")! as string
+      const sharee = data.get("sharee")! as string
+      if(sharee===user.email){
+        return fail(409)
+      }
+      const [invitee] = await sql<{id:string}[]>`select id from users where email=${sharee}`
+      if(!invitee){
+        return fail(404)
+      }
+      const [targetted_project] = await sql`select id from project where name=${project} and owner=${user.id}`
+      if(!targetted_project){
+        return redirect(301, '/projects')
+      }
+      const token = jwt.sign({ yoot:"yoot" }, JWT_SECRET, {
+        expiresIn:"24h"
+      })
+      await sql` 
+        insert into invitation_links(link, project, invitee) 
+        values( ${token}, ${targetted_project.id}, ${invitee.id} )
+      `
+      return {
+        token
+      }
+    } catch (err) {
+      console.log(err)
       return fail(500)
     }
   }

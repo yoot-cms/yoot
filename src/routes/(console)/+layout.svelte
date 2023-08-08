@@ -27,7 +27,9 @@
 					}}
 					class=" flex relative"
 				>
-					<span class=" absolute right-0 bg-red-400 rounded-full p-1" />
+					{#if notifications.length !== 0}
+						<span class=" absolute right-0 bg-red-400 rounded-full p-1" />
+					{/if}
 					<Notifications />
 				</button>
 			</div>
