@@ -56,13 +56,13 @@
 				class="flex justify-between w-full h-fit no-scroll overflow-x-scroll border rounded-md bg-neutral-300 p-2"
 			>
 				<h1 class="text-neutral-900 truncate text-ellipsis">
-          {`http://localhost:5173/api/invitations?token=${$invitation_token}`}
+          {`http://yootcms.xyz/api/invitations?token=${$invitation_token}`}
 				</h1>
 				<button
 					type="button"
 					on:click={async (event) => {
 						event.stopPropagation();
-						await navigator.clipboard.writeText(`http://localhost:5173/api/invitations?token=${$invitation_token}`).then(() => {
+						await navigator.clipboard.writeText(`https://yootcms.xyz/api/invitations?token=${$invitation_token}`).then(() => {
 							toast.success('Invitation copied into clipboard');
 						});
 					}}
