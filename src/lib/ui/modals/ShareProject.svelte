@@ -48,6 +48,9 @@
 			<div class=" flex justify-between items-center">
 				<h1 class=" font-bold text-xl">Invitation created</h1>
 				<button
+          on:click={()=>{
+              show_invitation_token.set(false)
+            }}
 				>
 					<Close />
 				</button>
