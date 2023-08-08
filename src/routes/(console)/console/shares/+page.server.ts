@@ -6,13 +6,13 @@ type Share = {
   share_id: string
   project_name: string
   project_owner: string
+  is_sharer: boolean
 }
 
 export const load: PageServerLoad = async ({ locals }) => {
-  try {
-    const { user } = locals
-    console.log(user.email)
-    const shares : Share[] = await sql`
+  const { user } = locals
+  console.log(user.email)
+  const shares: Share[] = await sql`
       SELECT
         s.id AS share_id,
         s.permissions AS share_permissions,
@@ -27,12 +27,8 @@ export const load: PageServerLoad = async ({ locals }) => {
         users AS u ON p.owner = u.id
       WHERE s.sharee=${user.id} or s.sharer=${user.id}
     `
-    console.log(shares)
-    return {
-      shares
-    }
-  } catch (err) {
-    console.log(`Error while fetching shares ${err}`)
-    return fail(500)
+  console.log(shares)
+  return {
+    shares
   }
 }
