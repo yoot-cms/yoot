@@ -1,8 +1,6 @@
 import { type Actions, fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import sql from "$lib/db"
-import * as jwt from "jsonwebtoken"
-import { JWT_SECRET } from "$env/static/private";
 
 export const load: PageServerLoad = async ({ locals }) => {
   const { user } = locals
@@ -76,9 +74,7 @@ export const actions: Actions = {
       if(!targetted_project){
         return redirect(301, '/projects')
       }
-      const token = jwt.sign({ yoot:"yoot" }, JWT_SECRET, {
-        expiresIn:"24h"
-      })
+      const token = crypto.randomUUID()
       await sql` 
         insert into invitation_links(link, project, invitee, inviter) 
         values( ${token}, ${targetted_project.id}, ${invitee.id}, ${user.id} )
