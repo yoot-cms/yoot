@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({ request, locals }) => {
     if (!token) {
       return new Response("Invitation token not found", { status: 400 })
     }
-    const [targetted_token] = await sql<{ id: string, project: string, invitee: string, expired: boolean }[]>`select * from invitation_links where link=${token}`
+    const [targetted_token] = await sql<{ id: string, project: string, inviter:string, invitee: string, expired: boolean }[]>`select * from invitation_links where link=${token}`
     if (!targetted_token) {
       return new Response("Invalid invitation token", { status: 404 })
     }
@@ -17,8 +17,8 @@ export const GET: RequestHandler = async ({ request, locals }) => {
       return new Response("Invitation expired. Please ask a new link", { status: 400 })
     }
     await sql` 
-      insert into shares(project, sharee, active, permissions) 
-      values( ${targetted_token.project}, ${targetted_token.invitee}, ${true}, ${""} )
+      insert into shares(project, sharee, sharer, permissions) 
+      values( ${targetted_token.project}, ${targetted_token.invitee}, ${targetted_token.inviter}, ${""} )
     `
     await sql` update invitation_links set expired=${true} where id=${targetted_token.id} `
     return new Response("You acceted the invitation.")

@@ -16,7 +16,7 @@
 		},
 		{
 			name: 'Shares',
-			path: '/console/shared',
+			path: '/console/shares',
 			icon: Shared
 		}
 		//    {

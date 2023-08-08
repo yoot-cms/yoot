@@ -62,14 +62,15 @@ create table shares (
   id text default gen_random_uuid()::text PRIMARY KEY,
   project text not null REFERENCES project(id) ON DELETE CASCADE,
   sharee text not null,
-  active boolean default false,
+  sharer text not null,
   permissions text not null
 );
 
 create table invitation_links (
   id text default gen_random_uuid()::text PRIMARY KEY,
-  link textuser not null,
-  project text not null REFERENCES projects(id),
+  link text not null,
+  project text not null REFERENCES project(id),
   invitee text not null REFERENCES users(id),
+  inviter text not null REFERENCES users(id),
   expired boolean default false
 );
