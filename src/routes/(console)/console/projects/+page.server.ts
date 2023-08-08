@@ -80,8 +80,8 @@ export const actions: Actions = {
         expiresIn:"24h"
       })
       await sql` 
-        insert into invitation_links(link, project, invitee) 
-        values( ${token}, ${targetted_project.id}, ${invitee.id} )
+        insert into invitation_links(link, project, invitee, inviter) 
+        values( ${token}, ${targetted_project.id}, ${invitee.id}, ${user.id} )
       `
       return {
         token
