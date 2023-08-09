@@ -4,11 +4,14 @@
 	import { breadcrumb_items, show_notifications } from '$lib/stores';
 	import type { LayoutData } from './$types';
 	import NotificationsBoard from '$lib/ui/modals/NotificationsBoard.svelte';
+  import SignOutConfirmation from '$lib/ui/modals/SignOutConfirmation.svelte';
 	export let data: LayoutData;
 	$: ({ user, notifications } = data);
 </script>
 
 <NotificationsBoard {notifications} />
+
+<SignOutConfirmation/>
 
 <div class=" w-full h-screen flex">
 	<SideBar user_data={{ name: user.username, profile_pic: user.profile_pic }} />

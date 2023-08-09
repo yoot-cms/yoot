@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { location } from '$lib/stores';
+	import { location, show_signout } from '$lib/stores';
 	import Projects from '$lib/components/Projects.svelte';
 	import ApiKeys from '$lib/components/ApiKeys.svelte';
 	import Shared from '$lib/components/Shared.svelte';
+	import SignOut from '$lib/components/SignOut.svelte';
 	const items: { name: string; path: string; icon: any }[] = [
 		{
 			name: 'Projects',
@@ -19,11 +20,6 @@
 			path: '/console/shares',
 			icon: Shared
 		}
-		//    {
-		//      name: 'Stats',
-		//      path: '/console/stats',
-		//      icon: Stats
-		//    },
 	];
 	export let user_data: { name: string; profile_pic: string };
 </script>
@@ -46,9 +42,17 @@
 				<h1>{item.name}</h1>
 			</a>
 		{/each}
+		<button
+			on:click={() => {
+				show_signout.set(true);
+			}}
+			class="hover:bg-neutral-100 rounded-md p-3 flex items-center gap-2 transition-all text-black"
+		>
+			<SignOut />
+			<h1>SignOut</h1>
+		</button>
 	</div>
-	<a
-		href="/profile"
+	<button
 		class={` ${
 			$location === '/console/profile'
 				? 'bg-neutral-600 text-white hover:text-black'
@@ -57,5 +61,5 @@
 	>
 		<img src={user_data.profile_pic} class="w-8 h-8 rounded-full" alt="Profile" />
 		<h1>{user_data.name}</h1>
-	</a>
+	</button>
 </div>

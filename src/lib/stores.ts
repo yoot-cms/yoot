@@ -72,3 +72,5 @@ export const targetted_notification = writable<{
 export const invitation_token = writable("")
 
 export const show_invitation_token = writable(false)
+
+export const show_signout = writable(false)
