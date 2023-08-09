@@ -1,18 +1,22 @@
 <script lang="ts">
-  import { location, breadcrumb_items } from "$lib/stores";
-  location.set('/console/shares')
+	import { goto } from '$app/navigation';
+	import { location, breadcrumb_items } from '$lib/stores';
+	location.set('/console/shares');
 	breadcrumb_items.set([{ title: 'Shares', path: '/console/shares' }]);
-  import Share from "$lib/ui/Share.svelte";
-  export let data
+	import Share from '$lib/ui/Share.svelte';
+	export let data;
 </script>
 
 <div class="w-full h-full bg-neutral-100 flex justify-center">
 	{#if data.shares.length === 0}
 		<div class=" h-full w-full flex justify-center items-center">
 			<button
+				on:click={() => {
+					goto('/console/projects');
+				}}
 				class=" group transition-all flex flex-col gap-3 items-center justify-center border-2 border-neutral-300 hover:border-neutral-500 border-dashed w-64 h-64 rounded-lg"
 			>
-				<h1 class=" group-hover:text-neutral-500 text-center text-neutral-400">Create a project</h1>
+				<h1 class=" group-hover:text-neutral-500 text-center text-neutral-400">Share a project</h1>
 			</button>
 		</div>
 	{:else}
@@ -26,9 +30,7 @@
 				class=" p-2 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
 				{#each data.shares as share}
-					<Share
-						{share}
-					/>
+					<Share {share} />
 				{/each}
 			</div>
 		</div>

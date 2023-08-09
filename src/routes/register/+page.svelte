@@ -2,7 +2,6 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
-	import { goto } from '$app/navigation';
 	let loading = false;
 	const handle_registration: SubmitFunction = async () => {
 		loading = true;
@@ -14,7 +13,7 @@
 					return;
 			}
 			toast.success('Account created!');
-			goto('/login');
+			window.location.href="/console"
 			await update();
 		};
 	};
