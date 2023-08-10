@@ -1,4 +1,3 @@
-import { fail } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import sql from "$lib/db";
 
@@ -11,7 +10,6 @@ type Share = {
 
 export const load: PageServerLoad = async ({ locals }) => {
   const { user } = locals
-  console.log(user.email)
   const shares: Share[] = await sql`
       SELECT
         s.id AS share_id,
@@ -27,7 +25,6 @@ export const load: PageServerLoad = async ({ locals }) => {
         users AS u ON p.owner = u.id
       WHERE s.sharee=${user.id} or s.sharer=${user.id}
     `
-  console.log(shares)
   return {
     shares
   }
