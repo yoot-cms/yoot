@@ -1,5 +1,6 @@
 import type { PageServerLoad } from "./$types";
 import sql from "$lib/db";
+import { fail, type Actions } from "@sveltejs/kit";
 
 type Share = {
   share_id: string
@@ -33,8 +34,20 @@ export const load: PageServerLoad = async ({ locals }) => {
       users AS usharee ON s.sharee = usharee.id
     WHERE s.sharee = ${user.id} OR s.sharer = ${user.id}
   `
-  console.log(shares)
   return {
     shares
+  }
+}
+
+export const actions: Actions = {
+  delete: async ({ request }) => {
+    try {
+      const data = await request.formData()
+      const share = data.get("share")! as string
+      await sql` delete from shares where id=${share}`
+    } catch (err) {
+      console.log(`Error while deleting share ${err}`)
+      return fail(500)
+    }
   }
 }
