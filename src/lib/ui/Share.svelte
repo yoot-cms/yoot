@@ -5,6 +5,8 @@
 		project_name: string;
 		project_owner: string;
     is_sharer: boolean
+    sharer_email: string
+    sharee_email: string
 	};
 </script>
 
@@ -19,4 +21,9 @@
 	<h1 class=" group-hover:text-neutral-900 text-2xl text-neutral-700 font-bold">
 		{share.project_name}
 	</h1>
+  {#if share.is_sharer}
+    <h1 class="text-xs truncate text-ellipsis" title={`Sharing with ${share.sharee_email}`}>Sharing with {share.sharee_email}</h1>
+  {:else}
+    <h1 class="text-xs truncate text-ellipsis" title={`Shared by ${share.sharer_email}`}>Shared by {share.sharer_email}</h1>
+  {/if}
 </button>
