@@ -74,3 +74,6 @@ export const invitation_token = writable("")
 export const show_invitation_token = writable(false)
 
 export const show_signout = writable(false)
+
+export const show_image_previewer = writable(false)
+export const previewer_source = writable("")
