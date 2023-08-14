@@ -27,8 +27,9 @@
 	};
 </script>
 
-<button
-	class="p-2 drop-shadow-lg hover:drop-shadow-xl relative group h-[200px] w-[200px] bg-neutral-50 border-neutral-200 rounded-lg transition-all"
+<a
+  href={ share.is_sharer?`/console/projects/${share.project_name}`:`/shares/${share.project_name}` }
+	class="flex items-center justify-center flex-col p-2 drop-shadow-lg hover:drop-shadow-xl relative group h-[200px] w-[200px] bg-neutral-50 border-neutral-200 rounded-lg transition-all"
 >
 	<div class=" w-32 h-10 absolute top-0 right-0 m-2 flex justify-end gap-5">
 		<form action="?/delete" method="post" use:enhance={handle_delete_share}>
@@ -55,4 +56,4 @@
 			Shared by {share.sharer_email}
 		</h1>
 	{/if}
-</button>
+</a>
