@@ -1,7 +1,12 @@
 <script lang="ts">
 	import Trash from '$lib/components/Trash.svelte';
 	import Edit from '$lib/components/Edit.svelte';
-	import { show_delete_entry, targetted_entry, show_image_previewer, previewer_source } from '$lib/stores';
+	import {
+		show_delete_entry,
+		targetted_entry,
+		show_image_previewer,
+		previewer_source
+	} from '$lib/stores';
 	export let schema: Record<string, string>;
 	export let entry: {
 		id: string;
@@ -16,10 +21,10 @@
 			<div class=" w-[300px] shrink-0 ">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<img
-          on:click={()=>{
-              previewer_source.set(entry.value[field_name].toString())
-              show_image_previewer.set(true)
-            }}
+					on:click={() => {
+						previewer_source.set(entry.value[field_name].toString());
+						show_image_previewer.set(true);
+					}}
 					class="hover:cursor-pointer w-16 shrink-0 h-10"
 					src={entry.value[field_name].toString()}
 					alt=""
@@ -43,7 +48,7 @@
 	<div class="w-[300px] gap-5 flex shrink-0">
 		<button
 			on:click={() => {
-        targetted_entry.set(entry.id)
+				targetted_entry.set(entry.id);
 				show_delete_entry.set(true);
 			}}
 			class="hover:text-red-500"

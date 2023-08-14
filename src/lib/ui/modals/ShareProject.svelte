@@ -31,7 +31,7 @@
           const data = result.data as {token:string}
           invitation_token.set(data.token)
           show_invitation_token.set(true)
-					toast.success(`Invitation sent to ${sharee}`);
+					toast.success(`Invitation created`);
 					show_share_project.set(false);
 					break;
 			}
@@ -59,7 +59,7 @@
 				class="flex justify-between w-full h-fit no-scroll overflow-x-scroll border rounded-md bg-neutral-300 p-2"
 			>
 				<h1 class="text-neutral-900 truncate text-ellipsis">
-          {`http://yootcms.xyz/api/invitations?token=${$invitation_token}`}
+          {`https://yootcms.xyz/api/invitations?token=${$invitation_token}`}
 				</h1>
 				<button
 					type="button"
