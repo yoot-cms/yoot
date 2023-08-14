@@ -3,6 +3,7 @@
 	import SignOut from '$lib/components/SignOut.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import { goto } from '$app/navigation';
 	export let share: {
 		share_id: string;
 		project_name: string;
@@ -18,7 +19,7 @@
 					toast.error('Something went wrong. Please try again or contact support');
 					break;
 				case 'success':
-          const message = share.is_sharer? "Share deleted" :"You left this share"
+					const message = share.is_sharer ? 'Share deleted' : 'You left this share';
 					toast.success(message);
 					break;
 			}
@@ -27,15 +28,21 @@
 	};
 </script>
 
-<a
-  href={ share.is_sharer?`/console/projects/${share.project_name}`:`/shares/${share.project_name}` }
-	class="flex items-center justify-center flex-col p-2 drop-shadow-lg hover:drop-shadow-xl relative group h-[200px] w-[200px] bg-neutral-50 border-neutral-200 rounded-lg transition-all"
+<button
+	class=" p-2 drop-shadow-lg hover:drop-shadow-xl relative group h-[200px] w-[200px] bg-neutral-50 border-neutral-200 rounded-lg transition-all"
+	on:click={() => {
+		if (share.is_sharer) {
+      goto(`/console/projects/${share.project_name}`)
+		} else {
+      goto(`/console/shares/${share.project_name}`)
+		}
+	}}
 >
 	<div class=" w-32 h-10 absolute top-0 right-0 m-2 flex justify-end gap-5">
 		<form action="?/delete" method="post" use:enhance={handle_delete_share}>
-      <input type="text" hidden name="project_name" value={share.project_name}>
-      <input type="text" hidden name="project_owner" value={share.project_owner}>
-      <input type="text" hidden name="share" value={share.share_id}>
+			<input type="text" hidden name="project_name" value={share.project_name} />
+			<input type="text" hidden name="project_owner" value={share.project_owner} />
+			<input type="text" hidden name="share" value={share.share_id} />
 			<button type="submit" hidden={!share.is_sharer} class="z-50 hover:text-red-500">
 				<Trash />
 			</button>
@@ -56,4 +63,4 @@
 			Shared by {share.sharer_email}
 		</h1>
 	{/if}
-</a>
+</button>
