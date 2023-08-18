@@ -34,7 +34,7 @@
 		if (share.is_sharer) {
       goto(`/console/projects/${share.project_name}`)
 		} else {
-      goto(`/console/shares/${share.project_name}`)
+      goto(`/console/shares/${share.share_id}`)
 		}
 	}}
 >
