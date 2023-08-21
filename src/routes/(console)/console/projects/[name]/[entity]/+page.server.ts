@@ -99,6 +99,11 @@ export const actions: Actions = {
       const data = await request.formData()
       const fields = JSON.parse(data.get('fields')! as string) as [string, string][]
       const entry = data.get('entry')! as string
+      const [targetted_entry] = await sql`select * from entry where id=${entry}`
+      if (!targetted_entry) {
+        return fail(404)
+      }
+      const current_value = targetted_entry.value as Record<string, any>
       let entry_value: Record<string, string | number | boolean> = {};
       for (const [field_name, field_type] of fields) {
         const value = data.get(field_name)! as string
@@ -110,6 +115,11 @@ export const actions: Actions = {
         }
         if (field_type === "Image") {
           const file = data.get(field_name)! as File;
+          if(!file){
+            console.log('Didnt find any file')
+            entry_value[field_name] = current_value[field_name]
+            continue
+          }
           const file_extension = file.type.split("/")[1]! as string;
           const form_data = new FormData()
           form_data.append('file_extension', file_extension)
@@ -139,10 +149,6 @@ export const actions: Actions = {
         if (field_type === "Boolean") {
           entry_value[field_name] = value === 'on' ? true : false;
         }
-      }
-      const [targetted_entry] = await sql`select * from entry where id=${entry}`
-      if (!targetted_entry) {
-        return fail(404)
       }
       await sql`
         update entry
