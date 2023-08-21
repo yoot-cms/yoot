@@ -1,10 +1,13 @@
 <script lang="ts">
-	import { location } from '$lib/stores';
-	import type { PageData } from './$types';
+	import { location, breadcrumb_items } from '$lib/stores';
 	import Entity from '$lib/ui/Entity.svelte';
+	import type { PageServerData } from './$types';
 	location.set('/console/shares');
-	export let data: PageData;
-	$: ({ entities } = data);
+	export let data: PageServerData;
+	$: ({ entities, share, sharer_email, project_name } = data);
+  $: breadcrumb_items.set([
+    { title: `${sharer_email}'s ${project_name.toUpperCase()} `, path: `/console/shares/${share}` },
+  ]);
 </script>
 
 <svelte:head>
@@ -39,7 +42,7 @@
 				class=" p-2 pb-6 max-h-full w-full flex flex-wrap justify-start items-start gap-5 overflow-y-scroll no-scroll"
 			>
 				{#each entities as entity}
-					<Entity name={entity.name} project={""} schema={entity.schema} />
+					<Entity from_share={true} name={entity.name} project={share} schema={entity.schema} />
 				{/each}
 			</div>
 		</div>

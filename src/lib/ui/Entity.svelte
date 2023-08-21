@@ -2,6 +2,7 @@
 	export let name: string;
 	export let project: string;
 	export let schema: Record<string, string>;
+	export let from_share = false;
 	import { show_delete_entity, targetted_entity } from '$lib/stores';
 	import Trash from '$lib/components/Trash.svelte';
 	import Loading from '$lib/components/Loading.svelte';
@@ -12,12 +13,16 @@
 
 <button
 	on:click={() => {
-		goto(`/console/projects/${project}/${name}`);
+		if (!from_share) {
+			goto(`/console/projects/${project}/${name}`);
+		} else {
+			goto(`/console/shares/${project}/${name}`);
+		}
 	}}
 	class=" max-h-full shrink-0 hover:cursor-pointer w-[300px] rounded-lg p-5 flex flex-col drop-shadow-lg hover:drop-shadow-xl bg-neutral-50"
 >
 	<div class=" mb-2 w-full flex justify-between gap-2 items-center">
-		<div class=" flex gap-2 truncate ">
+		<div class=" flex gap-2 truncate">
 			<span
 				class=" bg-transparent hover:cursor-text focus:outline-none text-ellipsis truncate text-neutral-800 text-2xl font-bold"
 			>
@@ -36,7 +41,7 @@
 						name,
 						project
 					});
-          show_delete_entity.set(true)
+					show_delete_entity.set(true);
 				}}
 				type="button"
 				class=" text-neutral-300 hover:text-red-500 transition-all duration-300"

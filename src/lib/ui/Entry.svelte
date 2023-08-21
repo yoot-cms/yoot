@@ -15,6 +15,7 @@
 		entity: string;
 		value: Record<string, string | number | boolean | any>;
 	};
+	export let from_share = false;
 </script>
 
 <div class=" w-full shrink-0 truncate p-2 h-16 overflow-x-scroll flex items-center">
@@ -47,30 +48,31 @@
 			</h1>
 		{/if}
 	{/each}
-	<div class="w-[300px] gap-5 flex shrink-0">
-		<button
-			on:click={() => {
-				targetted_entry.set(entry.id);
-				show_delete_entry.set(true);
-			}}
-			class="hover:text-red-500"
-		>
-			<Trash />
-		</button>
-		<button
-			on:click={() => {
-				show_edit_entry.set(true);
-				targetted_edited_entry.set({
-					id: entry.id,
-					entity: entry.entity,
-					value: entry.value,
-          schema
-				});
-        console.log($targetted_edited_entry)
-			}}
-			class="hover:text-blue-500"
-		>
-			<Edit />
-		</button>
-	</div>
+	{#if !from_share}
+		<div class="w-[300px] gap-5 flex shrink-0">
+			<button
+				on:click={() => {
+					targetted_entry.set(entry.id);
+					show_delete_entry.set(true);
+				}}
+				class="hover:text-red-500"
+			>
+				<Trash />
+			</button>
+			<button
+				on:click={() => {
+					show_edit_entry.set(true);
+					targetted_edited_entry.set({
+						id: entry.id,
+						entity: entry.entity,
+						value: entry.value,
+						schema
+					});
+				}}
+				class="hover:text-blue-500"
+			>
+				<Edit />
+			</button>
+		</div>
+	{/if}
 </div>
