@@ -23,7 +23,6 @@ export const load: PageServerLoad = async ({ locals: { user }, params }) => {
     JOIN project ON shares.project = project.id
     WHERE shares.id = ${share}
   `
-  console.log(targetted_share)
   if (!targetted_share) throw redirect(301, '/console/shares')
   if (user.id !== targetted_share.sharee) throw redirect(301, '/console/shares')
   const [{ id, schema, name }] = await sql<Entity[]>`select id, schema, name from entity where name=${entity} and project=${targetted_share.project}`
