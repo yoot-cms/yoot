@@ -18,13 +18,103 @@
 
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 	<div class="sm:mx-auto sm:w-full sm:max-w-sm">
-		<img
-			class="mx-auto h-10 w-auto"
-			src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-			alt="Your Company"
-		/>
 		<h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-			Welcome back to YOOT
+			<h1>Welcome back to YOOT</h1>
+			<div class="m-auto flex justify-center">
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+					><rect width="10" height="10" x="1" y="1" fill="#414ce1" rx="1"
+						><animate
+							id="svgSpinnersBlocksShuffle30"
+							fill="freeze"
+							attributeName="x"
+							begin="0;svgSpinnersBlocksShuffle3b.end"
+							dur="0.2s"
+							values="1;13"
+						/><animate
+							id="svgSpinnersBlocksShuffle31"
+							fill="freeze"
+							attributeName="y"
+							begin="svgSpinnersBlocksShuffle38.end"
+							dur="0.2s"
+							values="1;13"
+						/><animate
+							id="svgSpinnersBlocksShuffle32"
+							fill="freeze"
+							attributeName="x"
+							begin="svgSpinnersBlocksShuffle39.end"
+							dur="0.2s"
+							values="13;1"
+						/><animate
+							id="svgSpinnersBlocksShuffle33"
+							fill="freeze"
+							attributeName="y"
+							begin="svgSpinnersBlocksShuffle3a.end"
+							dur="0.2s"
+							values="13;1"
+						/></rect
+					><rect width="10" height="10" x="1" y="13" fill="#414ce1" rx="1"
+						><animate
+							id="svgSpinnersBlocksShuffle34"
+							fill="freeze"
+							attributeName="y"
+							begin="svgSpinnersBlocksShuffle30.end"
+							dur="0.2s"
+							values="13;1"
+						/><animate
+							id="svgSpinnersBlocksShuffle35"
+							fill="freeze"
+							attributeName="x"
+							begin="svgSpinnersBlocksShuffle31.end"
+							dur="0.2s"
+							values="1;13"
+						/><animate
+							id="svgSpinnersBlocksShuffle36"
+							fill="freeze"
+							attributeName="y"
+							begin="svgSpinnersBlocksShuffle32.end"
+							dur="0.2s"
+							values="1;13"
+						/><animate
+							id="svgSpinnersBlocksShuffle37"
+							fill="freeze"
+							attributeName="x"
+							begin="svgSpinnersBlocksShuffle33.end"
+							dur="0.2s"
+							values="13;1"
+						/></rect
+					><rect width="10" height="10" x="13" y="13" fill="#414ce1" rx="1"
+						><animate
+							id="svgSpinnersBlocksShuffle38"
+							fill="freeze"
+							attributeName="x"
+							begin="svgSpinnersBlocksShuffle34.end"
+							dur="0.2s"
+							values="13;1"
+						/><animate
+							id="svgSpinnersBlocksShuffle39"
+							fill="freeze"
+							attributeName="y"
+							begin="svgSpinnersBlocksShuffle35.end"
+							dur="0.2s"
+							values="13;1"
+						/><animate
+							id="svgSpinnersBlocksShuffle3a"
+							fill="freeze"
+							attributeName="x"
+							begin="svgSpinnersBlocksShuffle36.end"
+							dur="0.2s"
+							values="1;13"
+						/><animate
+							id="svgSpinnersBlocksShuffle3b"
+							fill="freeze"
+							attributeName="y"
+							begin="svgSpinnersBlocksShuffle37.end"
+							dur="0.2s"
+							values="1;13"
+						/></rect
+					></svg
+				>
+			</div>
 		</h2>
 	</div>
 
@@ -63,17 +153,16 @@
 
 			<div>
 				<button
-          disabled={loading}
+					disabled={loading}
 					type="submit"
 					class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-					>
-          {#if !loading}
-            <h1>Register</h1>
-          {:else}
-            <Loading/>
-          {/if}
-          </button
 				>
+					{#if !loading}
+						<h1>Register</h1>
+					{:else}
+						<Loading />
+					{/if}
+				</button>
 			</div>
 		</form>
 
