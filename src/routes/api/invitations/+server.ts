@@ -3,7 +3,7 @@ import sql from "$lib/db";
 
 export const GET: RequestHandler = async ({ request, locals }) => {
   try {
-    console.log(locals.user)
+    const { user } = locals
     const queries = new URL(request.url)
     const token = queries.searchParams.get('token')
     if (!token) {
@@ -15,6 +15,9 @@ export const GET: RequestHandler = async ({ request, locals }) => {
     }
     if (targetted_token.expired) {
       return new Response("Invitation expired. Please ask a new link", { status: 400 })
+    }
+    if(targetted_token.invitee!==user.id){
+      return new Response("This invitation was not sent to you", { status:401 })
     }
     await sql` 
       insert into shares(project, sharee, sharer, permissions) 
