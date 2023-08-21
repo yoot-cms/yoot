@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Close from '$lib/components/Close.svelte';
 	import Discard from '$lib/components/Discard.svelte';
+	import { enhance, type SubmitFunction } from '$app/forms';
 	import { show_edit_entry, targetted_edited_entry } from '$lib/stores';
+	import toast from 'svelte-french-toast';
 	let loading = false;
 	$: ({ schema, id, entity, value } = $targetted_edited_entry);
 	$: fields = Object.entries(schema);
@@ -15,6 +17,30 @@
 		image = file as Blob;
 		loaded_preview = true;
 	}
+	const handle_entry_update: SubmitFunction = async () => {
+		loading = true;
+		toast.loading('Updating entry', { id: 'updating-entry' });
+		return async ({ update, result }) => {
+			loading = false;
+			toast.dismiss('updating-entry');
+			switch (result.type) {
+				case 'error':
+					if (result.status === 404) {
+						toast.error(
+							'The targetted entry has not been found. Please reload your page and try again'
+						);
+						return;
+					}
+					toast.error('Something went wrong. Try again or contact support');
+					break;
+				case 'success':
+					toast.success('Entry updated');
+					show_edit_entry.set(false);
+					break;
+			}
+			await update();
+		};
+	};
 </script>
 
 {#if $show_edit_entry}
@@ -37,13 +63,15 @@
 				</button>
 			</div>
 			<form
-				action="?/create_entry"
+				action="?/edit"
+				use:enhance={handle_entry_update}
 				method="post"
 				class="flex flex-col justify-between gap-5"
 				enctype="multipart/form-data"
 			>
-				<input type="text" name="entity" hidden />
-				<input type="text" name="fields" hidden />
+				<input type="text" name="entity" hidden value={entity} />
+				<input type="text" name="entry" hidden value={id} />
+				<input type="text" name="fields" hidden value={JSON.stringify(fields)} />
 				<div class="max-h-[500px] flex flex-col gap-2 overflow-y-scroll no-scroll">
 					{#each fields as [field_name, data_type]}
 						{#if data_type === 'Text'}
