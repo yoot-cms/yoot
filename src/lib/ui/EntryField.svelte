@@ -14,10 +14,10 @@
 </script>
 
 {#if data_type === 'Text'}
-	<div class="flex flex-col gap-2 ">
+	<div class="flex flex-col gap-2">
 		<h1 class="">{field_name}</h1>
 		<input
-            autocomplete="off"
+			autocomplete="off"
 			required
 			class=" border p-2 rounded-md w-full focus:outline-none"
 			type="text"
@@ -27,14 +27,14 @@
 {/if}
 
 {#if data_type === 'Number'}
-	<div class="flex flex-col gap-2 ">
+	<div class="flex flex-col gap-2">
 		<h1 class="">{field_name}</h1>
 		<input
 			required
 			class=" border p-2 rounded-md w-full focus:outline-none"
 			type="number"
 			name={field_name}
-      step="any"
+			step="any"
 		/>
 	</div>
 {/if}

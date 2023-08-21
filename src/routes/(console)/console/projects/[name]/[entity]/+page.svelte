@@ -4,10 +4,11 @@
 	import EntryField from '$lib/ui/EntryField.svelte';
 	import Entry from '$lib/ui/Entry.svelte';
 	import Close from '$lib/components/Close.svelte';
-  import DeleteEntry from '$lib/ui/modals/DeleteEntry.svelte';
+	import DeleteEntry from '$lib/ui/modals/DeleteEntry.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import toast from 'svelte-french-toast';
 	import ImagePreviewer from '$lib/ui/modals/ImagePreviewer.svelte';
+	import EditEntry from '$lib/ui/modals/EditEntry.svelte';
 	location.set('/console/projects');
 	export let data: PageServerData;
 	$: ({ entries, entity } = data);
@@ -43,8 +44,9 @@
 	<title>YOOT | Entries in {data.entity_name}</title>
 </svelte:head>
 
-<DeleteEntry/>
-<ImagePreviewer/>
+<DeleteEntry />
+<ImagePreviewer />
+<EditEntry />
 
 {#if $show_create_entry}
 	<div
@@ -114,7 +116,7 @@
 						{#each fields as field}
 							<h1 class=" w-[300px] shrink-0">{field[0].toUpperCase()}</h1>
 						{/each}
-            <h1 class=" w-[300px] shrink-0">Actions</h1>
+						<h1 class=" w-[300px] shrink-0">Actions</h1>
 					</div>
 				</thead>
 				<div class="w-full">

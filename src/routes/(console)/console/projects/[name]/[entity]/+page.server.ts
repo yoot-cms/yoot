@@ -80,8 +80,7 @@ export const actions: Actions = {
       }
       await sql` insert into entry(entity, value) values( ${entity}, ${sql.json(entry_value)} ) `
     } catch (err) {
-      console.log('Error creating entry')
-      console.log(err)
+      console.log(`Error creating entry ${err}`)
       return fail(500)
     }
   },
@@ -91,6 +90,67 @@ export const actions: Actions = {
       const entry_id = data.get('entry')! as string
       await sql` delete from entry where id=${entry_id}`
     } catch (err) {
+      console.log(`Error while deleting entry ${err}`)
+      return fail(500)
+    }
+  },
+  edit: async ({ request }) => {
+    try {
+      const data = await request.formData()
+      const fields = JSON.parse(data.get('fields')! as string) as [string, string][]
+      const entry = data.get('entry')! as string
+      let entry_value: Record<string, string | number | boolean> = {};
+      for (const [field_name, field_type] of fields) {
+        const value = data.get(field_name)! as string
+        if (field_type === "Text") {
+          entry_value[field_name] = value
+        }
+        if (field_type === "Number") {
+          entry_value[field_name] = Number(value)
+        }
+        if (field_type === "Image") {
+          const file = data.get(field_name)! as File;
+          const file_extension = file.type.split("/")[1]! as string;
+          const form_data = new FormData()
+          form_data.append('file_extension', file_extension)
+          form_data.append('file_data', file)
+          try {
+            const res = await fetch(
+              MEDIA_API_URL,
+              {
+                method: "POST",
+                body: form_data
+              }
+            )
+            if (res.ok) {
+              if (res.status === 200) {
+                const { url } = await res.json() as { url: string }
+                entry_value[field_name] = url
+              }
+            } else {
+              console.log(`Error handling file upload ${res}`)
+              return fail(500)
+            }
+          } catch (err) {
+            console.log(`Error handling file upload ${err}`)
+            return fail(500)
+          }
+        }
+        if (field_type === "Boolean") {
+          entry_value[field_name] = value === 'on' ? true : false;
+        }
+      }
+      const [targetted_entry] = await sql`select * from entry where id=${entry}`
+      if (!targetted_entry) {
+        return fail(404)
+      }
+      await sql`
+        update entry
+        set value=${sql.json(entry_value)}
+        where id=${entry}
+      `
+    } catch (err) {
+      console.log(`Error while editing entry ${err}`)
       return fail(500)
     }
   }
