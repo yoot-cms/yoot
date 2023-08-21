@@ -6,7 +6,6 @@
 	location.set('/console/shares');
 	export let data: PageServerData;
 	$: ({ entries, schema, project, sharer, entity, share } = data);
-  $: console.log(project, entity)
 	$: fields = Object.entries(schema);
   $: breadcrumb_items.set([
       { title: `${sharer}'s ${project.toUpperCase()} `, path: `/console/shares/${share}` },
