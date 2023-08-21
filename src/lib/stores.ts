@@ -44,6 +44,8 @@ export const show_delete_entry = writable(false)
 
 export const targetted_entry = writable("")
 
+export const show_edit_entry = writable(false)
+
 export const loaded_preview = writable(false)
 
 export const show_edit_project = writable(false)
@@ -76,4 +78,14 @@ export const show_invitation_token = writable(false)
 export const show_signout = writable(false)
 
 export const show_image_previewer = writable(false)
+
 export const previewer_source = writable("")
+
+export const targetted_entry_schema = writable<Record<string, string>>({})
+
+export const targetted_edited_entry = writable<{
+  id: string,
+  entity: string,
+  value:Record<string, string | number | boolean | any>,
+  schema: Record<string, string>
+}>({id:"", entity:"", value:{}, schema:{}})

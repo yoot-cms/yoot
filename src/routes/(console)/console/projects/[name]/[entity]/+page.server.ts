@@ -91,6 +91,16 @@ export const actions: Actions = {
       const entry_id = data.get('entry')! as string
       await sql` delete from entry where id=${entry_id}`
     } catch (err) {
+      console.log(`Error while deleting entry ${err}`)
+      return fail(500)
+    }
+  },
+  edit: async ({ request, locals })=>{
+    try {
+      const data = await request.formData()
+      const { user } = locals
+    } catch (err) {
+      console.log(`Error while editing entry ${err}`)
       return fail(500)
     }
   }

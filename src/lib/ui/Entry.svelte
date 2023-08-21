@@ -5,7 +5,9 @@
 		show_delete_entry,
 		targetted_entry,
 		show_image_previewer,
-		previewer_source
+		previewer_source,
+		show_edit_entry,
+		targetted_edited_entry
 	} from '$lib/stores';
 	export let schema: Record<string, string>;
 	export let entry: {
@@ -15,10 +17,10 @@
 	};
 </script>
 
-<div class=" w-full shrink-0 truncate p-2 h-16 overflow-x-scroll flex items-center ">
+<div class=" w-full shrink-0 truncate p-2 h-16 overflow-x-scroll flex items-center">
 	{#each Object.entries(schema) as [field_name, field_type]}
 		{#if field_type === 'Image'}
-			<div class=" w-[300px] shrink-0 ">
+			<div class=" w-[300px] shrink-0">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<img
 					on:click={() => {
@@ -55,7 +57,19 @@
 		>
 			<Trash />
 		</button>
-		<button class="hover:text-blue-500">
+		<button
+			on:click={() => {
+				show_edit_entry.set(true);
+				targetted_edited_entry.set({
+					id: entry.id,
+					entity: entry.entity,
+					value: entry.value,
+          schema
+				});
+        console.log($targetted_edited_entry)
+			}}
+			class="hover:text-blue-500"
+		>
 			<Edit />
 		</button>
 	</div>
