@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { location } from '$lib/stores';
+	import { location, breadcrumb_items } from '$lib/stores';
 	import Entity from '$lib/ui/Entity.svelte';
 	import type { PageServerData } from './$types';
 	location.set('/console/shares');
 	export let data: PageServerData;
-	$: ({ entities, share } = data);
-  $: console.log("share", share)
+	$: ({ entities, share, sharer_email, project_name } = data);
+  $: breadcrumb_items.set([
+    { title: `${sharer_email}'s ${project_name.toUpperCase()} `, path: `/console/shares/${share}` },
+  ]);
 </script>
 
 <svelte:head>
