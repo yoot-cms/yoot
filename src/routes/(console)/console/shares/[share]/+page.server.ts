@@ -20,6 +20,7 @@ export const load: PageServerLoad = async ({ locals, params })=>{
     throw redirect(301, "/console/shares")
   }
   const entities : Entity[] = await sql`select * from entity where project=${project}`
+  console.log(share, "share")
   return {
     entities,
     share
