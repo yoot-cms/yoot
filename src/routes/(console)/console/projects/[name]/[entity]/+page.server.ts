@@ -115,8 +115,7 @@ export const actions: Actions = {
         }
         if (field_type === "Image") {
           const file = data.get(field_name)! as File;
-          if(!file){
-            console.log('Didnt find any file')
+          if(file.size===0){
             entry_value[field_name] = current_value[field_name]
             continue
           }
@@ -142,7 +141,7 @@ export const actions: Actions = {
               return fail(500)
             }
           } catch (err) {
-            console.log(`Error handling file upload ${err}`)
+            console.log(`Error handling file upload `)
             return fail(500)
           }
         }
